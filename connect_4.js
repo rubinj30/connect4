@@ -1,11 +1,11 @@
 const playingBoard = [
+    ['B', 'O', 'O', 'O', 'O', 'O'],
     ['O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O']
+    ['B', 'O', 'O', 'O', 'O', 'O'],
+    ['B', 'O', 'O', 'O', 'O', 'O'],
+    ['B', 'O', 'O', 'O', 'O', 'O'],
+    ['B', 'O', 'O', 'O', 'O', 'O'],
+    ['B', 'O', 'O', 'O', 'O', 'O']
 ];
 
 player1 = {
@@ -24,7 +24,7 @@ player2 = {
 // already and go up to next spot if there is one already
 const dropPiece = (column, piece) => {
     let landed;
-    const newColumn = column.map((space, i) => {
+    return column.map((space, i) => {
         if (space === 'O' && !landed) {
             landed = true;
             return piece;
@@ -32,11 +32,9 @@ const dropPiece = (column, piece) => {
             return space;
         }
     });
-    console.log(newColumn);
-    return newColumn;
 };
 
-dropPiece(playingBoard[3], 'B');
+console.log("DROP", dropPiece(playingBoard[3], 'B'));
 
 // this should return a copy of the board with the updated column
 replaceColumn = (board, columnIndex) => {
@@ -49,14 +47,11 @@ replaceColumn = (board, columnIndex) => {
 
 replaceColumn(playingBoard, 0);
 
-declareWin = currentTurn => {
-    console.log(`${currentTurn} WINS!`);
-};
+declareWin = currentTurn => console.log(`${currentTurn} WINS!`);
 
 // will check a given array for 4 in a row and return win status
 // true if there are ever 4 in a row
 checkColumnForWin = (column, currentTurn) => {
-    console.log('running checkColumnForWin');
     let win = false;
     let count = 0;
     column.forEach((space, i) => {
@@ -70,20 +65,14 @@ checkColumnForWin = (column, currentTurn) => {
             count = 0;
         }
     });
-    console.log('win status', win);
     return win;
 };
 
-getPiecesIndexesInColumn = (column, currentTurn) => {
-    const indexes = column
-        .map((space, i) => {
-            return currentTurn === space && i;
-        })
-        .filter(item => true && item);
-    console.log(indexes);
-    return indexes
-};
+// given row index, return each item from that index in each column to create
+// a row array
+transformRowToColumn = (board, rowIndex) =>
+    board.map(column => column[rowIndex]);
 
-getPiecesIndexesInColumn(['B', 'R', 'B', 'B', 'B', 'B'], 'B')
-
+console.log('transform', transformRowToColumn(playingBoard, 0));
+checkColumnForWin(transformRowToColumn(playingBoard, 0), 'B')
 // checkColumnForWin(['B', 'R', 'B', 'B', 'B', 'B'], 'B');
