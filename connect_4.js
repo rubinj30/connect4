@@ -53,6 +53,8 @@ declareWin = currentTurn => {
     console.log(`${currentTurn} WINS!`);
 };
 
+// will check a given array for 4 in a row and return win status
+// true if there are ever 4 in a row
 checkColumnForWin = (column, currentTurn) => {
     console.log('running checkColumnForWin');
     let win = false;
@@ -60,7 +62,6 @@ checkColumnForWin = (column, currentTurn) => {
     column.forEach((space, i) => {
         if (space === currentTurn) {
             count += 1;
-            console.log('space', space, 'current', currentTurn, 'count', count);
             if (count >= 4) {
                 win = true;
                 declareWin(currentTurn);
@@ -73,6 +74,16 @@ checkColumnForWin = (column, currentTurn) => {
     return win;
 };
 
-checkColumnForWin(['B', 'R', 'B', 'B', 'B', 'B'], 'B');
+getPiecesIndexesInColumn = (column, currentTurn) => {
+    const indexes = column
+        .map((space, i) => {
+            return currentTurn === space && i;
+        })
+        .filter(item => true && item);
+    console.log(indexes);
+    return indexes
+};
 
+getPiecesIndexesInColumn(['B', 'R', 'B', 'B', 'B', 'B'], 'B')
 
+// checkColumnForWin(['B', 'R', 'B', 'B', 'B', 'B'], 'B');
