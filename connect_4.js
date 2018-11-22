@@ -36,7 +36,7 @@ const dropPiece = (column, piece) => {
     return newColumn;
 };
 
-dropPiece(playingBoard[3], 'B')
+dropPiece(playingBoard[3], 'B');
 
 // this should return a copy of the board with the updated column
 replaceColumn = (board, columnIndex) => {
@@ -48,3 +48,31 @@ replaceColumn = (board, columnIndex) => {
 };
 
 replaceColumn(playingBoard, 0);
+
+declareWin = currentTurn => {
+    console.log(`${currentTurn} WINS!`);
+};
+
+checkColumnForWin = (column, currentTurn) => {
+    console.log('running checkColumnForWin');
+    let win = false;
+    let count = 0;
+    column.forEach((space, i) => {
+        if (space === currentTurn) {
+            count += 1;
+            console.log('space', space, 'current', currentTurn, 'count', count);
+            if (count >= 4) {
+                win = true;
+                declareWin(currentTurn);
+            }
+        } else {
+            count = 0;
+        }
+    });
+    console.log('win status', win);
+    return win;
+};
+
+checkColumnForWin(['B', 'R', 'B', 'B', 'B', 'B'], 'B');
+
+
