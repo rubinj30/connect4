@@ -1,5 +1,11 @@
-const { playingBoard, player1, player2 } = require('./gameObjects.js');
-const { dropPiece, replaceColumn, declareWin, checkColumnForWin, checkFlatBoardForWin } = require('./gamePlayFuncs.js')
+const game = require('./gameObj.js');
+const {
+    dropPiece,
+    replaceColumn,
+    declareWin,
+    checkColumnForWin,
+    checkFlatBoardForWin
+} = require('./gamePlayFuncs.js');
 
 var prompt = require('prompt');
 var schema = {
@@ -11,9 +17,6 @@ var schema = {
             message: 'Choose column to drop checker in (enter number 1 - 7)',
             required: true
         }
-        //   password: {
-        //     hidden: true
-        //   }
     }
 };
 

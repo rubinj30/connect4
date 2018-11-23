@@ -1,6 +1,7 @@
+const game = require('./gameObj')
+
 // this will take in an array and look from bottom up if there is a piece played
 // already and go up to next spot if there is one already
-
 const dropPiece = (column, piece) => {
     let landed;
     return column.map(space => {
@@ -16,7 +17,7 @@ const dropPiece = (column, piece) => {
 // this should return a copy of the board with the updated column
 replaceColumn = (board, columnIndex) => {
     const newBoard = board.map((column, i) => {
-        return columnIndex === i ? dropPiece(column, player1.piece) : column;
+        return columnIndex === i ? dropPiece(column, game.player1.piece) : column;
     });
     return newBoard;
 };
@@ -67,7 +68,7 @@ checkFlatBoardForWin = (board, currentTurn, interval) => {
     return win;
 };
 
-checkFlatBoardForWin(playingBoard, 'B', 5);
+checkFlatBoardForWin(game.board, 'B', 5);
 
 // given row index, return each item from that index in each column to create
 // a row array
