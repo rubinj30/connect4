@@ -66,7 +66,6 @@ checkColumnForWin = (column, currentTurn) => {
     return win;
 };
 
-
 // if the board is flattened then there should be the same # of pieces
 // b/w ones from a specific column and then the next column but one row down
 checkFlatBoardForWin = (board, currentTurn) => {
@@ -74,14 +73,15 @@ checkFlatBoardForWin = (board, currentTurn) => {
     let count = 0;
     console.log(board);
     board.flat().map((space, i) => {
-        if (space === currentTurn && i % 7 === 0) {
-            count += 1;3
-            if (count >= 4) {
-                win = true;
-                declareWin(currentTurn);
+        if (i % 7 === 0) {
+            if (currentTurn === space) {
+                count += 1;
+                console.log(count);
+                if (count >= 4) {
+                    win = true;
+                    declareWin(currentTurn);
+                }
             }
-        } else {
-            count = 0;
         }
     });
     console.log('win status:: ', win);
