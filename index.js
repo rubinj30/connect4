@@ -18,7 +18,7 @@ var questions = [
         name: 'column',
         message:
             'Please enter the column number where you want to drop your checker (1 to 7) and hit ENTER',
-        validate: function (input) {
+        validate: function(input) {
             // Declare function as asynchronous, and save the done callback
             var done = this.async();
 
@@ -37,7 +37,7 @@ var questions = [
     }
 ];
 
-const getMove = async () => {
+const getDroppedIndex = async current => {
     const index = await inquirer.prompt(questions).then(answers => {
         const column = answers['column'];
         const index = column - 1;
@@ -46,9 +46,19 @@ const getMove = async () => {
     });
     return index;
 };
+
+const changeTurn = currentTurn => {
+    return currentTurn === 'B' ? 'R' : 'B';
+};
 const sampleGetMoveFn = async () => {
-    const test = await getMove();
-    return test;
+    const { board, currentTurn } = { ...game };
+    const currentTurn = game.currentTurn;
+    console.log('TEST TEST TEST ', test);
+    const droppedIndex = await getDroppedIndex();
+
+    // returns new column but ALSO called setXCoord func ** WILL PRBLY need to have it return that too**
+    const updatedCol = dropPiece(board[droppedIndex]);
+    const newTurn = changeTurn(currentTurn);
 };
 
 sampleGetMoveFn();

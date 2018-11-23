@@ -7,11 +7,20 @@ const dropPiece = (column, piece) => {
     return column.map(space => {
         if (space === 'O' && !landed) {
             landed = true;
+            setXCoord(i);
             return piece;
         } else {
             return space;
         }
     });
+};
+
+setXCoord = rowIndex => {
+    game.lastDropped.xCoord = rowIndex;
+};
+
+setYCoord = columnIndex => {
+    game.lastDropped.yCoord = columnIndex;
 };
 
 // this should return a copy of the board with the updated column
@@ -21,6 +30,7 @@ replaceColumn = (board, columnIndex) => {
             ? dropPiece(column, game.player1.piece)
             : column;
     });
+    setYCoord(columnIndex);
     return newBoard;
 };
 
@@ -52,13 +62,11 @@ checkColumnForWin = (column, currentTurn) => {
 checkFlatBoardForWin = (board, currentTurn, interval) => {
     let win = false;
     let count = 0;
-    console.log(board);
     board.flat().map((space, i) => {
         // only checks every 7 (or 5) spaces for piece
         if (i % interval === 0) {
             if (currentTurn === space) {
                 count += 1;
-                console.log(count);
                 if (count >= 4) {
                     win = true;
                     declareWin(currentTurn);
@@ -77,14 +85,8 @@ checkFlatBoardForWin(game.board, 'B', 5);
 transformRowToColumn = (board, rowIndex) =>
     board.map(column => column[rowIndex]);
 
-rotateArrayToGivenIndex = flatIndex => {
-    const board = [...game.board];
-    console.log('copy', board);
-    const flatNewOrder = board
-        .slice(flatIndex)
-        .concat(board.slice(0, flatIndex));
-    console.log('new order', flatNewOrder);
-    return flatNewOrder;
+getXCoordinate = columnIndex => {
+    const firstBlankSpace = this.state.board[columnIndex].indexOf('O');
+    const xCoord = firstBlankSpace - 1;
+    return xCoord;
 };
-
-rotateArrayToGivenIndex(5);
