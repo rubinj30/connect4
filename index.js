@@ -47,17 +47,14 @@ const getDroppedIndex = async current => {
     return index;
 };
 
-const changeTurn = currentTurn => {
-    return currentTurn === 'B' ? 'R' : 'B';
+const changeTurn = turn => {
+    return turn === 'B' ? 'R' : 'B';
 };
 const sampleGetMoveFn = async () => {
     const { board, currentTurn } = { ...game };
-    const currentTurn = game.currentTurn;
-    console.log('TEST TEST TEST ', test);
     const droppedIndex = await getDroppedIndex();
 
     // returns new column but ALSO called setXCoord func ** WILL PRBLY need to have it return that too**
-    const updatedCol = dropPiece(board[droppedIndex]);
     const newTurn = changeTurn(currentTurn);
 };
 
