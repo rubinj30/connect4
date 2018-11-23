@@ -1,10 +1,10 @@
 const playingBoard = [
     ['B', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O'],
-    ['B', 'O', 'O', 'O', 'O', 'O'],
-    ['B', 'O', 'O', 'O', 'O', 'O'],
-    ['B', 'O', 'O', 'O', 'O', 'O'],
-    ['B', 'O', 'O', 'O', 'O', 'O'],
+    ['O', 'B', 'O', 'O', 'O', 'O'],
+    ['B', 'O', 'B', 'O', 'O', 'O'],
+    ['B', 'O', 'O', 'B', 'O', 'O'],
+    ['B', 'O', 'O', 'O', 'B', 'O'],
+    ['B', 'O', 'O', 'O', 'O', 'B'],
     ['B', 'O', 'O', 'O', 'O', 'O']
 ];
 
@@ -24,7 +24,7 @@ player2 = {
 // already and go up to next spot if there is one already
 const dropPiece = (column, piece) => {
     let landed;
-    return column.map((space, i) => {
+    return column.map(space => {
         if (space === 'O' && !landed) {
             landed = true;
             return piece;
@@ -34,14 +34,12 @@ const dropPiece = (column, piece) => {
     });
 };
 
-console.log('DROP', dropPiece(playingBoard[3], 'B'));
-
 // this should return a copy of the board with the updated column
 replaceColumn = (board, columnIndex) => {
     const newBoard = board.map((column, i) => {
         return columnIndex === i ? dropPiece(column, player1.piece) : column;
     });
-    console.log(newBoard);
+    // console.log(newBoard);
     return newBoard;
 };
 
@@ -68,14 +66,34 @@ checkColumnForWin = (column, currentTurn) => {
     return win;
 };
 
+
+// if the board is flattened then there should be the same # of pieces
+// b/w ones from a specific column and then the next column but one row down
+checkFlatBoardForWin = (board, currentTurn) => {
+    let win = false;
+    let count = 0;
+    console.log(board);
+    board.flat().map((space, i) => {
+        if (space === currentTurn && i % 7 === 0) {
+            count += 1;3
+            if (count >= 4) {
+                win = true;
+                declareWin(currentTurn);
+            }
+        } else {
+            count = 0;
+        }
+    });
+    console.log('win status:: ', win);
+    return win;
+};
+
+checkFlatBoardForWin(playingBoard, 'B');
+
 // given row index, return each item from that index in each column to create
 // a row array
 transformRowToColumn = (board, rowIndex) =>
     board.map(column => column[rowIndex]);
-
-console.log('transform', transformRowToColumn(playingBoard, 0));
-checkColumnForWin(transformRowToColumn(playingBoard, 0), 'B');
-// checkColumnForWin(['B', 'R', 'B', 'B', 'B', 'B'], 'B');
 
 var prompt = require('prompt');
 var schema = {
@@ -96,12 +114,11 @@ var schema = {
 getMove = turn => {
     prompt.start();
     prompt.get(schema, function(err, result) {
-        console.log('Command-line input received:');
         console.log(`${turn} dropped in column: ${result.move}`);
         // now I am shifting columns 1 thru 7 back to indexes 0 - 7
         return result.move - 1;
     });
 };
 
-const test = move('R')
+const test = getMove('R');
 console.log(test);
