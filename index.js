@@ -7,27 +7,29 @@ const {
     checkFlatBoardForWin
 } = require('./gamePlayFuncs.js');
 
-var prompt = require('prompt');
-var schema = {
-    properties: {
-        move: {
-            // verifying that the user enters an integer between 1 and 7
-            // i am shifting indexes up by one when asking user 1 - 7 for column numbers instead of indexes 0 - 6
-            pattern: /^([1-7])$/,
-            message: 'Choose column to drop checker in (enter number 1 - 7)',
-            required: true
-        }
+var inquirer = require('inquirer');
+
+var questions = [
+    {
+        type: 'input',
+        name: 'column',
+        message:
+            'Please enter the column number where you want to drop your checker (1 to 7)'
     }
-};
+];
 
-getMove = turn => {
-    prompt.start();
-    prompt.get(schema, function(err, result) {
-        console.log(`${turn} dropped in column: ${result.move}`);
-        // now I am shifting columns 1 thru 7 back to indexes 0 - 7
-        return result.move - 1;
+const getMove = async () => {
+    const index = await inquirer.prompt(questions).then(answers => {
+        const column = answers['column'];
+        const index = column - 1;
+        console.log(`You chose column ${column} (AKA index ${index}!`);
+        return index;
     });
+    return index;
+};
+const sampleGetMoveFn = async () => {
+    const test = await getMove();
+    return test;
 };
 
-const test = getMove('R');
-console.log(test);
+sampleGetMoveFn();

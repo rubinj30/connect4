@@ -1,4 +1,4 @@
-const game = require('./gameObj')
+const game = require('./gameObj');
 
 // this will take in an array and look from bottom up if there is a piece played
 // already and go up to next spot if there is one already
@@ -17,7 +17,9 @@ const dropPiece = (column, piece) => {
 // this should return a copy of the board with the updated column
 replaceColumn = (board, columnIndex) => {
     const newBoard = board.map((column, i) => {
-        return columnIndex === i ? dropPiece(column, game.player1.piece) : column;
+        return columnIndex === i
+            ? dropPiece(column, game.player1.piece)
+            : column;
     });
     return newBoard;
 };
@@ -74,3 +76,15 @@ checkFlatBoardForWin(game.board, 'B', 5);
 // a row array
 transformRowToColumn = (board, rowIndex) =>
     board.map(column => column[rowIndex]);
+
+rotateArrayToGivenIndex = flatIndex => {
+    const board = [...game.board];
+    console.log('copy', board);
+    const flatNewOrder = board
+        .slice(flatIndex)
+        .concat(board.slice(0, flatIndex));
+    console.log('new order', flatNewOrder);
+    return flatNewOrder;
+};
+
+rotateArrayToGivenIndex(5);
