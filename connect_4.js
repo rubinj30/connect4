@@ -1,11 +1,13 @@
+// using standard board 
+// 7 columns x 6 rows
 const playingBoard = [
-    ['B', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'B', 'O', 'O', 'O', 'O'],
-    ['B', 'O', 'B', 'O', 'O', 'O'],
-    ['B', 'O', 'O', 'B', 'O', 'O'],
-    ['B', 'O', 'O', 'O', 'B', 'O'],
-    ['B', 'O', 'O', 'O', 'O', 'B'],
-    ['B', 'O', 'O', 'O', 'O', 'O']
+    ['O', 'O', 'O', 'O', 'O', 'B'],
+    ['O', 'O', 'O', 'O', 'B', 'O'],
+    ['O', 'O', 'O', 'B', 'O', 'O'],
+    ['O', 'O', 'B', 'O', 'O', 'O'],
+    ['O', 'O', 'O', 'O', 'O', 'O'],
+    ['O', 'O', 'O', 'O', 'O', 'O'],
+    ['O', 'O', 'O', 'O', 'O', 'O']
 ];
 
 player1 = {
@@ -39,7 +41,6 @@ replaceColumn = (board, columnIndex) => {
     const newBoard = board.map((column, i) => {
         return columnIndex === i ? dropPiece(column, player1.piece) : column;
     });
-    // console.log(newBoard);
     return newBoard;
 };
 
@@ -68,12 +69,15 @@ checkColumnForWin = (column, currentTurn) => {
 
 // if the board is flattened then there should be the same # of pieces
 // b/w ones from a specific column and then the next column but one row down
-checkFlatBoardForWin = (board, currentTurn) => {
+// TODO: only works from left to right if divisible by 7
+// need to pass interval to check by and figure out way to get starting point for checking
+checkFlatBoardForWin = (board, currentTurn, interval) => {
     let win = false;
     let count = 0;
     console.log(board);
     board.flat().map((space, i) => {
-        if (i % 7 === 0) {
+        // only checks every 7 (or 5) spaces for piece
+        if (i % interval === 0) {
             if (currentTurn === space) {
                 count += 1;
                 console.log(count);
@@ -88,7 +92,7 @@ checkFlatBoardForWin = (board, currentTurn) => {
     return win;
 };
 
-checkFlatBoardForWin(playingBoard, 'B');
+checkFlatBoardForWin(playingBoard, 'B', 5);
 
 // given row index, return each item from that index in each column to create
 // a row array
