@@ -4,34 +4,31 @@ const game = require('./gameObj');
 // already and go up to next spot if there is one already
 const dropPiece = (column, piece) => {
     let landed;
-    return column.map(space => {
+    const newColumn = column.map((space, i) => {
         if (space === 'O' && !landed) {
             landed = true;
-            setXCoord(i);
             return piece;
         } else {
             return space;
         }
     });
+    return newColumn;
 };
 
-setXCoord = rowIndex => {
-    game.lastDropped.xCoord = rowIndex;
-};
+// dont need anymore, just returning from a function and will update at end
+// setXCoord = rowIndex => {
+//     game.lastDropped.xCoord = rowIndex;
+// };
 
-setYCoord = columnIndex => {
-    game.lastDropped.yCoord = columnIndex;
-};
+// setYCoord = columnIndex => {
+//     game.lastDropped.yCoord = columnIndex;
+// };
 
 // this should return a copy of the board with the updated column
-replaceColumn = (board, columnIndex) => {
-    const newBoard = board.map((column, i) => {
-        return columnIndex === i
-            ? dropPiece(column, game.player1.piece)
-            : column;
-    });
-    setYCoord(columnIndex);
-    return newBoard;
+replaceColumn = (board, columnIndex, currentTurn) => {
+    return board.map((column, i) =>
+        columnIndex === i ? dropPiece(column, currentTurn) : column
+    );
 };
 
 declareWin = currentTurn => console.log(`${currentTurn} WINS!`);
@@ -85,8 +82,17 @@ checkFlatBoardForWin(game.board, 'B', 5);
 transformRowToColumn = (board, rowIndex) =>
     board.map(column => column[rowIndex]);
 
-getXCoordinate = columnIndex => {
-    const firstBlankSpace = this.state.board[columnIndex].indexOf('O');
-    const xCoord = firstBlankSpace - 1;
-    return xCoord;
+getXCoordinate = (column) => {
+    const firstBlankSpace = column.indexOf('O');
+    return firstBlankSpace;
 };
+
+module.exports = {
+    dropPiece,
+    replaceColumn,
+    checkColumnForWin,
+    declareWin,
+    checkFlatBoardForWin,
+    transformRowToColumn,
+    getXCoordinate,
+}

@@ -2,7 +2,7 @@
 // 7 columns x 6 rows
 const game = {
     board: [
-        ['O', 'O', 'O', 'O', 'O', 'B'],
+        ['B', 'O', 'O', 'O', 'O', 'B'],
         ['O', 'O', 'O', 'O', 'B', 'O'],
         ['O', 'O', 'O', 'B', 'O', 'O'],
         ['O', 'O', 'B', 'O', 'O', 'O'],
