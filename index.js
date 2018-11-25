@@ -81,35 +81,33 @@ const checkWin = (updatedBoard, droppedIndex, turn) => {
     // if one of the following are true then return true
     return colCheck || diaganolL || diaganolR || rowCheck;
 };
-while (!game.winStatus) {
-    const sampleGetMoveFn = async () => {
-        const { board, currentTurn } = { ...game };
-        console.log(board);
-        // gets column index number from user
-        const droppedIndex = await getDroppedIndex(currentTurn);
+const sampleGetMoveFn = async () => {
+    const { board, currentTurn } = { ...game };
+    console.log(board);
+    // gets column index number from user
+    const droppedIndex = await getDroppedIndex(currentTurn);
 
-        // based on the above column this gets the index of the first blank space which will be needed later
-        const xCoordinate = getXCoordinate(board[droppedIndex]);
+    // based on the above column this gets the index of the first blank space which will be needed later
+    const xCoordinate = getXCoordinate(board[droppedIndex]);
 
-        // returns a new board with an updated column
-        const updatedBoard = replaceColumn(board, droppedIndex, currentTurn);
+    // returns a new board with an updated column
+    const updatedBoard = replaceColumn(board, droppedIndex, currentTurn);
 
-        console.log(updatedBoard);
-        // updates which user's turn it is
-        const newTurn = changeTurn(currentTurn);
+    console.log(updatedBoard);
+    // updates which user's turn it is
+    const newTurn = changeTurn(currentTurn);
 
-        // should write condition to check each of the following only if win = false
-        const winStatus = checkWin(updatedBoard, droppedIndex, currentTurn);
-        console.log('win', winStatus);
+    // should write condition to check each of the following only if win = false
+    const winStatus = checkWin(updatedBoard, droppedIndex, currentTurn);
+    console.log('win', winStatus);
 
-        // updates the game board and player info with updated variables
-        updateGameAfterMove(
-            updatedBoard,
-            newTurn,
-            xCoordinate,
-            droppedIndex,
-            winStatus
-        );
-    };
-}
+    // updates the game board and player info with updated variables
+    updateGameAfterMove(
+        updatedBoard,
+        newTurn,
+        xCoordinate,
+        droppedIndex,
+        winStatus
+    );
+};
 sampleGetMoveFn();
