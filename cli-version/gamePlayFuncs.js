@@ -101,7 +101,6 @@ const displayBoard = (board, currentTurn) => {
         ['=', '=', '=', '=', '=', '=', '=']
     );
     console.log(rotatedBoard);
-    console.log(`\nIt is ${currentTurn}'s move`);
 };
 
 const changeTurn = turn => {

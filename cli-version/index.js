@@ -25,12 +25,22 @@ updateGameAfterMove = (
     };
 };
 
+updateAfterGame = (newTurn) => {
+    game.board = game.blankBoard;
+    game.currentTurn = newTurn;
+} 
+
+incrementWinLoss = () => {
+
+}
+
 const promptForMove = async () => {
     try {
         const { board, currentTurn } = { ...game };
 
         // show current state of the playing board in a playable view
         displayBoard(board, currentTurn);
+        console.log(`\nIt is ${currentTurn}'s move`);
 
         // gets column index number from user
         const columnPlayedIndex = await getColumnPlayedIndex(currentTurn);
@@ -72,7 +82,8 @@ const promptForMove = async () => {
             promptForMove();
         } else {
             declareWin(currentTurn);
-            game.board = game.blankBoard;
+            displayBoard(updatedBoard, currentTurn);
+            updateAfterGame(newTurn);
             const answer = await playAgain();
             if (answer.includes('y')) {
                 promptForMove();
