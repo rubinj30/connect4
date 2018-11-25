@@ -43,12 +43,12 @@ checkColumnForWin = (column, currentTurn) => {
 
 // if the board is flattened then there should be the same # of pieces
 // b/w ones from a specific column and then the next column but one row down
-checkFlatBoardForWin = (board, currentTurn, interval) => {
+checkFlatBoardForWin = (board, currentTurn, interval, flatIndex) => {
     let win = false;
     let count = 0;
     board.flat().forEach((space, i) => {
         // only checks every 7 (or 5) spaces for piece
-        if (i % interval === 0) {
+        if ((i - flatIndex) % interval === 0) {
             if (currentTurn === space) {
                 count += 1;
                 if (count >= 4) {
@@ -66,10 +66,20 @@ checkFlatBoardForWin = (board, currentTurn, interval) => {
 transformRowToColumn = (board, rowIndex) =>
     board.map(column => column[rowIndex]);
 
-getXCoordinate = (column) => {
+getXCoordinate = column => {
     const firstBlankSpace = column.indexOf('-');
     return firstBlankSpace;
 };
+
+getFlatIndexOfLastDropped = (xCoord, yCoord, board) => {
+    // TODO: find better way to get length of column
+    const length = board[0].length;
+    const flatBoardIndex = xCoord + yCoord * length;
+    console.log('flatIndex', flatBoardIndex);
+    return flatBoardIndex;
+};
+
+const rotateBoard = (board) => board[0].map((col, i) => board.map(row => row[i]));
 
 module.exports = {
     dropPiece,
@@ -79,4 +89,5 @@ module.exports = {
     checkFlatBoardForWin,
     transformRowToColumn,
     getXCoordinate,
-}
+    rotateBoard
+};

@@ -2,9 +2,12 @@ const game = require('./gameObj.js');
 const {
     dropPiece,
     replaceColumn,
-    declareWin,
     checkColumnForWin,
-    checkFlatBoardForWin
+    declareWin,
+    checkFlatBoardForWin,
+    getXCoordinate,
+    rotateBoard,
+    // transformRowToColumn,
 } = require('./gamePlayFuncs.js');
 
 var inquirer = require('inquirer');
@@ -72,23 +75,23 @@ updateGameAfterMove = (
 // TODO: make sure to optimize all params passed once all check funcs are called
 //  and should set it up to only continue to next if the previous is false
 // TODO: can use checkFlat for all 4 directional checks, so could have array of intervals and loop thru
-const checkWin = (updatedBoard, droppedIndex, turn) => {
+const checkWin = (updatedBoard, droppedIndex, turn, flatIndex) => {
     const colCheck = checkColumnForWin(updatedBoard[droppedIndex], turn);
     console.log('colcheck = ', colCheck);
-    const diaganolL = checkFlatBoardForWin(updatedBoard, turn, 7);
+    const diaganolL = checkFlatBoardForWin(updatedBoard, turn, 7, flatIndex);
     console.log('diaganolL = ', diaganolL);
-    const diaganolR = checkFlatBoardForWin(updatedBoard, turn, 5);
+    const diaganolR = checkFlatBoardForWin(updatedBoard, turn, 5, flatIndex);
     console.log('diaganolR = ', diaganolR);
-    // const rowCheck = checkFlatBoardForWin(updatedBoard, turn, 6);
-    // console.log('rowCheck = ', rowCheck);
+    const rowCheck = checkFlatBoardForWin(updatedBoard, turn, 6, flatIndex);
+    console.log('rowCheck = ', rowCheck);
     //
     // if one of the following are true then return true
-    return colCheck || diaganolL || diaganolR;
+    return colCheck || diaganolL || diaganolR || rowCheck;
 };
 const sampleGetMoveFn = async () => {
     try {
         const { board, currentTurn } = { ...game };
-        console.log('BOARD', board);
+        console.log(board);
         // gets column index number from user
         const droppedIndex = await getDroppedIndex(currentTurn);
 
@@ -101,13 +104,13 @@ const sampleGetMoveFn = async () => {
         console.log(updatedBoard);
         // updates which user's turn it is
         const newTurn = changeTurn(currentTurn);
+        const flatIndex = getFlatIndexOfLastDropped(xCoordinate, droppedIndex, board)
 
         // should write condition to check each of the following only if win = false
-        const winStatus = checkWin(updatedBoard, droppedIndex, currentTurn);
+        const winStatus = checkWin(updatedBoard, droppedIndex, currentTurn, flatIndex);
         console.log('win', winStatus);
 
-        console.log('updated', updatedBoard);
-
+        console.log('updated', updatedBoard.flat().join());
         if (!winStatus) {
             updateGameAfterMove(
                 updatedBoard,
