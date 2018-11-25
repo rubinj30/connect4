@@ -1,3 +1,5 @@
+const inquirer = require('inquirer');
+
 const getMoveQuestions = [
     {
         type: 'input',
@@ -32,7 +34,7 @@ const playAgainQuestions = [
             var done = this.async();
             setTimeout(function() {
                 const cleanedAnswer = input.toLowerCase().trim();
-                if (!playAgainAnswerValid(cleanedAnswer)) {
+                if (!isPlayAgainAnswerValid(cleanedAnswer)) {
                     // Pass the return value in the done callback
                     done('You must provide a Y or N');
                     return;
@@ -44,11 +46,22 @@ const playAgainQuestions = [
     }
 ];
 
-const playAgainAnswerValid = (input) => {
-    return ['y', 'n', 'yes', 'no', 'yea', ].includes(input)
-}
+const playAgain = async () => {
+    const againYesOrNo = await inquirer.prompt(playAgainQuestions);
+    return againYesOrNo['playAgain'];
+};
+
+const isPlayAgainAnswerValid = input => {
+    return ['y', 'n', 'yes', 'no', 'yea'].includes(input);
+};
+
+const getColumnPlayedIndex = async () => {
+    const answers = await inquirer.prompt(getMoveQuestions)
+    // return column number entered minus 1 as I offset index for easier gameplay
+    return answers['column'] - 1;
+};
 
 module.exports = {
-    getMoveQuestions,
-    playAgainQuestions
+    playAgain,
+    getColumnPlayedIndex
 };

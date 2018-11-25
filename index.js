@@ -1,40 +1,13 @@
 const game = require('./gameObj.js');
-const { getMoveQuestions, playAgainQuestions, checkIfPlayAgain } = require('./prompts');
+const { playAgain, getColumnPlayedIndex } = require('./prompts');
 const {
     replaceColumn,
     declareWin,
     checkWin,
     getXCoordinate,
-    displayBoard
-    // rotateBoard
-    // dropPiece,
-    // checkColumnForWin,
-    // checkFlatBoardForWin,
-    // transformRowToColumn,
+    displayBoard,
+    changeTurn
 } = require('./gamePlayFuncs.js');
-
-var inquirer = require('inquirer');
-
-const getColumnPlayedIndex = current => {
-    const index = inquirer.prompt(getMoveQuestions).then(answers => {
-        const column = answers['column'];
-        const index = column - 1;
-        console.log(
-            `${current} chose column #${column} (a.k.a index ${index})!`
-        );
-        return index;
-    });
-    return index;
-};
-
-const playAgain = async () => {
-    const againYesOrNo = await inquirer.prompt(playAgainQuestions)
-    return againYesOrNo['playAgain'];
-};
-
-const changeTurn = turn => {
-    return turn === 'B' ? 'R' : 'B';
-};
 
 updateGameAfterMove = (
     updatedBoard,
@@ -57,7 +30,7 @@ const promptForMove = async () => {
         const { board, currentTurn } = { ...game };
 
         // show current state of the playing board in a playable view
-        displayBoard(board);
+        displayBoard(board, currentTurn);
 
         // gets column index number from user
         const columnPlayedIndex = await getColumnPlayedIndex(currentTurn);
@@ -101,7 +74,6 @@ const promptForMove = async () => {
             declareWin(currentTurn);
             const answer = await playAgain();
             if (answer.includes('y')) {
-                console.log("PLAY AGAIN");
                 promptForMove();
             }
         }
