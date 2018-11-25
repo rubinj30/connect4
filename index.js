@@ -54,19 +54,19 @@ const changeTurn = turn => {
 };
 
 updateGameAfterMove = (
-    newTurn,
     updatedBoard,
+    newTurn,
+    winStatus,
     xCoordinate,
-    yCoordinate,
-    winStatus
+    yCoordinate
 ) => {
     game.board = updatedBoard;
     game.currentTurn = newTurn;
+    game.winStatus = winStatus;
     game.lastDropped = {
         xCoord: xCoordinate,
         yCoord: yCoordinate
     };
-    game.winStatus = winStatus;
 };
 
 // TODO: make sure to optimize all params passed once all check funcs are called
@@ -74,40 +74,55 @@ updateGameAfterMove = (
 // TODO: can use checkFlat for all 4 directional checks, so could have array of intervals and loop thru
 const checkWin = (updatedBoard, droppedIndex, turn) => {
     const colCheck = checkColumnForWin(updatedBoard[droppedIndex], turn);
+    console.log('colcheck = ', colCheck);
     const diaganolL = checkFlatBoardForWin(updatedBoard, turn, 7);
+    console.log('diaganolL = ', diaganolL);
     const diaganolR = checkFlatBoardForWin(updatedBoard, turn, 5);
-    const rowCheck = checkFlatBoardForWin(updatedBoard, turn, 6);
-
+    console.log('diaganolR = ', diaganolR);
+    // const rowCheck = checkFlatBoardForWin(updatedBoard, turn, 6);
+    // console.log('rowCheck = ', rowCheck);
+    //
     // if one of the following are true then return true
-    return colCheck || diaganolL || diaganolR || rowCheck;
+    return colCheck || diaganolL || diaganolR;
 };
 const sampleGetMoveFn = async () => {
-    const { board, currentTurn } = { ...game };
-    console.log(board);
-    // gets column index number from user
-    const droppedIndex = await getDroppedIndex(currentTurn);
+    try {
+        const { board, currentTurn } = { ...game };
+        console.log('BOARD', board);
+        // gets column index number from user
+        const droppedIndex = await getDroppedIndex(currentTurn);
 
-    // based on the above column this gets the index of the first blank space which will be needed later
-    const xCoordinate = getXCoordinate(board[droppedIndex]);
+        // based on the above column this gets the index of the first blank space which will be needed later
+        const xCoordinate = await getXCoordinate(board[droppedIndex]);
 
-    // returns a new board with an updated column
-    const updatedBoard = replaceColumn(board, droppedIndex, currentTurn);
+        // returns a new board with an updated column
+        const updatedBoard = replaceColumn(board, droppedIndex, currentTurn);
 
-    console.log(updatedBoard);
-    // updates which user's turn it is
-    const newTurn = changeTurn(currentTurn);
+        console.log(updatedBoard);
+        // updates which user's turn it is
+        const newTurn = changeTurn(currentTurn);
 
-    // should write condition to check each of the following only if win = false
-    const winStatus = checkWin(updatedBoard, droppedIndex, currentTurn);
-    console.log('win', winStatus);
+        // should write condition to check each of the following only if win = false
+        const winStatus = checkWin(updatedBoard, droppedIndex, currentTurn);
+        console.log('win', winStatus);
 
-    // updates the game board and player info with updated variables
-    updateGameAfterMove(
-        updatedBoard,
-        newTurn,
-        xCoordinate,
-        droppedIndex,
-        winStatus
-    );
+        console.log('updated', updatedBoard);
+
+        if (!winStatus) {
+            updateGameAfterMove(
+                updatedBoard,
+                newTurn,
+                winStatus,
+                xCoordinate,
+                droppedIndex
+            );
+            sampleGetMoveFn();
+        } else {
+            declareWin(currentTurn);
+        }
+        // updates the game board and player info with updated variables
+    } catch (err) {
+        console.log(err);
+    }
 };
 sampleGetMoveFn();

@@ -67,7 +67,7 @@ transformRowToColumn = (board, rowIndex) =>
     board.map(column => column[rowIndex]);
 
 getXCoordinate = (column) => {
-    const firstBlankSpace = column.indexOf('O');
+    const firstBlankSpace = column.indexOf('-');
     return firstBlankSpace;
 };
 
