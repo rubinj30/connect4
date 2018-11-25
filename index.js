@@ -4,7 +4,8 @@ const {
     declareWin,
     checkWin,
     getXCoordinate,
-    rotateBoard
+    displayBoard
+    // rotateBoard
     // dropPiece,
     // checkColumnForWin,
     // checkFlatBoardForWin,
@@ -37,7 +38,7 @@ var questions = [
     }
 ];
 
-const getDroppedIndex = current => {
+const getColumnPlayedIndex = current => {
     const index = inquirer.prompt(questions).then(answers => {
         const column = answers['column'];
         const index = column - 1;
@@ -69,42 +70,38 @@ updateGameAfterMove = (
     };
 };
 
-const displayBoard = board => {
-    rotatedBoard = rotateBoard(board);
-    rotatedBoard.unshift(
-        ['1', '2', '3', '4', '5', '6', '7'],
-        ['=', '=', '=', '=', '=', '=', '=']
-    );
-    console.log(rotatedBoard);
-};
-
 const promptForMove = async () => {
     try {
         const { board, currentTurn } = { ...game };
 
+        // show current state of the playing board in a playable view
+        displayBoard(board);
+
         // gets column index number from user
-        const droppedIndex = await getDroppedIndex(currentTurn);
+        const columnPlayedIndex = await getColumnPlayedIndex(currentTurn);
 
         // based on the above column this gets the index of the first blank space which will be needed later
-        const xCoordinate = await getXCoordinate(board[droppedIndex]);
+        const xCoordinate = await getXCoordinate(board[columnPlayedIndex]);
 
         // returns a new board with an updated column
-        const updatedBoard = replaceColumn(board, droppedIndex, currentTurn);
-
-        displayBoard(updatedBoard);
+        const updatedBoard = replaceColumn(
+            board,
+            columnPlayedIndex,
+            currentTurn
+        );
 
         // updates which user's turn it is
         const newTurn = changeTurn(currentTurn);
         const flatIndex = getFlatIndexOfLastDropped(
             xCoordinate,
-            droppedIndex,
+            columnPlayedIndex,
             board
         );
 
         // should write condition to check each of the following only if win = false
         const winStatus = checkWin(
             updatedBoard,
-            droppedIndex,
+            columnPlayedIndex,
             currentTurn,
             flatIndex
         );
@@ -115,7 +112,7 @@ const promptForMove = async () => {
                 newTurn,
                 winStatus,
                 xCoordinate,
-                droppedIndex
+                columnPlayedIndex
             );
             promptForMove();
         } else {

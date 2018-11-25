@@ -94,14 +94,24 @@ const checkWin = (updatedBoard, droppedIndex, turn, flatIndex) => {
     return colCheck || diaganolL || diaganolR || rowCheck;
 };
 
+const displayBoard = board => {
+    rotatedBoard = rotateBoard(board);
+    rotatedBoard.unshift(
+        ['1', '2', '3', '4', '5', '6', '7'],
+        ['=', '=', '=', '=', '=', '=', '=']
+    );
+    console.log(rotatedBoard);
+};
+
 module.exports = {
-    dropPiece,
     checkWin,
     replaceColumn,
-    checkColumnForWin,
     declareWin,
-    checkFlatBoardForWin,
-    transformRowToColumn,
-    getXCoordinate,
-    rotateBoard
+    displayBoard,
+    getXCoordinate
+    // dropPiece,
+    // checkColumnForWin,
+    // checkFlatBoardForWin,
+    // transformRowToColumn,
+    // rotateBoard
 };
