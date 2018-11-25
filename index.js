@@ -1,12 +1,13 @@
 const game = require('./gameObj.js');
 const {
-    dropPiece,
     replaceColumn,
-    checkColumnForWin,
     declareWin,
-    checkFlatBoardForWin,
+    checkWin,
     getXCoordinate,
     rotateBoard
+    // dropPiece,
+    // checkColumnForWin,
+    // checkFlatBoardForWin,
     // transformRowToColumn,
 } = require('./gamePlayFuncs.js');
 
@@ -19,7 +20,7 @@ var questions = [
         type: 'input',
         name: 'column',
         message:
-            'Please enter the column number where you want to drop your checker (1 to 7) and hit ENTER',
+            'Pick a column 1 - 7 by entering the number and pressing ENTER\n\n            ',
         validate: function(input) {
             var done = this.async();
             setTimeout(function() {
@@ -68,23 +69,16 @@ updateGameAfterMove = (
     };
 };
 
-// TODO: make sure to optimize all params passed once all check funcs are called
-//  and should set it up to only continue to next if the previous is false
-// TODO: can use checkFlat for all 4 directional checks, so could have array of intervals and loop thru
-const checkWin = (updatedBoard, droppedIndex, turn, flatIndex) => {
-    const colCheck = checkFlatBoardForWin(updatedBoard, turn, 1, flatIndex);
-    console.log('colcheck = ', colCheck);
-    const diaganolL = checkFlatBoardForWin(updatedBoard, turn, 7, flatIndex);
-    console.log('diaganolL = ', diaganolL);
-    const diaganolR = checkFlatBoardForWin(updatedBoard, turn, 5, flatIndex);
-    console.log('diaganolR = ', diaganolR);
-    const rowCheck = checkFlatBoardForWin(updatedBoard, turn, 6, flatIndex);
-    console.log('rowCheck = ', rowCheck);
-    //
-    // if one of the following are true then return true
-    return colCheck || diaganolL || diaganolR || rowCheck;
+const displayBoard = board => {
+    rotatedBoard = rotateBoard(board);
+    rotatedBoard.unshift(
+        ['1', '2', '3', '4', '5', '6', '7'],
+        ['=', '=', '=', '=', '=', '=', '=']
+    );
+    console.log(rotatedBoard);
 };
-const sampleGetMoveFn = async () => {
+
+const promptForMove = async () => {
     try {
         const { board, currentTurn } = { ...game };
 
@@ -97,14 +91,7 @@ const sampleGetMoveFn = async () => {
         // returns a new board with an updated column
         const updatedBoard = replaceColumn(board, droppedIndex, currentTurn);
 
-        const rotatedBoard = rotateBoard(updatedBoard);
-        rotatedBoard.unshift(
-            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-            ['1', '2', '3', '4', '5', '6', '7'],
-            ['=', '=', '=', '=', '=', '=', '=']
-        );
-        console.log(rotatedBoard);
-
+        displayBoard(updatedBoard);
 
         // updates which user's turn it is
         const newTurn = changeTurn(currentTurn);
@@ -121,7 +108,6 @@ const sampleGetMoveFn = async () => {
             currentTurn,
             flatIndex
         );
-        console.log('win', winStatus);
 
         if (!winStatus) {
             updateGameAfterMove(
@@ -131,7 +117,7 @@ const sampleGetMoveFn = async () => {
                 xCoordinate,
                 droppedIndex
             );
-            sampleGetMoveFn();
+            promptForMove();
         } else {
             declareWin(currentTurn);
         }
@@ -140,4 +126,4 @@ const sampleGetMoveFn = async () => {
         console.log(err);
     }
 };
-sampleGetMoveFn();
+promptForMove();

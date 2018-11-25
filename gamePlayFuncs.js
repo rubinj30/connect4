@@ -75,15 +75,28 @@ getFlatIndexOfLastDropped = (xCoord, yCoord, board) => {
     // TODO: find better way to get length of column
     const length = board[0].length;
     const flatBoardIndex = xCoord + yCoord * length;
-    console.log('flatIndex', flatBoardIndex);
     return flatBoardIndex;
 };
 
 const rotateBoard = board =>
     board[0].map((col, i) => board.map(row => row[row.length - 1 - i]));
 
+// TODO: make sure to optimize all params passed once all check funcs are called
+//  and should set it up to only continue to next if the previous is false
+// TODO: can use checkFlat for all 4 directional checks, so could have array of intervals and loop thru
+const checkWin = (updatedBoard, droppedIndex, turn, flatIndex) => {
+    const colCheck = checkFlatBoardForWin(updatedBoard, turn, 1, flatIndex);
+    const diaganolL = checkFlatBoardForWin(updatedBoard, turn, 7, flatIndex);
+    const diaganolR = checkFlatBoardForWin(updatedBoard, turn, 5, flatIndex);
+    const rowCheck = checkFlatBoardForWin(updatedBoard, turn, 6, flatIndex);
+
+    // if one of the following are true then return true
+    return colCheck || diaganolL || diaganolR || rowCheck;
+};
+
 module.exports = {
     dropPiece,
+    checkWin,
     replaceColumn,
     checkColumnForWin,
     declareWin,
