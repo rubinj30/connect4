@@ -3,7 +3,7 @@
 const dropPiece = (column, piece) => {
     let landed;
     const newColumn = column.map((space, i) => {
-        if (space === '-' && !landed) {
+        if (space === ' ' && !landed) {
             landed = true;
             return piece;
         } else {
@@ -67,7 +67,7 @@ transformRowToColumn = (board, rowIndex) =>
     board.map(column => column[rowIndex]);
 
 getXCoordinate = column => {
-    const firstBlankSpace = column.indexOf('-');
+    const firstBlankSpace = column.indexOf(' ');
     return firstBlankSpace;
 };
 
@@ -79,7 +79,8 @@ getFlatIndexOfLastDropped = (xCoord, yCoord, board) => {
     return flatBoardIndex;
 };
 
-const rotateBoard = board => board[0].map((col, i) => board.map(row => row[i]));
+const rotateBoard = board =>
+    board[0].map((col, i) => board.map(row => row[row.length - 1 - i]));
 
 module.exports = {
     dropPiece,

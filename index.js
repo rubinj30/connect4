@@ -6,7 +6,7 @@ const {
     declareWin,
     checkFlatBoardForWin,
     getXCoordinate,
-    rotateBoard,
+    rotateBoard
     // transformRowToColumn,
 } = require('./gamePlayFuncs.js');
 
@@ -14,7 +14,6 @@ var inquirer = require('inquirer');
 
 // regex for validation - if # of columns are dynamic, then that will need to be dynamic
 // /^([1-7])$/,
-
 var questions = [
     {
         type: 'input',
@@ -22,10 +21,7 @@ var questions = [
         message:
             'Please enter the column number where you want to drop your checker (1 to 7) and hit ENTER',
         validate: function(input) {
-            // Declare function as asynchronous, and save the done callback
             var done = this.async();
-
-            // Do async stuff
             setTimeout(function() {
                 console.log(input, typeof input);
                 if (!/^([1-7])$/.test(Number(input))) {
@@ -91,7 +87,7 @@ const checkWin = (updatedBoard, droppedIndex, turn, flatIndex) => {
 const sampleGetMoveFn = async () => {
     try {
         const { board, currentTurn } = { ...game };
-        console.log(board);
+
         // gets column index number from user
         const droppedIndex = await getDroppedIndex(currentTurn);
 
@@ -101,16 +97,32 @@ const sampleGetMoveFn = async () => {
         // returns a new board with an updated column
         const updatedBoard = replaceColumn(board, droppedIndex, currentTurn);
 
-        console.log(updatedBoard);
+        const rotatedBoard = rotateBoard(updatedBoard);
+        rotatedBoard.unshift(
+            [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            ['1', '2', '3', '4', '5', '6', '7'],
+            ['=', '=', '=', '=', '=', '=', '=']
+        );
+        console.log(rotatedBoard);
+
+
         // updates which user's turn it is
         const newTurn = changeTurn(currentTurn);
-        const flatIndex = getFlatIndexOfLastDropped(xCoordinate, droppedIndex, board)
+        const flatIndex = getFlatIndexOfLastDropped(
+            xCoordinate,
+            droppedIndex,
+            board
+        );
 
         // should write condition to check each of the following only if win = false
-        const winStatus = checkWin(updatedBoard, droppedIndex, currentTurn, flatIndex);
+        const winStatus = checkWin(
+            updatedBoard,
+            droppedIndex,
+            currentTurn,
+            flatIndex
+        );
         console.log('win', winStatus);
 
-        console.log('updated', updatedBoard.flat().join());
         if (!winStatus) {
             updateGameAfterMove(
                 updatedBoard,
