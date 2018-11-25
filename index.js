@@ -15,9 +15,6 @@ const {
 
 var inquirer = require('inquirer');
 
-
-
-
 const getColumnPlayedIndex = current => {
     const index = inquirer.prompt(getMoveQuestions).then(answers => {
         const column = answers['column'];
@@ -30,13 +27,10 @@ const getColumnPlayedIndex = current => {
     return index;
 };
 
-const playAgain = () => {
-    const againYesOrNo = inquirer.prompt(quest).then(answers => {
-        const playAgainAnswer = answers['playAgain'];
-        return playAgainAnswer;
-    });
-    console.log('play again ---- ', againYesOrNo);
-    return againYesOrNo;
+const playAgain = async () => {
+    const againYesOrNo = await inquirer.prompt(playAgainQuestions)
+    console.log('again? ', againYesOrNo['playAgain']);
+    return againYesOrNo['playAgain'];
 };
 
 const changeTurn = turn => {
@@ -106,6 +100,8 @@ const promptForMove = async () => {
             promptForMove();
         } else {
             declareWin(currentTurn);
+            const answer = await playAgain();
+            console.log(answer)
         }
         // updates the game board and player info with updated variables
     } catch (err) {

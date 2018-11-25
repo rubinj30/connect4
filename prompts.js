@@ -31,9 +31,8 @@ const playAgainQuestions = [
         validate: function(input) {
             var done = this.async();
             setTimeout(function() {
-                const lowerCasedAnswer = input.toLowerCase();
-                // TODO: make array of 'y', 'n', 'no', 'yes', 'yea' etc
-                if (lowerCasedAnswer != 'y' || lowerCasedAnswer != 'n') {
+                const cleanedAnswer = input.toLowerCase().trim();
+                if (!['y', 'n', 'yes', 'no'].includes(cleanedAnswer)) {
                     // Pass the return value in the done callback
                     done('You must provide a Y or N');
                     return;
