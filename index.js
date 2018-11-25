@@ -50,6 +50,15 @@ const getColumnPlayedIndex = current => {
     return index;
 };
 
+const playAgain = () => {
+    const againYesOrNo = inquirer.prompt(questions).then(answers => {
+        const playAgainAnswer = answers['playAgain'];
+        return playAgainAnswer;
+    });
+    console.log('play again ---- ', againYesOrNo);
+    return againYesOrNo;
+};
+
 const changeTurn = turn => {
     return turn === 'B' ? 'R' : 'B';
 };
