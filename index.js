@@ -76,7 +76,7 @@ updateGameAfterMove = (
 //  and should set it up to only continue to next if the previous is false
 // TODO: can use checkFlat for all 4 directional checks, so could have array of intervals and loop thru
 const checkWin = (updatedBoard, droppedIndex, turn, flatIndex) => {
-    const colCheck = checkColumnForWin(updatedBoard[droppedIndex], turn);
+    const colCheck = checkFlatBoardForWin(updatedBoard, turn, 1, flatIndex);
     console.log('colcheck = ', colCheck);
     const diaganolL = checkFlatBoardForWin(updatedBoard, turn, 7, flatIndex);
     console.log('diaganolL = ', diaganolL);

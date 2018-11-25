@@ -32,7 +32,6 @@ checkColumnForWin = (column, currentTurn) => {
             count += 1;
             if (count >= 4) {
                 win = true;
-                declareWin(currentTurn);
             }
         } else {
             count = 0;
@@ -53,8 +52,9 @@ checkFlatBoardForWin = (board, currentTurn, interval, flatIndex) => {
                 count += 1;
                 if (count >= 4) {
                     win = true;
-                    declareWin(currentTurn);
                 }
+            } else {
+                count = 0;
             }
         }
     });
@@ -79,7 +79,7 @@ getFlatIndexOfLastDropped = (xCoord, yCoord, board) => {
     return flatBoardIndex;
 };
 
-const rotateBoard = (board) => board[0].map((col, i) => board.map(row => row[i]));
+const rotateBoard = board => board[0].map((col, i) => board.map(row => row[i]));
 
 module.exports = {
     dropPiece,
