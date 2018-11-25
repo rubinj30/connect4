@@ -32,7 +32,7 @@ const playAgainQuestions = [
             var done = this.async();
             setTimeout(function() {
                 const cleanedAnswer = input.toLowerCase().trim();
-                if (!['y', 'n', 'yes', 'no'].includes(cleanedAnswer)) {
+                if (!playAgainAnswerValid(cleanedAnswer)) {
                     // Pass the return value in the done callback
                     done('You must provide a Y or N');
                     return;
@@ -43,6 +43,10 @@ const playAgainQuestions = [
         }
     }
 ];
+
+const playAgainAnswerValid = (input) => {
+    return ['y', 'n', 'yes', 'no', 'yea', ].includes(input)
+}
 
 module.exports = {
     getMoveQuestions,

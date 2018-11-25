@@ -1,5 +1,5 @@
 const game = require('./gameObj.js');
-const { getMoveQuestions, playAgainQuestions } = require('./prompts');
+const { getMoveQuestions, playAgainQuestions, checkIfPlayAgain } = require('./prompts');
 const {
     replaceColumn,
     declareWin,
@@ -29,7 +29,6 @@ const getColumnPlayedIndex = current => {
 
 const playAgain = async () => {
     const againYesOrNo = await inquirer.prompt(playAgainQuestions)
-    console.log('again? ', againYesOrNo['playAgain']);
     return againYesOrNo['playAgain'];
 };
 
@@ -101,7 +100,10 @@ const promptForMove = async () => {
         } else {
             declareWin(currentTurn);
             const answer = await playAgain();
-            console.log(answer)
+            if (answer.includes('y')) {
+                console.log("PLAY AGAIN");
+                promptForMove();
+            }
         }
         // updates the game board and player info with updated variables
     } catch (err) {
