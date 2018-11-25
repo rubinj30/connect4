@@ -1,4 +1,5 @@
 const game = require('./gameObj.js');
+const { getMoveQuestions, playAgainQuestions } = require('./prompts');
 const {
     replaceColumn,
     declareWin,
@@ -14,32 +15,11 @@ const {
 
 var inquirer = require('inquirer');
 
-// regex for validation - if # of columns are dynamic, then that will need to be dynamic
-// /^([1-7])$/,
-var questions = [
-    {
-        type: 'input',
-        name: 'column',
-        message:
-            'Pick a column 1 - 7 by entering the number and pressing ENTER\n\n            ',
-        validate: function(input) {
-            var done = this.async();
-            setTimeout(function() {
-                console.log(input, typeof input);
-                if (!/^([1-7])$/.test(Number(input))) {
-                    // Pass the return value in the done callback
-                    done('You need to provide a number between 1 and 7');
-                    return;
-                }
-                // Pass the return value in the done callback
-                done(null, true);
-            }, 300);
-        }
-    }
-];
+
+
 
 const getColumnPlayedIndex = current => {
-    const index = inquirer.prompt(questions).then(answers => {
+    const index = inquirer.prompt(getMoveQuestions).then(answers => {
         const column = answers['column'];
         const index = column - 1;
         console.log(
@@ -51,7 +31,7 @@ const getColumnPlayedIndex = current => {
 };
 
 const playAgain = () => {
-    const againYesOrNo = inquirer.prompt(questions).then(answers => {
+    const againYesOrNo = inquirer.prompt(quest).then(answers => {
         const playAgainAnswer = answers['playAgain'];
         return playAgainAnswer;
     });

@@ -1,4 +1,4 @@
-const questions = [
+const getMoveQuestions = [
     {
         type: 'input',
         name: 'column',
@@ -8,6 +8,8 @@ const questions = [
             var done = this.async();
             setTimeout(function() {
                 console.log(input, typeof input);
+                // TODO:
+                // regex for validation - if # of columns are dynamic, then that will need to be dynamic
                 if (!/^([1-7])$/.test(Number(input))) {
                     // Pass the return value in the done callback
                     done('You need to provide a number between 1 and 7');
@@ -17,7 +19,10 @@ const questions = [
                 done(null, true);
             }, 300);
         }
-    },
+    }
+];
+
+const playAgainQuestions = [
     {
         type: 'input',
         name: 'playAgain',
@@ -41,5 +46,6 @@ const questions = [
 ];
 
 module.exports = {
-    questions
+    getMoveQuestions,
+    playAgainQuestions
 };
