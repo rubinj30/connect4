@@ -72,6 +72,7 @@ const promptForMove = async () => {
             promptForMove();
         } else {
             declareWin(currentTurn);
+            game.board = game.blankBoard;
             const answer = await playAgain();
             if (answer.includes('y')) {
                 promptForMove();
