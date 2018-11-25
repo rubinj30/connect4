@@ -5,4 +5,7 @@ Goals:
 
 For the final version, I plan on building out the game with Typescript/React on the front-end and Rails on the back-end. The command-line version will be a node.js app, so some of the functions can be re-used in version 2. 
 
-To play the CLI version
+To play the CLI version: 
+1) navigate to the `cli-version` directory
+2) `npm install` dependencies
+3) `node index.js` to start the game
