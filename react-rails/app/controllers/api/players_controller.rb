@@ -15,5 +15,12 @@ class Api::PlayersController < ApplicationController
       @player = Player.find(params[:id])
       render json: @player
     end
+    
+    def update
+        # currently incrementing wins but will edit in future
+        @player = Player.find(params[:id])
+        @player.wins += 1
+        render json: @player
+    end
 end
   
