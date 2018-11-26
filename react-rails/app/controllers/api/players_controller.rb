@@ -20,6 +20,7 @@ class Api::PlayersController < ApplicationController
         # currently incrementing wins but will edit in future
         @player = Player.find(params[:id])
         @player.wins += 1
+        @player.save
         render json: @player
     end
 end

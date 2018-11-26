@@ -3,8 +3,22 @@ import { Disc } from '../atoms/disc.component';
 
 export type Piece = 'B' | 'R' | ' ';
 type Column = Piece[];
-
-export class Board extends Component {
+type BoardType = Column[];
+type State = {
+    board: BoardType;
+};
+export class Board extends Component<{}, State> {
+    state: State = {
+        board: [
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ']
+        ],
+    };
     render() {
         return (
             <div>
