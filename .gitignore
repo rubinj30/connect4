@@ -1,4 +1,4 @@
 cli-version/node_modules/
 cli-version/package-lock.json
-connect4/client/node_modules
-connect4/client/package-lock.json
+react-rails/client/node_modules
+react-rails/client/package-lock.json
