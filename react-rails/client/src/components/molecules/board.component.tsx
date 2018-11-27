@@ -15,7 +15,7 @@ export class Board extends Component<{}, State> {
         currentTurn: 'B',
         win: false,
         board: [
-            [' ', ' ', ' ', ' ', ' ', ' '],
+            ['B', ' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' ', ' '],
@@ -26,12 +26,16 @@ export class Board extends Component<{}, State> {
     };
 
     handleClick = event => {
-        console.log(event.target);
         console.log(event.currentTarget.dataset.index);
+        const { board, currentTurn } = this.state;
+        const clickedColIndex = Number(event.currentTarget.dataset.index);
+        const test = this.replaceColumn(board, clickedColIndex, currentTurn);
+        this.setState({ board: test });
     };
 
     dropPieceInColumn = (column, piece) => {
         let landed;
+        console.log('ran drop piece');
         const newColumn = column.map((space, i) => {
             if (space === ' ' && !landed) {
                 landed = true;
@@ -40,21 +44,22 @@ export class Board extends Component<{}, State> {
                 return space;
             }
         });
+        console.log('col', newColumn);
         return newColumn;
     };
 
     replaceColumn = (board, columnIndex, currentTurn) => {
-        return board.map((column, i) =>
-            columnIndex === i
+        return board.map((column, i) => {
+            console.log('column ', columnIndex, 'i', i);
+            return columnIndex === i
                 ? this.dropPieceInColumn(column, currentTurn)
-                : column
-        );
+                : column;
+        });
     };
 
     render() {
         return (
             <div className="bg-blue h-100 pa3 flex flex-column items-center">
-                <div>disc</div>
                 {this.state.board.map((column, i) => {
                     return (
                         <div
