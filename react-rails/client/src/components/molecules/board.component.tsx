@@ -25,6 +25,11 @@ export class Board extends Component<{}, State> {
         ]
     };
 
+    handleClick = event => {
+        console.log(event.target);
+        console.log(event.currentTarget.dataset.index);
+    };
+
     dropPieceInColumn = (column, piece) => {
         let landed;
         const newColumn = column.map((space, i) => {
@@ -48,11 +53,16 @@ export class Board extends Component<{}, State> {
 
     render() {
         return (
-            <div className="bg-blue h-100 pa3">
+            <div className="bg-blue h-100 pa3 flex flex-column items-center">
                 <div>disc</div>
                 {this.state.board.map((column, i) => {
                     return (
-                        <div className="flex">
+                        <div
+                            key={i}
+                            data-index={i}
+                            className="flex"
+                            onClick={this.handleClick}
+                        >
                             {column.map((piece, j) => (
                                 <Disc piece={piece} key={j} />
                             ))}
