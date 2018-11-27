@@ -4,17 +4,22 @@ import './molecules.css';
 
 type Props = {
     currentTurn: PieceType;
+    resetBoard: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
-export class WinMessage extends Component<Props, {}> {
-    render() {
-        const { currentTurn } = this.props;
-        const color = currentTurn === 'B' ? 'black' : 'red';
-        return (
-            <div className={`bg-${color} z-5 absolute w-50 h-50 flex flex-column items-center justify-center pa5 f3 winMsg white `}>
-                <span className="pb2 w-70 tc">{color.toUpperCase()} wins!</span>
-                <div className={`pa2 f5 bg-white ${color}`}>Reset Board</div>
+export const WinMessage = ({ resetBoard, currentTurn }: Props) => {
+    const color = currentTurn === 'B' ? 'black' : 'red';
+    return (
+        <div
+            className={`bg-${color} z-5 absolute w-50 h-50 flex flex-column items-center justify-center pa5 f3 winMsg white `}
+        >
+            <span className="pb2 w-70 tc">{color.toUpperCase()} wins!</span>
+            <div
+                onClick={resetBoard}
+                className={`pa2 br2 hover-bg-blue hover-white f5 bg-white pointer ${color}`}
+            >
+                Reset Board
             </div>
-        );
-    }
-}
+        </div>
+    );
+};

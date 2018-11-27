@@ -9,6 +9,7 @@ type State = {
     currentTurn: PieceType;
     win: boolean;
     board: BoardType;
+    cleanBoard: BoardType;
     lastDropped: {
         x: number;
         y: number;
@@ -23,6 +24,15 @@ export class Board extends Component<{}, State> {
             y: 0
         },
         board: [
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ']
+        ],
+        cleanBoard: [
             [' ', ' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' ', ' '],
@@ -147,15 +157,27 @@ export class Board extends Component<{}, State> {
         return flatBoardIndex;
     };
 
+    resetBoard = () => {
+        this.setState(({ cleanBoard }) => {
+            return { board: cleanBoard, win: false };
+        });
+    };
+
     render() {
-        const { currentTurn } = this.state;
+        const { win, currentTurn, board } = this.state;
         return (
             <div className="bg-blue h-100 pa3 flex flex-column items-center justify-center board">
-                {this.state.win && <WinMessage currentTurn={currentTurn} />}
-                {this.state.board.map((column, i) => {
+                {win && (
+                    <WinMessage
+                        currentTurn={currentTurn}
+                        resetBoard={this.resetBoard}
+                    />
+                )}
+                {board.map((column, i) => {
                     return (
                         <Column
                             key={i}
+                            win={win}
                             column={column}
                             dataIndex={i}
                             currentTurn={currentTurn}
