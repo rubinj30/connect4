@@ -9,7 +9,6 @@ class App extends Component {
             <div className="App flex flex-column items-center">
                 <Title />
                 <NewPlayer />
-                <div className="bg-red">test</div>
                 <Board />
             </div>
         );
