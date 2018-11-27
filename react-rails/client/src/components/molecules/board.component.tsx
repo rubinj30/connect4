@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Column, ColumnType } from './column.component';
 import { PieceType } from '../atoms/space.component';
 import './molecules.css';
+import { WinMessage } from './win-message.component';
 
 type BoardType = ColumnType[];
 type State = {
     currentTurn: PieceType;
-    win: false;
+    win: boolean;
     board: BoardType;
     lastDropped: {
         x: number;
@@ -48,16 +49,16 @@ export class Board extends Component<{}, State> {
             board[0].length
         );
 
-        const test = this.checkAllWinConditions(
+        const win = this.checkAllWinConditions(
             [1, 5, 6, 7, 8],
             updatedBoard,
             currentTurn,
             flatIndexOfLastDropped
         );
-        console.log(test);
         this.changeTurn();
         this.setState({
             board: updatedBoard,
+            win,
             lastDropped: { x, y: clickedColIndex }
         });
     };
@@ -148,7 +149,10 @@ export class Board extends Component<{}, State> {
 
     render() {
         return (
-            <div className="board bg-blue h-100 pa3 flex flex-column items-center">
+            <div className="bg-blue h-100 pa3 flex flex-column items-center justify-center board">
+                {this.state.win && (
+                    <WinMessage currentTurn={this.state.currentTurn} />
+                )}
                 {this.state.board.map((column, i) => {
                     return (
                         <Column

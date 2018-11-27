@@ -1,3 +1,9 @@
 .board {
+  border-radius: 5px;
   transform: rotate(-90deg);
+}
+
+.winMsg {
+  transform: rotate(90deg);
+  border-radius: 5px;
 }
