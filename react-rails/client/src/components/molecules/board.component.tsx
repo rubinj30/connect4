@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Column, ColumnType } from './column.component';
 import { PieceType } from '../atoms/space.component';
+import './molecules.css';
 
 type BoardType = ColumnType[];
 type State = {
@@ -68,7 +69,7 @@ export class Board extends Component<{}, State> {
 
     render() {
         return (
-            <div className="bg-blue h-100 pa3 flex flex-column items-center">
+            <div className="board bg-blue h-100 pa3 flex flex-column items-center">
                 {this.state.board.map((column, i) => {
                     return (
                         <Column
