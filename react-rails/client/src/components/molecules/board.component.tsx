@@ -8,11 +8,19 @@ type State = {
     currentTurn: PieceType;
     win: false;
     board: BoardType;
+    lastDropped: {
+        x: number;
+        y: number;
+    };
 };
 export class Board extends Component<{}, State> {
     state: State = {
         currentTurn: 'B',
         win: false,
+        lastDropped: {
+            x: 0,
+            y: 0
+        },
         board: [
             [' ', ' ', ' ', ' ', ' ', ' '],
             [' ', ' ', ' ', ' ', ' ', ' '],
@@ -32,10 +40,26 @@ export class Board extends Component<{}, State> {
             clickedColIndex,
             currentTurn
         );
-        const test = this.checkAllWinConditions([1, 5, 6, 7], updatedBoard, currentTurn, 0);
+
+        const x = this.getIndexOfPiece(updatedBoard[clickedColIndex]);
+        const flatIndexOfLastDropped = this.getFlatIndexOfLastDropped(
+            x,
+            clickedColIndex,
+            board[0].length
+        );
+
+        const test = this.checkAllWinConditions(
+            [1, 5, 6, 7, 8],
+            updatedBoard,
+            currentTurn,
+            flatIndexOfLastDropped
+        );
         console.log(test);
         this.changeTurn();
-        this.setState({ board: updatedBoard });
+        this.setState({
+            board: updatedBoard,
+            lastDropped: { x, y: clickedColIndex }
+        });
     };
 
     changeTurn = () => {
@@ -98,10 +122,28 @@ export class Board extends Component<{}, State> {
         currentTurn: PieceType,
         flatIndex: number
     ) => {
-        const winChecks = intervals.map((interval, i) => {
-            this.winCheckByInterval(board, currentTurn, interval, flatIndex);
+        const winChecks = intervals.map(interval => {
+            return this.winCheckByInterval(
+                board,
+                currentTurn,
+                interval,
+                flatIndex
+            );
         });
-        winChecks.every(x => false);
+        // if at least at least one of win conditions checked is true, return true
+        const winStatus = winChecks.some(win => win === true);
+        return winStatus;
+    };
+
+    getIndexOfPiece = (column: ColumnType) => {
+        const firstBlankSpace = column.indexOf(' ');
+        const index = firstBlankSpace > -1 ? firstBlankSpace : column.length;
+        return index - 1;
+    };
+
+    getFlatIndexOfLastDropped = (x: number, y: number, colLength) => {
+        const flatBoardIndex = x + y * length;
+        return flatBoardIndex;
     };
 
     render() {
