@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Player.destroy_all
+puts 'deleting existing players in database'
+
+Player.create({name: 'charlie conway', wins: 10, losses: 5});
+Player.create({name: 'gordon bombay', wins: 5, losses: 10});
+
+puts 'database re-seeded with players'
