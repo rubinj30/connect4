@@ -8,4 +8,6 @@ For the final version, I plan on building out the game with Typescript/React on 
 To play the CLI version: 
 1) navigate to the `cli-version` directory
 2) `npm install` dependencies
-3) `node index.js` to start the game
+3) `npm start` or `node index.js` to start the game
+4) player 1 ('B' for Black) and player 2 ('R' for red) will alternate picking columns to drop game pieces in
+
