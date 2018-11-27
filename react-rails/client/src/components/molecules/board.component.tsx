@@ -148,17 +148,17 @@ export class Board extends Component<{}, State> {
     };
 
     render() {
+        const { currentTurn } = this.state;
         return (
             <div className="bg-blue h-100 pa3 flex flex-column items-center justify-center board">
-                {this.state.win && (
-                    <WinMessage currentTurn={this.state.currentTurn} />
-                )}
+                {this.state.win && <WinMessage currentTurn={currentTurn} />}
                 {this.state.board.map((column, i) => {
                     return (
                         <Column
                             key={i}
                             column={column}
                             dataIndex={i}
+                            currentTurn={currentTurn}
                             handleClick={this.handleClick}
                         />
                     );

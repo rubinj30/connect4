@@ -1,9 +1,30 @@
 .board {
-  border-radius: 5px;
-  transform: rotate(-90deg);
+    border-radius: 5px;
+    transform: rotate(-90deg);
 }
 
 .winMsg {
-  transform: rotate(90deg);
-  border-radius: 5px;
+    transform: rotate(90deg);
+    border-radius: 5px;
+}
+
+.arrow {
+    border-top: 40px solid #357edd;
+    border-bottom: 40px solid #357edd;
+    border-right: 30px solid #357edd;
+    border-radius: 3px;
+    z-index: 4;
+}
+
+.column {
+  width: 100%;
+
+}
+
+.column:hover .red {
+  border-right: red 20px solid
+}
+
+.column:hover .black {
+  border-right: black 20px solid
 }
