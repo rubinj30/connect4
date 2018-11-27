@@ -1,0 +1,1 @@
+import { Space } from './space.component';
