@@ -29,8 +29,23 @@ export class Board extends Component<{}, State> {
         console.log(event.currentTarget.dataset.index);
         const { board, currentTurn } = this.state;
         const clickedColIndex = Number(event.currentTarget.dataset.index);
-        const test = this.replaceColumn(board, clickedColIndex, currentTurn);
-        this.setState({ board: test });
+        const updatedBoard = this.replaceColumn(
+            board,
+            clickedColIndex,
+            currentTurn
+        );
+        this.changeTurn();
+        this.setState({ board: updatedBoard });
+    };
+
+    changeTurn = () => {
+        this.setState(({ currentTurn }) => {
+            if (currentTurn === 'B') {
+                return { currentTurn: 'R' };
+            } else {
+                return { currentTurn: 'B' };
+            }
+        });
     };
 
     dropPieceInColumn = (column, piece) => {
