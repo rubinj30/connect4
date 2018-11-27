@@ -18,122 +18,134 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Column
-          column={
-            Array [
-              "B",
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-            ]
-          }
-          dataIndex={0}
-          handleClick={[Function]}
-        />,
-        <Column
-          column={
-            Array [
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-            ]
-          }
-          dataIndex={1}
-          handleClick={[Function]}
-        />,
-        <Column
-          column={
-            Array [
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-            ]
-          }
-          dataIndex={2}
-          handleClick={[Function]}
-        />,
-        <Column
-          column={
-            Array [
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-            ]
-          }
-          dataIndex={3}
-          handleClick={[Function]}
-        />,
-        <Column
-          column={
-            Array [
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-            ]
-          }
-          dataIndex={4}
-          handleClick={[Function]}
-        />,
-        <Column
-          column={
-            Array [
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-            ]
-          }
-          dataIndex={5}
-          handleClick={[Function]}
-        />,
-        <Column
-          column={
-            Array [
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-              " ",
-            ]
-          }
-          dataIndex={6}
-          handleClick={[Function]}
-        />,
+        false,
+        Array [
+          <Column
+            column={
+              Array [
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+              ]
+            }
+            currentTurn="B"
+            dataIndex={0}
+            handleClick={[Function]}
+          />,
+          <Column
+            column={
+              Array [
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+              ]
+            }
+            currentTurn="B"
+            dataIndex={1}
+            handleClick={[Function]}
+          />,
+          <Column
+            column={
+              Array [
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+              ]
+            }
+            currentTurn="B"
+            dataIndex={2}
+            handleClick={[Function]}
+          />,
+          <Column
+            column={
+              Array [
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+              ]
+            }
+            currentTurn="B"
+            dataIndex={3}
+            handleClick={[Function]}
+          />,
+          <Column
+            column={
+              Array [
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+              ]
+            }
+            currentTurn="B"
+            dataIndex={4}
+            handleClick={[Function]}
+          />,
+          <Column
+            column={
+              Array [
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+              ]
+            }
+            currentTurn="B"
+            dataIndex={5}
+            handleClick={[Function]}
+          />,
+          <Column
+            column={
+              Array [
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+              ]
+            }
+            currentTurn="B"
+            dataIndex={6}
+            handleClick={[Function]}
+          />,
+        ],
       ],
-      "className": "bg-blue h-100 pa3 flex flex-column items-center",
+      "className": "bg-blue h-100 pa3 flex flex-column items-center justify-center board",
     },
     "ref": null,
     "rendered": Array [
+      false,
       Object {
         "instance": null,
         "key": "0",
         "nodeType": "function",
         "props": Object {
           "column": Array [
-            "B",
+            " ",
             " ",
             " ",
             " ",
             " ",
             " ",
           ],
+          "currentTurn": "B",
           "dataIndex": 0,
           "handleClick": [Function],
         },
@@ -154,6 +166,7 @@ ShallowWrapper {
             " ",
             " ",
           ],
+          "currentTurn": "B",
           "dataIndex": 1,
           "handleClick": [Function],
         },
@@ -174,6 +187,7 @@ ShallowWrapper {
             " ",
             " ",
           ],
+          "currentTurn": "B",
           "dataIndex": 2,
           "handleClick": [Function],
         },
@@ -194,6 +208,7 @@ ShallowWrapper {
             " ",
             " ",
           ],
+          "currentTurn": "B",
           "dataIndex": 3,
           "handleClick": [Function],
         },
@@ -214,6 +229,7 @@ ShallowWrapper {
             " ",
             " ",
           ],
+          "currentTurn": "B",
           "dataIndex": 4,
           "handleClick": [Function],
         },
@@ -234,6 +250,7 @@ ShallowWrapper {
             " ",
             " ",
           ],
+          "currentTurn": "B",
           "dataIndex": 5,
           "handleClick": [Function],
         },
@@ -254,6 +271,7 @@ ShallowWrapper {
             " ",
             " ",
           ],
+          "currentTurn": "B",
           "dataIndex": 6,
           "handleClick": [Function],
         },
@@ -271,122 +289,134 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Column
-            column={
-              Array [
-                "B",
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-              ]
-            }
-            dataIndex={0}
-            handleClick={[Function]}
-          />,
-          <Column
-            column={
-              Array [
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-              ]
-            }
-            dataIndex={1}
-            handleClick={[Function]}
-          />,
-          <Column
-            column={
-              Array [
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-              ]
-            }
-            dataIndex={2}
-            handleClick={[Function]}
-          />,
-          <Column
-            column={
-              Array [
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-              ]
-            }
-            dataIndex={3}
-            handleClick={[Function]}
-          />,
-          <Column
-            column={
-              Array [
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-              ]
-            }
-            dataIndex={4}
-            handleClick={[Function]}
-          />,
-          <Column
-            column={
-              Array [
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-              ]
-            }
-            dataIndex={5}
-            handleClick={[Function]}
-          />,
-          <Column
-            column={
-              Array [
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-                " ",
-              ]
-            }
-            dataIndex={6}
-            handleClick={[Function]}
-          />,
+          false,
+          Array [
+            <Column
+              column={
+                Array [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                ]
+              }
+              currentTurn="B"
+              dataIndex={0}
+              handleClick={[Function]}
+            />,
+            <Column
+              column={
+                Array [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                ]
+              }
+              currentTurn="B"
+              dataIndex={1}
+              handleClick={[Function]}
+            />,
+            <Column
+              column={
+                Array [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                ]
+              }
+              currentTurn="B"
+              dataIndex={2}
+              handleClick={[Function]}
+            />,
+            <Column
+              column={
+                Array [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                ]
+              }
+              currentTurn="B"
+              dataIndex={3}
+              handleClick={[Function]}
+            />,
+            <Column
+              column={
+                Array [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                ]
+              }
+              currentTurn="B"
+              dataIndex={4}
+              handleClick={[Function]}
+            />,
+            <Column
+              column={
+                Array [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                ]
+              }
+              currentTurn="B"
+              dataIndex={5}
+              handleClick={[Function]}
+            />,
+            <Column
+              column={
+                Array [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                ]
+              }
+              currentTurn="B"
+              dataIndex={6}
+              handleClick={[Function]}
+            />,
+          ],
         ],
-        "className": "bg-blue h-100 pa3 flex flex-column items-center",
+        "className": "bg-blue h-100 pa3 flex flex-column items-center justify-center board",
       },
       "ref": null,
       "rendered": Array [
+        false,
         Object {
           "instance": null,
           "key": "0",
           "nodeType": "function",
           "props": Object {
             "column": Array [
-              "B",
+              " ",
               " ",
               " ",
               " ",
               " ",
               " ",
             ],
+            "currentTurn": "B",
             "dataIndex": 0,
             "handleClick": [Function],
           },
@@ -407,6 +437,7 @@ ShallowWrapper {
               " ",
               " ",
             ],
+            "currentTurn": "B",
             "dataIndex": 1,
             "handleClick": [Function],
           },
@@ -427,6 +458,7 @@ ShallowWrapper {
               " ",
               " ",
             ],
+            "currentTurn": "B",
             "dataIndex": 2,
             "handleClick": [Function],
           },
@@ -447,6 +479,7 @@ ShallowWrapper {
               " ",
               " ",
             ],
+            "currentTurn": "B",
             "dataIndex": 3,
             "handleClick": [Function],
           },
@@ -467,6 +500,7 @@ ShallowWrapper {
               " ",
               " ",
             ],
+            "currentTurn": "B",
             "dataIndex": 4,
             "handleClick": [Function],
           },
@@ -487,6 +521,7 @@ ShallowWrapper {
               " ",
               " ",
             ],
+            "currentTurn": "B",
             "dataIndex": 5,
             "handleClick": [Function],
           },
@@ -507,6 +542,7 @@ ShallowWrapper {
               " ",
               " ",
             ],
+            "currentTurn": "B",
             "dataIndex": 6,
             "handleClick": [Function],
           },

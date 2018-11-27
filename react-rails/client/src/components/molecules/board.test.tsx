@@ -21,11 +21,7 @@ describe('Board component', () => {
             instance.changeTurn();
             expect(result.state().currentTurn).toEqual('R');
         });
-        it('dropPieceInColumn should call find first blank space and replace it with the piece in currentTurn', () => {
-            
-        });
-        it('replaceColumn should call find first blank space and replace it with the piece in currentTurn', () => {
-
-        });
+        it('dropPieceInColumn should call find first blank space and replace it with the piece in currentTurn', () => {});
+        it('replaceColumn should call find first blank space and replace it with the piece in currentTurn', () => {});
     });
 });
