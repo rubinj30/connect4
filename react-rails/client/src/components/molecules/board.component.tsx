@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Disc } from '../atoms/disc.component';
+import { Column, ColumnType } from './column.component';
+import { PieceType } from '../atoms/space.component';
 
-export type Piece = 'B' | 'R' | Space;
-type Space = ' ';
-type Column = Piece[];
-type BoardType = Column[];
+type BoardType = ColumnType[];
 type State = {
-    currentTurn: Piece;
+    currentTurn: PieceType;
     win: false;
     board: BoardType;
 };
@@ -26,7 +24,6 @@ export class Board extends Component<{}, State> {
     };
 
     handleClick = event => {
-        console.log(event.currentTarget.dataset.index);
         const { board, currentTurn } = this.state;
         const clickedColIndex = Number(event.currentTarget.dataset.index);
         const updatedBoard = this.replaceColumn(
@@ -48,9 +45,8 @@ export class Board extends Component<{}, State> {
         });
     };
 
-    dropPieceInColumn = (column, piece) => {
+    dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
         let landed;
-        console.log('ran drop piece');
         const newColumn = column.map((space, i) => {
             if (space === ' ' && !landed) {
                 landed = true;
@@ -59,13 +55,11 @@ export class Board extends Component<{}, State> {
                 return space;
             }
         });
-        console.log('col', newColumn);
         return newColumn;
     };
 
     replaceColumn = (board, columnIndex, currentTurn) => {
         return board.map((column, i) => {
-            console.log('column ', columnIndex, 'i', i);
             return columnIndex === i
                 ? this.dropPieceInColumn(column, currentTurn)
                 : column;
@@ -77,16 +71,12 @@ export class Board extends Component<{}, State> {
             <div className="bg-blue h-100 pa3 flex flex-column items-center">
                 {this.state.board.map((column, i) => {
                     return (
-                        <div
+                        <Column
                             key={i}
-                            data-index={i}
-                            className="flex"
-                            onClick={this.handleClick}
-                        >
-                            {column.map((piece, j) => (
-                                <Disc piece={piece} key={j} />
-                            ))}
-                        </div>
+                            column={column}
+                            dataIndex={i}
+                            handleClick={this.handleClick}
+                        />
                     );
                 })}
             </div>

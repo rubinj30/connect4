@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { Piece } from '../molecules/board.component';
+
+export type PieceType = 'B' | 'R' | SpaceType;
+type SpaceType = ' ';
 
 type Props = {
-    piece: Piece;
+    piece: PieceType;
 };
-export class Disc extends Component<Props, {}> {
+
+export class Space extends Component<Props, {}> {
     render() {
         const { piece } = this.props;
         const color = piece === 'B' ? 'black' : piece === 'R' ? 'red' : 'white';
