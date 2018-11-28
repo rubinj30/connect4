@@ -43,7 +43,7 @@ export class Board extends Component<{}, State> {
         ]
     };
 
-    handleClick = event => {
+    handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const { board, currentTurn } = this.state;
         const clickedColIndex = Number(event.currentTarget.dataset.index);
         const updatedBoard = this.replaceColumn(
@@ -65,7 +65,7 @@ export class Board extends Component<{}, State> {
             currentTurn,
             flatIndexOfLastDropped
         );
-        this.changeTurn();
+        !win && this.changeTurn();
         this.setState({
             board: updatedBoard,
             win,
@@ -74,7 +74,7 @@ export class Board extends Component<{}, State> {
     };
 
     changeTurn = () => {
-        this.setState(({ currentTurn }) => {
+        this.setState(({ currentTurn }: { currentTurn: PieceType }) => {
             if (currentTurn === 'B') {
                 return { currentTurn: 'R' };
             } else {
@@ -159,6 +159,7 @@ export class Board extends Component<{}, State> {
 
     resetBoard = () => {
         this.setState(({ cleanBoard }) => {
+            this.changeTurn();
             return { board: cleanBoard, win: false };
         });
     };

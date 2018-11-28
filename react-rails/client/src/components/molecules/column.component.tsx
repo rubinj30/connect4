@@ -1,4 +1,5 @@
 import React from 'react';
+import { Arrow } from '../atoms/arrow.component';
 import { PieceType, Space } from '../atoms/space.component';
 
 export type ColumnType = PieceType[];
@@ -19,7 +20,6 @@ export const Column = ({
     handleClick,
     currentTurn
 }: ColumnProps) => {
-    const currentColor = currentTurn === 'B' ? 'black' : 'red';
     return (
         <div
             className="flex column"
@@ -29,7 +29,7 @@ export const Column = ({
             {column.map((piece, j) => (
                 <Space piece={piece} key={j} />
             ))}
-            <div className={`arrow ${currentColor}`} color={currentColor} />
+            <Arrow currentTurn={currentTurn} win={win} />
         </div>
     );
 };
