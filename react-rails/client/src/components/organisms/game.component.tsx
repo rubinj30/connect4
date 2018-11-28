@@ -121,7 +121,16 @@ export class Game extends Component<{}, State> {
             // only checks every 7 (or 5) spaces for piece
             if ((i - flatIndex) % interval === 0) {
                 if (currentTurn === space) {
-                    console.log('i', i, 'given', flatIndex, 'interval', interval, 'space', space)
+                    console.log(
+                        'i',
+                        i,
+                        'given',
+                        flatIndex,
+                        'interval',
+                        interval,
+                        'space',
+                        space
+                    );
                     count += 1;
                     if (count >= 4) {
                         win = true;
@@ -159,14 +168,13 @@ export class Game extends Component<{}, State> {
         return index - 1;
     };
 
-    getFlatIndexOfLastDropped = (x: number, y: number, colLength) => {
+    getFlatIndexOfLastDropped = (x: number, y: number, colLength: number) => {
         const flatBoardIndex = x + y * colLength;
         return flatBoardIndex;
     };
 
     resetBoard = () => {
         this.setState(({ cleanBoard }) => {
-
             // TODO: only need to leave if not resetting board on player change
             this.changeTurn();
             return { board: cleanBoard, win: false };

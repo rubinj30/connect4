@@ -1,3 +1,5 @@
+jest.unmock('./game.component');
+
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Game } from './game.component';
@@ -39,9 +41,18 @@ describe('Board component', () => {
                 column
             ]);
         });
+        it('getFlatIndexOfLastDropped should return the index in the flattened array based on row/column of last dropped and column‰ length', () => {
+            const flatIndex = instance.getFlatIndexOfLastDropped(4, 3, 7);
+            expect(flatIndex).toEqual(25);
+        });
 
         describe('winCheckByInterval ', () => {
-            let blankColumn, nonWinBoard, colWinBoard, rowWinBoard, rightDiagWinBoard, leftDiagWinBoard;
+            let blankColumn,
+                nonWinBoard,
+                colWinBoard,
+                rowWinBoard,
+                rightDiagWinBoard,
+                leftDiagWinBoard;
             beforeEach(() => {
                 blankColumn = [' ', ' ', ' ', ' ', ' ', ' '];
                 winColumn = ['B', 'B', 'B', 'B', ' ', ' '];
@@ -84,11 +95,11 @@ describe('Board component', () => {
                 leftDiagWinBoard = [
                     blankColumn,
                     blankColumn,
-                    column,
-                    column,
-                    column,
+                    blankColumn,
+                    [' ', 'B', ' ', ' ', ' ', ' '],
+                    [' ', ' ', 'B', ' ', ' ', ' '],
                     [' ', ' ', ' ', 'B', ' ', ' '],
-                    blankColumn
+                    [' ', ' ', ' ', ' ', 'B', ' ']
                 ];
             });
             it('should return false if win condition not met on column', () => {
@@ -127,8 +138,10 @@ describe('Board component', () => {
                     rightDiagWinBoard,
                     'B',
                     7,
-                    13
-                )
+
+                    // 2nd item in 4th row
+                    19
+                );
                 expect(result).toBeTruthy();
             });
             // it('should return false if there is a win, but flatIndex doesnt ID correct', () => {
