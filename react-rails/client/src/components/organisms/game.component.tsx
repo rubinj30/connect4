@@ -4,11 +4,15 @@ import { ColumnType } from '../molecules/column.component';
 import { NumPlayers } from '../molecules/num-players.component';
 import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
+import { NewPlayer } from '../molecules/new-player.component';
 import './organisms.css';
 
 export type BoardType = ColumnType[];
+
+type ComputerTurn = 'yes' | 'no' | 'off';
 type State = {
     twoPlayer: boolean;
+    compTurn: ComputerTurn;
     currentTurn: PieceType;
     win: boolean;
     board: BoardType;
@@ -21,6 +25,7 @@ type State = {
 export class Game extends Component<{}, State> {
     state: State = {
         twoPlayer: true,
+        compTurn: 'off',
         currentTurn: 'B',
         win: false,
         lastDropped: {
@@ -70,7 +75,6 @@ export class Game extends Component<{}, State> {
             currentTurn,
             flatIndexOfLastDropped
         );
-        console.log('checkall', win);
         !win && this.changeTurn();
         this.setState({
             board: updatedBoard,
@@ -91,7 +95,7 @@ export class Game extends Component<{}, State> {
 
     dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
         let landed;
-        const newColumn = column.map((space, i) => {
+        const newColumn = column.map(space => {
             if (space === ' ' && !landed) {
                 landed = true;
                 return piece;
@@ -121,16 +125,6 @@ export class Game extends Component<{}, State> {
             // only checks every 7 (or 5) spaces for piece
             if ((i - flatIndex) % interval === 0) {
                 if (currentTurn === space) {
-                    console.log(
-                        'i',
-                        i,
-                        'given',
-                        flatIndex,
-                        'interval',
-                        interval,
-                        'space',
-                        space
-                    );
                     count += 1;
                     if (count >= 4) {
                         win = true;
@@ -182,12 +176,28 @@ export class Game extends Component<{}, State> {
     };
 
     changeNumPlayers = () => {
-        this.setState(({ twoPlayer }: { twoPlayer: boolean }) => {
-            return { twoPlayer: !twoPlayer };
-        }),
-            // for now resetting the board if changing to or from AI
-            this.resetBoard();
+        this.setState(
+            ({
+                twoPlayer,
+                cleanBoard,
+                currentTurn
+            }: {
+                twoPlayer: boolean;
+                cleanBoard: BoardType;
+                currentTurn: PieceType
+            }) => {
+                // if changing to computer, human goes first
+                const newTurn = twoPlayer ? 'B' : currentTurn;
+                return {
+                    twoPlayer: !twoPlayer,
+                    board: cleanBoard,
+                    currentTurn: newTurn
+                };
+            }
+        );
     };
+
+    checkEachColumn = (currentTurn, twoPlayer) => {};
 
     render() {
         const { currentTurn, board, win, twoPlayer } = this.state;
@@ -210,6 +220,7 @@ export class Game extends Component<{}, State> {
                     resetBoard={this.resetBoard}
                     handleClick={this.handleClick}
                 />
+                <NewPlayer twoPlayer={twoPlayer} currentTurn={currentTurn} />
             </div>
         );
     }

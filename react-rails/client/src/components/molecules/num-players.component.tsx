@@ -7,20 +7,20 @@ type Props = {
 
 export const NumPlayers = ({ twoPlayer, changeNumPlayers }: Props) => (
     <div onClick={changeNumPlayers} className="br2">
-        <span className="pr1">Number of Humans:</span>
+        <span className="pr1">Computer?</span>
         <span
             className={`pa2 ba b--blue option ${
                 twoPlayer ? '' : 'bg-blue white bw2'
             }`}
         >
-            1
+            Yes
         </span>
         <span
             className={`pa2 ba b--blue option ${
                 twoPlayer ? 'bg-blue white bw2' : ''
             }`}
         >
-            2
+            No
         </span>
     </div>
 );
