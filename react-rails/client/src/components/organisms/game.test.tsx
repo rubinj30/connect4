@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Board } from './board.component';
+import { Board } from './game.component';
 
 describe('Board component', () => {
     let fixture, result;
