@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Board } from '../molecules/board.component';
 import { ColumnType } from '../molecules/column.component';
+import { NumPlayers } from '../molecules/num-players.component';
 import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
 import './organisms.css';
 
 export type BoardType = ColumnType[];
 type State = {
+    twoPlayer: boolean;
     currentTurn: PieceType;
     win: boolean;
     board: BoardType;
@@ -18,6 +20,7 @@ type State = {
 };
 export class Game extends Component<{}, State> {
     state: State = {
+        twoPlayer: true,
         currentTurn: 'B',
         win: false,
         lastDropped: {
@@ -160,18 +163,34 @@ export class Game extends Component<{}, State> {
 
     resetBoard = () => {
         this.setState(({ cleanBoard }) => {
+
+            // TODO: only need to leave if not resetting board on player change
             this.changeTurn();
             return { board: cleanBoard, win: false };
         });
     };
 
+    changeNumPlayers = () => {
+        this.setState(({ twoPlayer }: { twoPlayer: boolean }) => {
+            return { twoPlayer: !twoPlayer };
+        }),
+            // for now resetting the board if changing to or from AI
+            this.resetBoard();
+    };
+
     render() {
-        const { currentTurn, board, win } = this.state;
+        const { currentTurn, board, win, twoPlayer } = this.state;
         return (
             <div>
-                <div className="flex items-center justify-between w-30">
-                    <span>Turn:</span>
-                    <Space piece={currentTurn} />
+                <div className="flex items-center justify-between">
+                    <span className="flex items-center justify-between w-30">
+                        <span>Turn:</span>
+                        <Space piece={currentTurn} />
+                    </span>
+                    <NumPlayers
+                        changeNumPlayers={this.changeNumPlayers}
+                        twoPlayer={twoPlayer}
+                    />
                 </div>
                 <Board
                     currentTurn={currentTurn}

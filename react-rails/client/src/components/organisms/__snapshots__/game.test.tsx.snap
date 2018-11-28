@@ -19,13 +19,21 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <div
-          className="flex items-center justify-between w-30"
+          className="flex items-center justify-between"
         >
-          <span>
-            Turn:
+          <span
+            className="flex items-center justify-between w-30"
+          >
+            <span>
+              Turn:
+            </span>
+            <Space
+              piece="B"
+            />
           </span>
-          <Space
-            piece="B"
+          <NumPlayers
+            changeNumPlayers={[Function]}
+            twoPlayer={true}
           />
         </div>,
         <Board
@@ -104,14 +112,22 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <span>
-              Turn:
+            <span
+              className="flex items-center justify-between w-30"
+            >
+              <span>
+                Turn:
+              </span>
+              <Space
+                piece="B"
+              />
             </span>,
-            <Space
-              piece="B"
+            <NumPlayers
+              changeNumPlayers={[Function]}
+              twoPlayer={true}
             />,
           ],
-          "className": "flex items-center justify-between w-30",
+          "className": "flex items-center justify-between",
         },
         "ref": null,
         "rendered": Array [
@@ -120,18 +136,50 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "Turn:",
+              "children": Array [
+                <span>
+                  Turn:
+                </span>,
+                <Space
+                  piece="B"
+                />,
+              ],
+              "className": "flex items-center justify-between w-30",
             },
             "ref": null,
-            "rendered": "Turn:",
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Turn:",
+                },
+                "ref": null,
+                "rendered": "Turn:",
+                "type": "span",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "piece": "B",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
             "type": "span",
           },
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
-              "piece": "B",
+              "changeNumPlayers": [Function],
+              "twoPlayer": true,
             },
             "ref": null,
             "rendered": null,
@@ -223,13 +271,21 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <div
-            className="flex items-center justify-between w-30"
+            className="flex items-center justify-between"
           >
-            <span>
-              Turn:
+            <span
+              className="flex items-center justify-between w-30"
+            >
+              <span>
+                Turn:
+              </span>
+              <Space
+                piece="B"
+              />
             </span>
-            <Space
-              piece="B"
+            <NumPlayers
+              changeNumPlayers={[Function]}
+              twoPlayer={true}
             />
           </div>,
           <Board
@@ -308,14 +364,22 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <span>
-                Turn:
+              <span
+                className="flex items-center justify-between w-30"
+              >
+                <span>
+                  Turn:
+                </span>
+                <Space
+                  piece="B"
+                />
               </span>,
-              <Space
-                piece="B"
+              <NumPlayers
+                changeNumPlayers={[Function]}
+                twoPlayer={true}
               />,
             ],
-            "className": "flex items-center justify-between w-30",
+            "className": "flex items-center justify-between",
           },
           "ref": null,
           "rendered": Array [
@@ -324,18 +388,50 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Turn:",
+                "children": Array [
+                  <span>
+                    Turn:
+                  </span>,
+                  <Space
+                    piece="B"
+                  />,
+                ],
+                "className": "flex items-center justify-between w-30",
               },
               "ref": null,
-              "rendered": "Turn:",
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Turn:",
+                  },
+                  "ref": null,
+                  "rendered": "Turn:",
+                  "type": "span",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "piece": "B",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
               "type": "span",
             },
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "function",
               "props": Object {
-                "piece": "B",
+                "changeNumPlayers": [Function],
+                "twoPlayer": true,
               },
               "ref": null,
               "rendered": null,
