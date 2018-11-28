@@ -39,8 +39,9 @@ describe('Board component', () => {
                 column
             ]);
         });
+
         describe('winCheckByInterval ', () => {
-            let blankColumn, nonWinBoard, colWinBoard;
+            let blankColumn, nonWinBoard, colWinBoard, rowWinBoard, rightDiagWinBoard, leftDiagWinBoard;
             beforeEach(() => {
                 blankColumn = [' ', ' ', ' ', ' ', ' ', ' '];
                 winColumn = ['B', 'B', 'B', 'B', ' ', ' '];
@@ -62,6 +63,33 @@ describe('Board component', () => {
                     blankColumn,
                     column
                 ];
+                rowWinBoard = [
+                    blankColumn,
+                    blankColumn,
+                    blankColumn,
+                    column,
+                    column,
+                    column,
+                    column
+                ];
+                rightDiagWinBoard = [
+                    blankColumn,
+                    blankColumn,
+                    column,
+                    column,
+                    column,
+                    [' ', ' ', ' ', 'B', ' ', ' '],
+                    blankColumn
+                ];
+                leftDiagWinBoard = [
+                    blankColumn,
+                    blankColumn,
+                    column,
+                    column,
+                    column,
+                    [' ', ' ', ' ', 'B', ' ', ' '],
+                    blankColumn
+                ];
             });
             it('should return false if win condition not met on column', () => {
                 const result = instance.winCheckByInterval(
@@ -77,17 +105,30 @@ describe('Board component', () => {
                     colWinBoard,
                     'B',
                     1,
+
+                    // checking with the 4th item in first column assuming this was last dropped in
                     4
                 );
                 expect(result).toBeTruthy();
             });
-            it('should return true if win condition met on column', () => {
+            it('should return true if win condition met on row', () => {
                 const result = instance.winCheckByInterval(
-                    colWinBoard,
+                    rowWinBoard,
                     'B',
-                    1,
-                    0
+                    6,
+
+                    // this is the 3rd item in the 2nd row, which is emtpy but setup to check the correct intervals for the 3rd item in each array
+                    8
                 );
+                expect(result).toBeTruthy();
+            });
+            it('should return true if diaganol win met', () => {
+                const result = instance.winCheckByInterval(
+                    rightDiagWinBoard,
+                    'B',
+                    7,
+                    13
+                )
                 expect(result).toBeTruthy();
             });
             // it('should return false if there is a win, but flatIndex doesnt ID correct', () => {

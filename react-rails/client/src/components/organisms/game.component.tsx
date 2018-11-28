@@ -64,11 +64,13 @@ export class Game extends Component<{}, State> {
         );
 
         const win = this.checkAllWinConditions(
-            [1, 5, 6, 7, 8],
+            // 1 for columns, 6 for rows, 5 and 7 for diaganol
+            [1, 5, 6, 7],
             updatedBoard,
             currentTurn,
             flatIndexOfLastDropped
         );
+        console.log('checkall', win);
         !win && this.changeTurn();
         this.setState({
             board: updatedBoard,
@@ -119,6 +121,7 @@ export class Game extends Component<{}, State> {
             // only checks every 7 (or 5) spaces for piece
             if ((i - flatIndex) % interval === 0) {
                 if (currentTurn === space) {
+                    console.log('i', i, 'given', flatIndex, 'interval', interval, 'space', space)
                     count += 1;
                     if (count >= 4) {
                         win = true;
@@ -157,7 +160,7 @@ export class Game extends Component<{}, State> {
     };
 
     getFlatIndexOfLastDropped = (x: number, y: number, colLength) => {
-        const flatBoardIndex = x + y * length;
+        const flatBoardIndex = x + y * colLength;
         return flatBoardIndex;
     };
 
