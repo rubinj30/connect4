@@ -15,8 +15,10 @@ type State = {
     compTurn: ComputerTurn;
     currentTurn: PieceType;
     win: boolean;
-    board: BoardType;
-    cleanBoard: BoardType;
+    board: BoardType | [];
+    // cleanBoard: BoardType;
+    numRows: number;
+    numCols: number;
     lastDropped: {
         x: number;
         y: number;
@@ -32,24 +34,19 @@ export class Game extends Component<{}, State> {
             x: 0,
             y: 0
         },
-        board: [
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ']
-        ],
-        cleanBoard: [
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ', ' ']
-        ]
+        board: [],
+        numRows: 6,
+        numCols: 7
+    };
+    componentDidMount() {
+        const { numRows, numCols } = this.state;
+        this.createBoard(numRows, numCols);
+    }
+    createBoard = (numRows, numCols) => {
+        const row = Array(numRows).fill(' ');
+        const cols = Array(numCols).fill(row);
+        console.log(cols);
+        this.setState({ board: cols });
     };
 
     handleClick = event => {
@@ -168,29 +165,27 @@ export class Game extends Component<{}, State> {
     };
 
     resetBoard = () => {
-        this.setState(({ cleanBoard }) => {
-            // TODO: only need to leave if not resetting board on player change
-            this.changeTurn();
-            return { board: cleanBoard, win: false };
-        });
+        const { numRows, numCols } = this.state;
+        this.createBoard(numRows, numCols);
+        // TODO: only need to leave if not resetting board on player change
+        this.changeTurn();
+        this.setState({ win: false });
     };
 
     changeNumPlayers = () => {
         this.setState(
             ({
                 twoPlayer,
-                cleanBoard,
                 currentTurn
             }: {
                 twoPlayer: boolean;
-                cleanBoard: BoardType;
-                currentTurn: PieceType
+                currentTurn: PieceType;
             }) => {
                 // if changing to computer, human goes first
                 const newTurn = twoPlayer ? 'B' : currentTurn;
                 return {
                     twoPlayer: !twoPlayer,
-                    board: cleanBoard,
+                    // board: cleanBoard,
                     currentTurn: newTurn
                 };
             }

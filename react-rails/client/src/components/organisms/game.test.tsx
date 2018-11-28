@@ -47,55 +47,55 @@ describe('Board component', () => {
         });
 
         describe('winCheckByInterval ', () => {
-            let blankColumn,
+            let blankCol,
                 nonWinBoard,
                 colWinBoard,
                 rowWinBoard,
                 rightDiagWinBoard,
                 leftDiagWinBoard;
             beforeEach(() => {
-                blankColumn = [' ', ' ', ' ', ' ', ' ', ' '];
+                blankCol = [' ', ' ', ' ', ' ', ' ', ' '];
                 winColumn = ['B', 'B', 'B', 'B', ' ', ' '];
                 nonWinBoard = [
                     column,
                     column,
                     column,
-                    blankColumn,
+                    blankCol,
                     column,
-                    blankColumn,
+                    blankCol,
                     column
                 ];
                 colWinBoard = [
                     winColumn,
                     column,
                     column,
-                    blankColumn,
+                    blankCol,
                     column,
-                    blankColumn,
+                    blankCol,
                     column
                 ];
                 rowWinBoard = [
-                    blankColumn,
-                    blankColumn,
-                    blankColumn,
+                    blankCol,
+                    blankCol,
+                    blankCol,
                     column,
                     column,
                     column,
                     column
                 ];
                 rightDiagWinBoard = [
-                    blankColumn,
-                    blankColumn,
+                    blankCol,
+                    blankCol,
                     column,
                     column,
                     column,
                     [' ', ' ', ' ', 'B', ' ', ' '],
-                    blankColumn
+                    blankCol
                 ];
                 leftDiagWinBoard = [
-                    blankColumn,
-                    blankColumn,
-                    blankColumn,
+                    blankCol,
+                    blankCol,
+                    blankCol,
                     [' ', 'B', ' ', ' ', ' ', ' '],
                     [' ', ' ', 'B', ' ', ' ', ' '],
                     [' ', ' ', ' ', 'B', ' ', ' '],
@@ -103,16 +103,16 @@ describe('Board component', () => {
                 ];
             });
             it('should return false if win condition not met on column', () => {
-                const result = instance.winCheckByInterval(
+                const winCheck = instance.winCheckByInterval(
                     nonWinBoard,
                     'B',
                     1,
                     4
                 );
-                expect(result).toBeFalsy();
+                expect(winCheck).toBeFalsy();
             });
             it('should return true if win condition met on column', () => {
-                const result = instance.winCheckByInterval(
+                const winCheck = instance.winCheckByInterval(
                     colWinBoard,
                     'B',
                     1,
@@ -120,10 +120,10 @@ describe('Board component', () => {
                     // checking with the 4th item in first column assuming this was last dropped in
                     4
                 );
-                expect(result).toBeTruthy();
+                expect(winCheck).toBeTruthy();
             });
             it('should return true if win condition met on row', () => {
-                const result = instance.winCheckByInterval(
+                const winCheck = instance.winCheckByInterval(
                     rowWinBoard,
                     'B',
                     6,
@@ -131,10 +131,10 @@ describe('Board component', () => {
                     // this is the 3rd item in the 2nd row, which is emtpy but setup to check the correct intervals for the 3rd item in each array
                     8
                 );
-                expect(result).toBeTruthy();
+                expect(winCheck).toBeTruthy();
             });
             it('should return true if diaganol win met', () => {
-                const result = instance.winCheckByInterval(
+                const winCheck = instance.winCheckByInterval(
                     rightDiagWinBoard,
                     'B',
                     7,
@@ -142,17 +142,22 @@ describe('Board component', () => {
                     // 2nd item in 4th row
                     19
                 );
-                expect(result).toBeTruthy();
+                expect(winCheck).toBeTruthy();
             });
-            // it('should return false if there is a win, but flatIndex doesnt ID correct', () => {
-            //     const result = instance.winCheckByInterval(
-            //         colWinBoard,
-            //         'B',
-            //         1,
-            //         0
-            //     );
-            //     expect(result).toBeTruthy();
-            // });
+            it('createBoard should setState with a blank board based on number of columns (# of arrays) and rows (# of spaces in each array)', () => {
+                result.setState({ numRows: 6, numCols: 7 });
+                expect(result.state().board).toEqual([
+                    blankCol,
+                    blankCol,
+                    blankCol,
+                    blankCol,
+                    blankCol,
+                    blankCol,
+                    blankCol
+                ]);
+                result.setState({ numRows: 2, numCols: 2 });
+                expect(result.state().board).toEqual([[' ', ' '], [' ', ' ']]);
+            });
         });
     });
 });
