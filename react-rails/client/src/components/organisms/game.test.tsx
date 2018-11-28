@@ -146,6 +146,7 @@ describe('Board component', () => {
             });
             it('createBoard should setState with a blank board based on number of columns (# of arrays) and rows (# of spaces in each array)', () => {
                 result.setState({ numRows: 6, numCols: 7 });
+                instance.createBoard();
                 expect(result.state().board).toEqual([
                     blankCol,
                     blankCol,
@@ -156,6 +157,7 @@ describe('Board component', () => {
                     blankCol
                 ]);
                 result.setState({ numRows: 2, numCols: 2 });
+                instance.createBoard();
                 expect(result.state().board).toEqual([[' ', ' '], [' ', ' ']]);
             });
         });

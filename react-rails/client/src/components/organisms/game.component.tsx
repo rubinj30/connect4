@@ -38,15 +38,17 @@ export class Game extends Component<{}, State> {
         numRows: 6,
         numCols: 7
     };
+
     componentDidMount() {
-        const { numRows, numCols } = this.state;
-        this.createBoard(numRows, numCols);
+        this.createBoard();
     }
-    createBoard = (numRows, numCols) => {
-        const row = Array(numRows).fill(' ');
-        const cols = Array(numCols).fill(row);
-        console.log(cols);
-        this.setState({ board: cols });
+    
+    createBoard = () => {
+        this.setState(({ numRows, numCols }) => {
+            const col = Array(numRows).fill(' ');
+            const board = Array(numCols).fill(col);
+            return { board };
+        });
     };
 
     handleClick = event => {
@@ -165,8 +167,7 @@ export class Game extends Component<{}, State> {
     };
 
     resetBoard = () => {
-        const { numRows, numCols } = this.state;
-        this.createBoard(numRows, numCols);
+        this.createBoard();
         // TODO: only need to leave if not resetting board on player change
         this.changeTurn();
         this.setState({ win: false });
@@ -185,7 +186,6 @@ export class Game extends Component<{}, State> {
                 const newTurn = twoPlayer ? 'B' : currentTurn;
                 return {
                     twoPlayer: !twoPlayer,
-                    // board: cleanBoard,
                     currentTurn: newTurn
                 };
             }
