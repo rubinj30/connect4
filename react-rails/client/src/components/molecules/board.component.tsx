@@ -8,6 +8,7 @@ type Props = {
     currentTurn: PieceType;
     win: boolean;
     board: BoardType;
+    isCompTurn: boolean;
     resetBoard: any;
     handleClick: any;
 };
@@ -16,6 +17,7 @@ export const Board = ({
     currentTurn,
     board,
     win,
+    isCompTurn,
     resetBoard,
     handleClick
 }: Props) => {
@@ -32,6 +34,7 @@ export const Board = ({
                         column={column}
                         dataIndex={i}
                         currentTurn={currentTurn}
+                        isCompTurn={isCompTurn}
                         handleClick={handleClick}
                     />
                 );

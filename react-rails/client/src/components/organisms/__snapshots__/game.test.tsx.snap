@@ -99,6 +99,7 @@ ShallowWrapper {
           }
           currentTurn="B"
           handleClick={[Function]}
+          isCompTurn={false}
           resetBoard={[Function]}
           win={false}
         />,
@@ -269,6 +270,7 @@ ShallowWrapper {
           ],
           "currentTurn": "B",
           "handleClick": [Function],
+          "isCompTurn": false,
           "resetBoard": [Function],
           "win": false,
         },
@@ -397,6 +399,7 @@ ShallowWrapper {
             }
             currentTurn="B"
             handleClick={[Function]}
+            isCompTurn={false}
             resetBoard={[Function]}
             win={false}
           />,
@@ -567,6 +570,7 @@ ShallowWrapper {
             ],
             "currentTurn": "B",
             "handleClick": [Function],
+            "isCompTurn": false,
             "resetBoard": [Function],
             "win": false,
           },
@@ -727,6 +731,7 @@ ShallowWrapper {
           }
           currentTurn="B"
           handleClick={[Function]}
+          isCompTurn={false}
           resetBoard={[Function]}
           win={true}
         />,
@@ -897,6 +902,7 @@ ShallowWrapper {
           ],
           "currentTurn": "B",
           "handleClick": [Function],
+          "isCompTurn": false,
           "resetBoard": [Function],
           "win": true,
         },
@@ -1025,6 +1031,7 @@ ShallowWrapper {
             }
             currentTurn="B"
             handleClick={[Function]}
+            isCompTurn={false}
             resetBoard={[Function]}
             win={true}
           />,
@@ -1195,6 +1202,7 @@ ShallowWrapper {
             ],
             "currentTurn": "B",
             "handleClick": [Function],
+            "isCompTurn": false,
             "resetBoard": [Function],
             "win": true,
           },

@@ -11,10 +11,11 @@ import './organisms.css';
 
 export type BoardType = ColumnType[];
 
-type ComputerTurn = 'yes' | 'no' | 'off';
+// type ComputerTurn = 'yes' | 'no' | 'off';
 type State = {
+    // TODO: Combine these and maybe event currentTurn
     isCompOn: boolean;
-    compTurn: ComputerTurn;
+    isCompTurn: boolean;
     currentTurn: PieceType;
     win: boolean;
     board: BoardType | [];
@@ -30,7 +31,7 @@ type State = {
 export class Game extends Component<{}, State> {
     state: State = {
         isCompOn: false,
-        compTurn: 'off',
+        isCompTurn: false,
         currentTurn: 'B',
         win: false,
         lastDropped: {
@@ -50,10 +51,19 @@ export class Game extends Component<{}, State> {
     getRandomNum = max => {
         return Math.floor(Math.random() * max);
     };
-    compMove = numCols => {
+
+    compMove = () => {
+        const { numCols } = this.state;
         setTimeout(() => {
-            this.getRandomNum(numCols);
-        }, 500);
+            const randColIndex = this.getRandomNum(numCols);
+            this.playMove(randColIndex);
+        }, 800);
+    };
+
+    toggleCompTurn = () => {
+        this.setState(({ isCompTurn }) => {
+            return { isCompTurn: !isCompTurn };
+        });
     };
 
     setWinCheckIntervals = () => {
@@ -79,7 +89,7 @@ export class Game extends Component<{}, State> {
 
     // took out of handleClick so that it is not dependent on handleClick and can be used for computer moves
     playMove = colIndex => {
-        const { board, currentTurn, intervals } = this.state;
+        const { board, currentTurn, intervals, isCompOn } = this.state;
         const updatedBoard = this.replaceColumn(board, colIndex, currentTurn);
         const x = this.getIndexOfPiece(updatedBoard[colIndex]);
         const flatIndexOfLastDropped = this.getFlatIndexOfLastDropped(
@@ -95,6 +105,7 @@ export class Game extends Component<{}, State> {
             flatIndexOfLastDropped
         );
         !win && this.changeTurn();
+        isCompOn && this.toggleCompTurn();
         this.setState({
             board: updatedBoard,
             win,
@@ -105,6 +116,7 @@ export class Game extends Component<{}, State> {
     handleClick = event => {
         const clickedColIndex = Number(event.currentTarget.dataset.index);
         this.playMove(clickedColIndex);
+        this.state.isCompOn && this.compMove();
     };
 
     changeTurn = () => {
@@ -228,7 +240,7 @@ export class Game extends Component<{}, State> {
     checkEachColumn = (currentTurn, isCompOn) => {};
 
     render() {
-        const { currentTurn, board, win, isCompOn } = this.state;
+        const { currentTurn, board, win, isCompOn, isCompTurn } = this.state;
         return (
             <div>
                 <div className="flex items-center justify-between">
@@ -245,6 +257,7 @@ export class Game extends Component<{}, State> {
                     currentTurn={currentTurn}
                     board={board}
                     win={win}
+                    isCompTurn={isCompTurn}
                     resetBoard={this.resetBoard}
                     handleClick={this.handleClick}
                 />

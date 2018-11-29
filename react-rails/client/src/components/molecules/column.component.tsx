@@ -10,6 +10,7 @@ type ColumnProps = {
     column: ColumnType;
     dataIndex: number;
     currentTurn: PieceType;
+    isCompTurn: boolean;
     handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
@@ -18,13 +19,14 @@ export const Column = ({
     column,
     dataIndex,
     handleClick,
-    currentTurn
+    currentTurn,
+    isCompTurn
 }: ColumnProps) => {
     return (
         <div
             className="flex column justify-between items-center"
             data-index={dataIndex}
-            onClick={!win ? handleClick : undefined}
+            onClick={!win && !isCompTurn ? handleClick : undefined}
         >
             {column.map((piece, j) => (
                 <Space piece={piece} key={j} />
