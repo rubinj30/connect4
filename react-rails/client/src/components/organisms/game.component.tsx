@@ -45,12 +45,10 @@ export class Game extends Component<{}, State> {
 
     componentDidMount() {
         this.createBoard();
-        this.setWinCheckIntervals();
     }
 
     setWinCheckIntervals = () => {
         this.setState(({ numCols }: { numCols: number }) => {
-            console.log(numCols);
             const intervals = [1];
 
             // first three standard sizes mentioned on wikipedia say the board has 1 more column than rows
@@ -67,6 +65,7 @@ export class Game extends Component<{}, State> {
             const board = Array(numCols).fill(col);
             return { board };
         });
+        this.setWinCheckIntervals();
     };
 
     handleClick = event => {
