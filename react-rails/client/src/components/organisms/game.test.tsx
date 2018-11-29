@@ -1,10 +1,10 @@
 jest.unmock('./game.component');
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { Game } from './game.component';
 
-describe('Board component', () => {
+describe('Game component', () => {
     let fixture, result, instance, column, board, winColumn;
     beforeEach(() => {
         fixture = <Game />;
@@ -13,11 +13,21 @@ describe('Board component', () => {
         board = [column, column, column, column, column, column, column];
         instance = result.instance();
     });
-    it('should render properly', () => {
+    it('should render properly if no win', () => {
+        result.setState({ win: false });
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
     });
-    describe('functions', () => {
+    it('should render properly if win', () => {
+        result.setState({ win: true, board });
+        expect(result).toBeDefined();
+        expect(result).toMatchSnapshot();
+    });
+    describe('methods', () => {
+        let blankCol;
+        beforeEach(() => {
+            blankCol = [' ', ' ', ' ', ' ', ' ', ' '];
+        });
         it('changeTurn should change the currentTurn from "R" to "B" and vice versa', () => {
             result.setState({ currentTurn: 'R' });
             instance.changeTurn();
@@ -45,16 +55,55 @@ describe('Board component', () => {
             const flatIndex = instance.getFlatIndexOfLastDropped(4, 3, 7);
             expect(flatIndex).toEqual(25);
         });
+        it('createBoard should setState with a blank board based on number of columns (# of arrays) and rows (# of spaces in each array)', () => {
+            result.setState({ numRows: 6, numCols: 7 });
+            instance.createBoard();
+            expect(result.state().board).toEqual([
+                blankCol,
+                blankCol,
+                blankCol,
+                blankCol,
+                blankCol,
+                blankCol,
+                blankCol
+            ]);
+            result.setState({ numRows: 2, numCols: 2 });
+            instance.createBoard();
+            expect(result.state().board).toEqual([[' ', ' '], [' ', ' ']]);
+        });
+        it('should call createBoard during componentDidMount', () => {
+            const wrapper = mount(<Game />);
+            const instance = wrapper.instance();
+            const createBoard = jest.spyOn(instance, 'createBoard');
+            instance.componentDidMount();
+            expect(createBoard).toHaveBeenCalledTimes(1);
+        });
+        describe('resetBoard', () => {
+            it('resetBoard should call createBoard and changeTurn when called', () => {
+                const instance = result.instance();
+                const createBoard = jest.spyOn(instance, 'createBoard');
+                const changeTurn = jest.spyOn(instance, 'changeTurn');
+                expect(createBoard).toHaveBeenCalledTimes(0);
+                expect(changeTurn).toHaveBeenCalledTimes(0);
+                instance.resetBoard();
+                expect(createBoard).toHaveBeenCalledTimes(1);
+                expect(changeTurn).toHaveBeenCalledTimes(1);
+            });
+            it('resetBoard should win to false in state', () => {
+                const instance = result.instance();
+                result.setState({ win: true });
+                instance.resetBoard();
+                expect(result.state().win).toBeFalsy();
+            });
+        });
 
         describe('winCheckByInterval ', () => {
-            let blankCol,
-                nonWinBoard,
+            let nonWinBoard,
                 colWinBoard,
                 rowWinBoard,
                 rightDiagWinBoard,
                 leftDiagWinBoard;
             beforeEach(() => {
-                blankCol = [' ', ' ', ' ', ' ', ' ', ' '];
                 winColumn = ['B', 'B', 'B', 'B', ' ', ' '];
                 nonWinBoard = [
                     column,
@@ -143,22 +192,6 @@ describe('Board component', () => {
                     19
                 );
                 expect(winCheck).toBeTruthy();
-            });
-            it('createBoard should setState with a blank board based on number of columns (# of arrays) and rows (# of spaces in each array)', () => {
-                result.setState({ numRows: 6, numCols: 7 });
-                instance.createBoard();
-                expect(result.state().board).toEqual([
-                    blankCol,
-                    blankCol,
-                    blankCol,
-                    blankCol,
-                    blankCol,
-                    blankCol,
-                    blankCol
-                ]);
-                result.setState({ numRows: 2, numCols: 2 });
-                instance.createBoard();
-                expect(result.state().board).toEqual([[' ', ' '], [' ', ' ']]);
             });
         });
     });

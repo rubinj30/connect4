@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Board component should render properly 1`] = `
+exports[`Game component should render properly if no win 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Game />,
@@ -527,6 +527,574 @@ ShallowWrapper {
             "handleClick": [Function],
             "resetBoard": [Function],
             "win": false,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "currentTurn": "B",
+            "twoPlayer": true,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`Game component should render properly if win 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Game />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div
+          className="flex items-center justify-between"
+        >
+          <span
+            className="flex items-center justify-between w-30"
+          >
+            <span>
+              Turn:
+            </span>
+            <Space
+              piece="B"
+            />
+          </span>
+          <NumPlayers
+            changeNumPlayers={[Function]}
+            twoPlayer={true}
+          />
+        </div>,
+        <Board
+          board={
+            Array [
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+            ]
+          }
+          currentTurn="B"
+          handleClick={[Function]}
+          resetBoard={[Function]}
+          win={true}
+        />,
+        <NewPlayer
+          currentTurn="B"
+          twoPlayer={true}
+        />,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <span
+              className="flex items-center justify-between w-30"
+            >
+              <span>
+                Turn:
+              </span>
+              <Space
+                piece="B"
+              />
+            </span>,
+            <NumPlayers
+              changeNumPlayers={[Function]}
+              twoPlayer={true}
+            />,
+          ],
+          "className": "flex items-center justify-between",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <span>
+                  Turn:
+                </span>,
+                <Space
+                  piece="B"
+                />,
+              ],
+              "className": "flex items-center justify-between w-30",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Turn:",
+                },
+                "ref": null,
+                "rendered": "Turn:",
+                "type": "span",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "piece": "B",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "changeNumPlayers": [Function],
+              "twoPlayer": true,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "board": Array [
+            Array [
+              "B",
+              "B",
+              "B",
+              " ",
+              " ",
+              " ",
+            ],
+            Array [
+              "B",
+              "B",
+              "B",
+              " ",
+              " ",
+              " ",
+            ],
+            Array [
+              "B",
+              "B",
+              "B",
+              " ",
+              " ",
+              " ",
+            ],
+            Array [
+              "B",
+              "B",
+              "B",
+              " ",
+              " ",
+              " ",
+            ],
+            Array [
+              "B",
+              "B",
+              "B",
+              " ",
+              " ",
+              " ",
+            ],
+            Array [
+              "B",
+              "B",
+              "B",
+              " ",
+              " ",
+              " ",
+            ],
+            Array [
+              "B",
+              "B",
+              "B",
+              " ",
+              " ",
+              " ",
+            ],
+          ],
+          "currentTurn": "B",
+          "handleClick": [Function],
+          "resetBoard": [Function],
+          "win": true,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "currentTurn": "B",
+          "twoPlayer": true,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="flex items-center justify-between"
+          >
+            <span
+              className="flex items-center justify-between w-30"
+            >
+              <span>
+                Turn:
+              </span>
+              <Space
+                piece="B"
+              />
+            </span>
+            <NumPlayers
+              changeNumPlayers={[Function]}
+              twoPlayer={true}
+            />
+          </div>,
+          <Board
+            board={
+              Array [
+                Array [
+                  "B",
+                  "B",
+                  "B",
+                  " ",
+                  " ",
+                  " ",
+                ],
+                Array [
+                  "B",
+                  "B",
+                  "B",
+                  " ",
+                  " ",
+                  " ",
+                ],
+                Array [
+                  "B",
+                  "B",
+                  "B",
+                  " ",
+                  " ",
+                  " ",
+                ],
+                Array [
+                  "B",
+                  "B",
+                  "B",
+                  " ",
+                  " ",
+                  " ",
+                ],
+                Array [
+                  "B",
+                  "B",
+                  "B",
+                  " ",
+                  " ",
+                  " ",
+                ],
+                Array [
+                  "B",
+                  "B",
+                  "B",
+                  " ",
+                  " ",
+                  " ",
+                ],
+                Array [
+                  "B",
+                  "B",
+                  "B",
+                  " ",
+                  " ",
+                  " ",
+                ],
+              ]
+            }
+            currentTurn="B"
+            handleClick={[Function]}
+            resetBoard={[Function]}
+            win={true}
+          />,
+          <NewPlayer
+            currentTurn="B"
+            twoPlayer={true}
+          />,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <span
+                className="flex items-center justify-between w-30"
+              >
+                <span>
+                  Turn:
+                </span>
+                <Space
+                  piece="B"
+                />
+              </span>,
+              <NumPlayers
+                changeNumPlayers={[Function]}
+                twoPlayer={true}
+              />,
+            ],
+            "className": "flex items-center justify-between",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <span>
+                    Turn:
+                  </span>,
+                  <Space
+                    piece="B"
+                  />,
+                ],
+                "className": "flex items-center justify-between w-30",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Turn:",
+                  },
+                  "ref": null,
+                  "rendered": "Turn:",
+                  "type": "span",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "piece": "B",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "changeNumPlayers": [Function],
+                "twoPlayer": true,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "board": Array [
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+              Array [
+                "B",
+                "B",
+                "B",
+                " ",
+                " ",
+                " ",
+              ],
+            ],
+            "currentTurn": "B",
+            "handleClick": [Function],
+            "resetBoard": [Function],
+            "win": true,
           },
           "ref": null,
           "rendered": null,
