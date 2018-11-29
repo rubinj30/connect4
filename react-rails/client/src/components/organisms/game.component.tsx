@@ -41,7 +41,7 @@ export class Game extends Component<{}, State> {
         board: [],
         numRows: 6,
         numCols: 7,
-        intervals: [],
+        intervals: []
     };
 
     componentDidMount() {
@@ -77,6 +77,7 @@ export class Game extends Component<{}, State> {
     };
 
     createBoard = () => {
+        console.log('created');
         this.setState(({ numRows, numCols }) => {
             const col = Array(numRows).fill(' ');
             const board = Array(numCols).fill(col);
@@ -268,11 +269,23 @@ export class Game extends Component<{}, State> {
         this.createBoard();
     };
 
-    // TODO: not using right now
-    checkEachColumn = (currentTurn, isCompOn) => {};
+    getAvailColIndexes = board => {
+        const isColAvail = col => col.some(space => space === ' ');
+        const test =
+            board &&
+            board
+                .map((col, i) => {
+                    if (isColAvail(col)) {
+                        return i;
+                    }
+                })
+                .filter(x => x);
+        return test;
+    };
 
     render() {
         const { currentTurn, board, win, isCompOn, isCompTurn } = this.state;
+        console.log(this.getAvailColIndexes(board));
         return (
             <div>
                 <div className="flex items-center justify-between">
