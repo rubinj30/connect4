@@ -4,7 +4,7 @@ import axios from 'axios';
 
 type Props = {
     currentTurn: PieceType;
-    twoPlayer: boolean;
+    isCompOn: boolean;
 };
 
 type State = {
@@ -41,7 +41,7 @@ export class NewPlayer extends Component<Props, State> {
 
     render() {
         const { players } = this.state;
-        const { currentTurn, twoPlayer } = this.props;
+        const { currentTurn, isCompOn } = this.props;
         return (
             players && (
                 <div className="flex flex-column">
@@ -59,10 +59,10 @@ export class NewPlayer extends Component<Props, State> {
                                 currentTurn === 'R' ? 'border' : ''
                             }`}
                         >
-                            {twoPlayer ? 'player 2' : 'COMPUTER'}
+                            {isCompOn ? 'player 2' : 'COMPUTER'}
                         </div>
                     </div>
-                    <select
+                    {/* <select
                         className="w4 h2 ma2"
                         onChange={this.updateDropdown}
                     >
@@ -71,7 +71,7 @@ export class NewPlayer extends Component<Props, State> {
                                 {player.name}
                             </option>
                         ))}
-                    </select>
+                    </select> */}
                 </div>
             )
         );

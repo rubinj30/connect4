@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import { Board } from '../molecules/board.component';
 import { ColumnType } from '../molecules/column.component';
 import { NumPlayers } from '../molecules/num-players.component';
+import { BoardSelect } from '../molecules/board-select.component';
 import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
-import { NewPlayer } from '../molecules/new-player.component';
+import { NewPlayer } from '../molecules/players.component';
+
 import './organisms.css';
 
 export type BoardType = ColumnType[];
 
 type ComputerTurn = 'yes' | 'no' | 'off';
 type State = {
-    twoPlayer: boolean;
+    isCompOn: boolean;
     compTurn: ComputerTurn;
     currentTurn: PieceType;
     win: boolean;
@@ -27,7 +29,7 @@ type State = {
 };
 export class Game extends Component<{}, State> {
     state: State = {
-        twoPlayer: true,
+        isCompOn: true,
         compTurn: 'off',
         currentTurn: 'B',
         win: false,
@@ -38,7 +40,7 @@ export class Game extends Component<{}, State> {
         board: [],
         numRows: 6,
         numCols: 7,
-        intervals: [1]
+        intervals: []
     };
 
     componentDidMount() {
@@ -192,27 +194,34 @@ export class Game extends Component<{}, State> {
     changeNumPlayers = () => {
         this.setState(
             ({
-                twoPlayer,
+                isCompOn,
                 currentTurn
             }: {
-                twoPlayer: boolean;
+                isCompOn: boolean;
                 currentTurn: PieceType;
             }) => {
                 // if changing to computer, human goes first
-                const newTurn = twoPlayer ? 'B' : currentTurn;
+                const newTurn = isCompOn ? 'B' : currentTurn;
                 return {
-                    twoPlayer: !twoPlayer,
+                    isCompOn: !isCompOn,
                     currentTurn: newTurn
                 };
             }
         );
     };
 
+    updateBoardSize = event => {
+        console.log(event.currentTarget.value);
+        const numCols = Number(event.currentTarget.value);
+        this.setState({ numCols, numRows: numCols - 1 });
+        this.createBoard();
+    };
+
     // TODO: not using right now
-    checkEachColumn = (currentTurn, twoPlayer) => {};
+    checkEachColumn = (currentTurn, isCompOn) => {};
 
     render() {
-        const { currentTurn, board, win, twoPlayer } = this.state;
+        const { currentTurn, board, win, isCompOn } = this.state;
         return (
             <div>
                 <div className="flex items-center justify-between">
@@ -222,7 +231,7 @@ export class Game extends Component<{}, State> {
                     </span>
                     <NumPlayers
                         changeNumPlayers={this.changeNumPlayers}
-                        twoPlayer={twoPlayer}
+                        isCompOn={isCompOn}
                     />
                 </div>
                 <Board
@@ -232,7 +241,11 @@ export class Game extends Component<{}, State> {
                     resetBoard={this.resetBoard}
                     handleClick={this.handleClick}
                 />
-                <NewPlayer twoPlayer={twoPlayer} currentTurn={currentTurn} />
+                <NewPlayer isCompOn={isCompOn} currentTurn={currentTurn} />
+                <BoardSelect
+                    updateBoardSize={this.updateBoardSize}
+                    opts={[6, 7, 8, 10, 11]}
+                />
             </div>
         );
     }

@@ -33,7 +33,7 @@ ShallowWrapper {
           </span>
           <NumPlayers
             changeNumPlayers={[Function]}
-            twoPlayer={true}
+            isCompOn={true}
           />
         </div>,
         <Board
@@ -104,7 +104,19 @@ ShallowWrapper {
         />,
         <NewPlayer
           currentTurn="B"
-          twoPlayer={true}
+          isCompOn={true}
+        />,
+        <BoardSelect
+          opts={
+            Array [
+              6,
+              7,
+              8,
+              10,
+              11,
+            ]
+          }
+          updateBoardSize={[Function]}
         />,
       ],
     },
@@ -128,7 +140,7 @@ ShallowWrapper {
             </span>,
             <NumPlayers
               changeNumPlayers={[Function]}
-              twoPlayer={true}
+              isCompOn={true}
             />,
           ],
           "className": "flex items-center justify-between",
@@ -183,7 +195,7 @@ ShallowWrapper {
             "nodeType": "function",
             "props": Object {
               "changeNumPlayers": [Function],
-              "twoPlayer": true,
+              "isCompOn": true,
             },
             "ref": null,
             "rendered": null,
@@ -270,7 +282,25 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "currentTurn": "B",
-          "twoPlayer": true,
+          "isCompOn": true,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "opts": Array [
+            6,
+            7,
+            8,
+            10,
+            11,
+          ],
+          "updateBoardSize": [Function],
         },
         "ref": null,
         "rendered": null,
@@ -301,7 +331,7 @@ ShallowWrapper {
             </span>
             <NumPlayers
               changeNumPlayers={[Function]}
-              twoPlayer={true}
+              isCompOn={true}
             />
           </div>,
           <Board
@@ -372,7 +402,19 @@ ShallowWrapper {
           />,
           <NewPlayer
             currentTurn="B"
-            twoPlayer={true}
+            isCompOn={true}
+          />,
+          <BoardSelect
+            opts={
+              Array [
+                6,
+                7,
+                8,
+                10,
+                11,
+              ]
+            }
+            updateBoardSize={[Function]}
           />,
         ],
       },
@@ -396,7 +438,7 @@ ShallowWrapper {
               </span>,
               <NumPlayers
                 changeNumPlayers={[Function]}
-                twoPlayer={true}
+                isCompOn={true}
               />,
             ],
             "className": "flex items-center justify-between",
@@ -451,7 +493,7 @@ ShallowWrapper {
               "nodeType": "function",
               "props": Object {
                 "changeNumPlayers": [Function],
-                "twoPlayer": true,
+                "isCompOn": true,
               },
               "ref": null,
               "rendered": null,
@@ -538,7 +580,25 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "currentTurn": "B",
-            "twoPlayer": true,
+            "isCompOn": true,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "opts": Array [
+              6,
+              7,
+              8,
+              10,
+              11,
+            ],
+            "updateBoardSize": [Function],
           },
           "ref": null,
           "rendered": null,
@@ -601,7 +661,7 @@ ShallowWrapper {
           </span>
           <NumPlayers
             changeNumPlayers={[Function]}
-            twoPlayer={true}
+            isCompOn={true}
           />
         </div>,
         <Board
@@ -672,7 +732,19 @@ ShallowWrapper {
         />,
         <NewPlayer
           currentTurn="B"
-          twoPlayer={true}
+          isCompOn={true}
+        />,
+        <BoardSelect
+          opts={
+            Array [
+              6,
+              7,
+              8,
+              10,
+              11,
+            ]
+          }
+          updateBoardSize={[Function]}
         />,
       ],
     },
@@ -696,7 +768,7 @@ ShallowWrapper {
             </span>,
             <NumPlayers
               changeNumPlayers={[Function]}
-              twoPlayer={true}
+              isCompOn={true}
             />,
           ],
           "className": "flex items-center justify-between",
@@ -751,7 +823,7 @@ ShallowWrapper {
             "nodeType": "function",
             "props": Object {
               "changeNumPlayers": [Function],
-              "twoPlayer": true,
+              "isCompOn": true,
             },
             "ref": null,
             "rendered": null,
@@ -838,7 +910,25 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "currentTurn": "B",
-          "twoPlayer": true,
+          "isCompOn": true,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "opts": Array [
+            6,
+            7,
+            8,
+            10,
+            11,
+          ],
+          "updateBoardSize": [Function],
         },
         "ref": null,
         "rendered": null,
@@ -869,7 +959,7 @@ ShallowWrapper {
             </span>
             <NumPlayers
               changeNumPlayers={[Function]}
-              twoPlayer={true}
+              isCompOn={true}
             />
           </div>,
           <Board
@@ -940,7 +1030,19 @@ ShallowWrapper {
           />,
           <NewPlayer
             currentTurn="B"
-            twoPlayer={true}
+            isCompOn={true}
+          />,
+          <BoardSelect
+            opts={
+              Array [
+                6,
+                7,
+                8,
+                10,
+                11,
+              ]
+            }
+            updateBoardSize={[Function]}
           />,
         ],
       },
@@ -964,7 +1066,7 @@ ShallowWrapper {
               </span>,
               <NumPlayers
                 changeNumPlayers={[Function]}
-                twoPlayer={true}
+                isCompOn={true}
               />,
             ],
             "className": "flex items-center justify-between",
@@ -1019,7 +1121,7 @@ ShallowWrapper {
               "nodeType": "function",
               "props": Object {
                 "changeNumPlayers": [Function],
-                "twoPlayer": true,
+                "isCompOn": true,
               },
               "ref": null,
               "rendered": null,
@@ -1106,7 +1208,25 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "currentTurn": "B",
-            "twoPlayer": true,
+            "isCompOn": true,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "opts": Array [
+              6,
+              7,
+              8,
+              10,
+              11,
+            ],
+            "updateBoardSize": [Function],
           },
           "ref": null,
           "rendered": null,
