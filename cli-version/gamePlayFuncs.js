@@ -20,7 +20,8 @@ replaceColumn = (board, columnIndex, currentTurn) => {
     );
 };
 
-declareWin = currentTurn => console.log(`\n  ============= ${currentTurn} WINS! =============\n`);
+declareWin = currentTurn =>
+    console.log(`\n  ============= ${currentTurn} WINS! =============\n`);
 
 // will check a given array for 4 in a row and return win status
 // true if there are ever 4 in a row

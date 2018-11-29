@@ -42,7 +42,6 @@ export class NewPlayer extends Component<Props, State> {
     render() {
         const { players } = this.state;
         const { currentTurn, twoPlayer } = this.props;
-        console.log('current', currentTurn);
         return (
             players && (
                 <div className="flex flex-column">

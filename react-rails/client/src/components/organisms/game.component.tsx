@@ -19,6 +19,7 @@ type State = {
     // cleanBoard: BoardType;
     numRows: number;
     numCols: number;
+    intervals: number[];
     lastDropped: {
         x: number;
         y: number;
@@ -35,14 +36,29 @@ export class Game extends Component<{}, State> {
             y: 0
         },
         board: [],
-        numRows: 6,
-        numCols: 7
+        numRows: 23,
+        numCols: 24,
+        intervals: [1]
     };
 
     componentDidMount() {
         this.createBoard();
+        this.setWinCheckIntervals();
     }
-    
+
+    setWinCheckIntervals = () => {
+        this.setState(({ numCols }: { numCols: number }) => {
+            console.log(numCols);
+            const intervals = [1];
+
+            // first three standard sizes mentioned on wikipedia say the board has 1 more column than rows
+            // these intervals assume that is always the case
+            // win checks should work for any size board as long as there is one more column than row
+            intervals.push(numCols - 2, numCols - 1, numCols);
+            return { intervals };
+        });
+    };
+
     createBoard = () => {
         this.setState(({ numRows, numCols }) => {
             const col = Array(numRows).fill(' ');
@@ -52,7 +68,7 @@ export class Game extends Component<{}, State> {
     };
 
     handleClick = event => {
-        const { board, currentTurn } = this.state;
+        const { board, currentTurn, intervals } = this.state;
         const clickedColIndex = Number(event.currentTarget.dataset.index);
         const updatedBoard = this.replaceColumn(
             board,
@@ -69,7 +85,7 @@ export class Game extends Component<{}, State> {
 
         const win = this.checkAllWinConditions(
             // 1 for columns, 6 for rows, 5 and 7 for diaganol
-            [1, 5, 6, 7],
+            intervals,
             updatedBoard,
             currentTurn,
             flatIndexOfLastDropped
@@ -192,6 +208,7 @@ export class Game extends Component<{}, State> {
         );
     };
 
+    // TODO: not using right now
     checkEachColumn = (currentTurn, twoPlayer) => {};
 
     render() {
