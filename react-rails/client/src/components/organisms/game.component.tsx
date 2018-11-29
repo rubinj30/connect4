@@ -29,7 +29,7 @@ type State = {
 };
 export class Game extends Component<{}, State> {
     state: State = {
-        isCompOn: true,
+        isCompOn: false,
         compTurn: 'off',
         currentTurn: 'B',
         win: false,

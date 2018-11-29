@@ -57,9 +57,9 @@ export class NewPlayer extends Component<Props, State> {
                         <div
                             className={`name bg-red ma2 pa2 white ${
                                 currentTurn === 'R' ? 'border' : ''
-                            }`}
+                            } ${isCompOn ? 'b f5' : ''}`}
                         >
-                            {isCompOn ? 'player 2' : 'COMPUTER'}
+                            {isCompOn ? 'COMPUTER' : 'player 2'}
                         </div>
                     </div>
                     {/* <select

@@ -13,14 +13,14 @@ export const NumPlayers = ({ isCompOn, changeNumPlayers }: Props) => (
                 isCompOn ? '' : 'bg-blue white bw2'
             }`}
         >
-            Yes
+            No
         </span>
         <span
             className={`pa2 ba b--blue option ${
                 isCompOn ? 'bg-blue white bw2' : ''
             }`}
         >
-            No
+            Yes
         </span>
     </div>
 );

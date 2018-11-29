@@ -33,7 +33,7 @@ ShallowWrapper {
           </span>
           <NumPlayers
             changeNumPlayers={[Function]}
-            isCompOn={true}
+            isCompOn={false}
           />
         </div>,
         <Board
@@ -104,7 +104,7 @@ ShallowWrapper {
         />,
         <NewPlayer
           currentTurn="B"
-          isCompOn={true}
+          isCompOn={false}
         />,
         <BoardSelect
           opts={
@@ -140,7 +140,7 @@ ShallowWrapper {
             </span>,
             <NumPlayers
               changeNumPlayers={[Function]}
-              isCompOn={true}
+              isCompOn={false}
             />,
           ],
           "className": "flex items-center justify-between",
@@ -195,7 +195,7 @@ ShallowWrapper {
             "nodeType": "function",
             "props": Object {
               "changeNumPlayers": [Function],
-              "isCompOn": true,
+              "isCompOn": false,
             },
             "ref": null,
             "rendered": null,
@@ -282,7 +282,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "currentTurn": "B",
-          "isCompOn": true,
+          "isCompOn": false,
         },
         "ref": null,
         "rendered": null,
@@ -331,7 +331,7 @@ ShallowWrapper {
             </span>
             <NumPlayers
               changeNumPlayers={[Function]}
-              isCompOn={true}
+              isCompOn={false}
             />
           </div>,
           <Board
@@ -402,7 +402,7 @@ ShallowWrapper {
           />,
           <NewPlayer
             currentTurn="B"
-            isCompOn={true}
+            isCompOn={false}
           />,
           <BoardSelect
             opts={
@@ -438,7 +438,7 @@ ShallowWrapper {
               </span>,
               <NumPlayers
                 changeNumPlayers={[Function]}
-                isCompOn={true}
+                isCompOn={false}
               />,
             ],
             "className": "flex items-center justify-between",
@@ -493,7 +493,7 @@ ShallowWrapper {
               "nodeType": "function",
               "props": Object {
                 "changeNumPlayers": [Function],
-                "isCompOn": true,
+                "isCompOn": false,
               },
               "ref": null,
               "rendered": null,
@@ -580,7 +580,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "currentTurn": "B",
-            "isCompOn": true,
+            "isCompOn": false,
           },
           "ref": null,
           "rendered": null,
@@ -661,7 +661,7 @@ ShallowWrapper {
           </span>
           <NumPlayers
             changeNumPlayers={[Function]}
-            isCompOn={true}
+            isCompOn={false}
           />
         </div>,
         <Board
@@ -732,7 +732,7 @@ ShallowWrapper {
         />,
         <NewPlayer
           currentTurn="B"
-          isCompOn={true}
+          isCompOn={false}
         />,
         <BoardSelect
           opts={
@@ -768,7 +768,7 @@ ShallowWrapper {
             </span>,
             <NumPlayers
               changeNumPlayers={[Function]}
-              isCompOn={true}
+              isCompOn={false}
             />,
           ],
           "className": "flex items-center justify-between",
@@ -823,7 +823,7 @@ ShallowWrapper {
             "nodeType": "function",
             "props": Object {
               "changeNumPlayers": [Function],
-              "isCompOn": true,
+              "isCompOn": false,
             },
             "ref": null,
             "rendered": null,
@@ -910,7 +910,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "currentTurn": "B",
-          "isCompOn": true,
+          "isCompOn": false,
         },
         "ref": null,
         "rendered": null,
@@ -959,7 +959,7 @@ ShallowWrapper {
             </span>
             <NumPlayers
               changeNumPlayers={[Function]}
-              isCompOn={true}
+              isCompOn={false}
             />
           </div>,
           <Board
@@ -1030,7 +1030,7 @@ ShallowWrapper {
           />,
           <NewPlayer
             currentTurn="B"
-            isCompOn={true}
+            isCompOn={false}
           />,
           <BoardSelect
             opts={
@@ -1066,7 +1066,7 @@ ShallowWrapper {
               </span>,
               <NumPlayers
                 changeNumPlayers={[Function]}
-                isCompOn={true}
+                isCompOn={false}
               />,
             ],
             "className": "flex items-center justify-between",
@@ -1121,7 +1121,7 @@ ShallowWrapper {
               "nodeType": "function",
               "props": Object {
                 "changeNumPlayers": [Function],
-                "isCompOn": true,
+                "isCompOn": false,
               },
               "ref": null,
               "rendered": null,
@@ -1208,7 +1208,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "currentTurn": "B",
-            "isCompOn": true,
+            "isCompOn": false,
           },
           "ref": null,
           "rendered": null,
