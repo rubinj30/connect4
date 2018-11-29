@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './atoms.css';
 
 export type PieceType = 'B' | 'R' | SpaceType;
 type SpaceType = ' ';
@@ -11,6 +12,6 @@ export class Space extends Component<Props, {}> {
     render() {
         const { piece } = this.props;
         const color = piece === 'B' ? 'black' : piece === 'R' ? 'red' : 'white';
-        return <div className={`bg-${color} br-100 w3 h3 ma2`} />;
+        return <div className={`bg-${color} br-100 ma1 space`} />;
     }
 }

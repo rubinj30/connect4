@@ -22,7 +22,7 @@ export const Column = ({
 }: ColumnProps) => {
     return (
         <div
-            className="flex column"
+            className="flex column justify-between items-center"
             data-index={dataIndex}
             onClick={!win ? handleClick : undefined}
         >

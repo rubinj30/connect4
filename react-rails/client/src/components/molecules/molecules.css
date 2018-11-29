@@ -4,10 +4,10 @@
 }
 
 .arrow {
-    border-top: 40px solid #357edd;
-    border-bottom: 40px solid #357edd;
-    border-right: 30px solid #357edd;
-    border-radius: 3px;
+    border-top: 30px solid #357edd;
+    border-bottom: 30px solid #357edd;
+    border-right: 20px solid #357edd;
+    border-radius: 20px;
     z-index: 4;
 }
 

@@ -136,7 +136,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "className": "bg-black br-100 w3 h3 ma2",
+      "className": "bg-black br-100 ma1 space",
     },
     "ref": null,
     "rendered": null,
@@ -148,7 +148,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "className": "bg-black br-100 w3 h3 ma2",
+        "className": "bg-black br-100 ma1 space",
       },
       "ref": null,
       "rendered": null,
@@ -194,7 +194,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "className": "bg-white br-100 w3 h3 ma2",
+      "className": "bg-white br-100 ma1 space",
     },
     "ref": null,
     "rendered": null,
@@ -206,7 +206,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "className": "bg-white br-100 w3 h3 ma2",
+        "className": "bg-white br-100 ma1 space",
       },
       "ref": null,
       "rendered": null,
@@ -252,7 +252,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "className": "bg-red br-100 w3 h3 ma2",
+      "className": "bg-red br-100 ma1 space",
     },
     "ref": null,
     "rendered": null,
@@ -264,7 +264,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "className": "bg-red br-100 w3 h3 ma2",
+        "className": "bg-red br-100 ma1 space",
       },
       "ref": null,
       "rendered": null,

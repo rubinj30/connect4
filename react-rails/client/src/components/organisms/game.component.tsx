@@ -36,8 +36,8 @@ export class Game extends Component<{}, State> {
             y: 0
         },
         board: [],
-        numRows: 23,
-        numCols: 24,
+        numRows: 6,
+        numCols: 7,
         intervals: [1]
     };
 
