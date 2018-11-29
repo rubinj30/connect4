@@ -86,6 +86,7 @@ const rotateBoard = board =>
 //  and should set it up to only continue to next if the previous is false
 // TODO: can use checkFlat for all 4 directional checks, so could have array of intervals and loop thru
 const checkWin = (updatedBoard, droppedIndex, turn, flatIndex) => {
+    // TODO: remove the col check and add back original function
     const colCheck = checkFlatBoardForWin(updatedBoard, turn, 1, flatIndex);
     const diaganolL = checkFlatBoardForWin(updatedBoard, turn, 7, flatIndex);
     const diaganolR = checkFlatBoardForWin(updatedBoard, turn, 5, flatIndex);

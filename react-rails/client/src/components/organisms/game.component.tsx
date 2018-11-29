@@ -22,12 +22,11 @@ type State = {
     // cleanBoard: BoardType;
     numRows: number;
     numCols: number;
-    intervals: number[];
+    intervals: number[] | [];
     lastDropped: {
         x: number;
         y: number;
     };
-    isColFull: boolean;
 };
 export class Game extends Component<{}, State> {
     state: State = {
@@ -43,7 +42,6 @@ export class Game extends Component<{}, State> {
         numRows: 6,
         numCols: 7,
         intervals: [],
-        isColFull: false
     };
 
     componentDidMount() {
@@ -70,12 +68,10 @@ export class Game extends Component<{}, State> {
 
     setWinCheckIntervals = () => {
         this.setState(({ numCols }: { numCols: number }) => {
-            const intervals = [1];
-
             // first three standard sizes mentioned on wikipedia say the board has 1 more column than rows
             // these intervals assume that is always the case
             // win checks should work for any size board as long as there is one more column than row
-            intervals.push(numCols - 2, numCols - 1, numCols);
+            const intervals = [numCols - 2, numCols - 1, numCols];
             return { intervals };
         });
     };
@@ -99,36 +95,39 @@ export class Game extends Component<{}, State> {
             colIndex,
             board[0].length
         );
-        if (numRows >= x + 1) {
-            console.log('numRows', numRows, 'x', x + 1);
-            const win = this.checkAllWinConditions(
-                // 1 for columns, 6 for rows, 5 and 7 for diaganol
+        // first check win in column and only if false, run other checks
+        let win = this.checkColumnForWin(updatedBoard[colIndex], currentTurn);
+        if (!win) {
+            win = this.checkAllWinConditions(
+                // 6 for rows, 5 and 7 for diaganol
                 intervals,
                 updatedBoard,
                 currentTurn,
                 flatIndexOfLastDropped
             );
-            !win && this.changeTurn();
-            isCompOn && this.toggleCompTurn();
-            this.setState({
-                board: updatedBoard,
-                win,
-                isColFull: false,
-                lastDropped: { x, y: colIndex }
-            });
-        } else {
-            this.setState({ isColFull: true });
         }
+
+        // only change turn if no one has won
+        !win && this.changeTurn();
+
+        // if the computer is playing, this will trigger the computer to move
+        isCompOn && this.toggleCompTurn();
+
+        this.setState({
+            board: updatedBoard,
+            win,
+            lastDropped: { x, y: colIndex }
+        });
     };
 
     handleClick = event => {
         const clickedColIndex = Number(event.currentTarget.dataset.index);
         this.playMove(clickedColIndex);
 
-        const { isCompOn, isColFull } = this.state;
+        const { win, isCompOn } = this.state;
 
         // needs to run only if compIsOn and the column is not already full
-        isCompOn && !isColFull && this.compMove();
+        !win && isCompOn && this.compMove();
     };
 
     changeTurn = () => {
@@ -165,7 +164,7 @@ export class Game extends Component<{}, State> {
                 : column;
         });
     };
-
+    resetCount = () => {};
     winCheckByInterval = (board, currentTurn, interval, flatIndex) => {
         let win = false;
         let count = 0;
@@ -186,6 +185,22 @@ export class Game extends Component<{}, State> {
         return win;
     };
 
+    checkColumnForWin = (column, currentTurn) => {
+        let win = false;
+        let count = 0;
+        column.forEach((space, i) => {
+            if (space === currentTurn) {
+                count += 1;
+                if (count >= 4) {
+                    win = true;
+                }
+            } else {
+                count = 0;
+            }
+        });
+        return win;
+    };
+
     checkAllWinConditions = (
         intervals: number[],
         board: BoardType,
@@ -200,6 +215,7 @@ export class Game extends Component<{}, State> {
                 flatIndex
             );
         });
+
         // if at least at least one of win conditions checked is true, return true
         const winStatus = winChecks.some(win => win === true);
         return winStatus;
@@ -217,10 +233,13 @@ export class Game extends Component<{}, State> {
     };
 
     resetBoard = () => {
+        setTimeout(() => {});
         this.createBoard();
         // TODO: only need to leave if not resetting board on player change
         this.changeTurn();
-        this.setState({ win: false });
+        this.setState(({ isCompOn }) => {
+            return { win: false, isCompOn };
+        });
     };
 
     changeNumPlayers = () => {
