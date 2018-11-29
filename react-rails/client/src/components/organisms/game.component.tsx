@@ -47,6 +47,15 @@ export class Game extends Component<{}, State> {
         this.createBoard();
     }
 
+    getRandomNum = max => {
+        return Math.floor(Math.random() * max);
+    };
+    compMove = numCols => {
+        setTimeout(() => {
+            this.getRandomNum(numCols);
+        }, 500);
+    };
+
     setWinCheckIntervals = () => {
         this.setState(({ numCols }: { numCols: number }) => {
             const intervals = [1];
@@ -68,22 +77,16 @@ export class Game extends Component<{}, State> {
         this.setWinCheckIntervals();
     };
 
-    handleClick = event => {
+    // took out of handleClick so that it is not dependent on handleClick and can be used for computer moves
+    playMove = colIndex => {
         const { board, currentTurn, intervals } = this.state;
-        const clickedColIndex = Number(event.currentTarget.dataset.index);
-        const updatedBoard = this.replaceColumn(
-            board,
-            clickedColIndex,
-            currentTurn
-        );
-
-        const x = this.getIndexOfPiece(updatedBoard[clickedColIndex]);
+        const updatedBoard = this.replaceColumn(board, colIndex, currentTurn);
+        const x = this.getIndexOfPiece(updatedBoard[colIndex]);
         const flatIndexOfLastDropped = this.getFlatIndexOfLastDropped(
             x,
-            clickedColIndex,
+            colIndex,
             board[0].length
         );
-
         const win = this.checkAllWinConditions(
             // 1 for columns, 6 for rows, 5 and 7 for diaganol
             intervals,
@@ -95,8 +98,13 @@ export class Game extends Component<{}, State> {
         this.setState({
             board: updatedBoard,
             win,
-            lastDropped: { x, y: clickedColIndex }
+            lastDropped: { x, y: colIndex }
         });
+    };
+
+    handleClick = event => {
+        const clickedColIndex = Number(event.currentTarget.dataset.index);
+        this.playMove(clickedColIndex);
     };
 
     changeTurn = () => {
