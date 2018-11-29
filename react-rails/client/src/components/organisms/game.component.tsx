@@ -27,6 +27,7 @@ type State = {
         x: number;
         y: number;
     };
+    isColFull: boolean;
 };
 export class Game extends Component<{}, State> {
     state: State = {
@@ -41,7 +42,8 @@ export class Game extends Component<{}, State> {
         board: [],
         numRows: 6,
         numCols: 7,
-        intervals: []
+        intervals: [],
+        isColFull: false
     };
 
     componentDidMount() {
@@ -88,35 +90,45 @@ export class Game extends Component<{}, State> {
     };
 
     // took out of handleClick so that it is not dependent on handleClick and can be used for computer moves
-    playMove = colIndex => {
-        const { board, currentTurn, intervals, isCompOn } = this.state;
+    playMove = async colIndex => {
+        const { board, currentTurn, intervals, isCompOn, numRows } = this.state;
         const updatedBoard = this.replaceColumn(board, colIndex, currentTurn);
         const x = this.getIndexOfPiece(updatedBoard[colIndex]);
-        const flatIndexOfLastDropped = this.getFlatIndexOfLastDropped(
+        const flatIndexOfLastDropped = await this.getFlatIndexOfLastDropped(
             x,
             colIndex,
             board[0].length
         );
-        const win = this.checkAllWinConditions(
-            // 1 for columns, 6 for rows, 5 and 7 for diaganol
-            intervals,
-            updatedBoard,
-            currentTurn,
-            flatIndexOfLastDropped
-        );
-        !win && this.changeTurn();
-        isCompOn && this.toggleCompTurn();
-        this.setState({
-            board: updatedBoard,
-            win,
-            lastDropped: { x, y: colIndex }
-        });
+        if (numRows >= x + 1) {
+            console.log('numRows', numRows, 'x', x + 1);
+            const win = this.checkAllWinConditions(
+                // 1 for columns, 6 for rows, 5 and 7 for diaganol
+                intervals,
+                updatedBoard,
+                currentTurn,
+                flatIndexOfLastDropped
+            );
+            !win && this.changeTurn();
+            isCompOn && this.toggleCompTurn();
+            this.setState({
+                board: updatedBoard,
+                win,
+                isColFull: false,
+                lastDropped: { x, y: colIndex }
+            });
+        } else {
+            this.setState({ isColFull: true });
+        }
     };
 
     handleClick = event => {
         const clickedColIndex = Number(event.currentTarget.dataset.index);
         this.playMove(clickedColIndex);
-        this.state.isCompOn && this.compMove();
+
+        const { isCompOn, isColFull } = this.state;
+
+        // needs to run only if compIsOn and the column is not already full
+        isCompOn && !isColFull && this.compMove();
     };
 
     changeTurn = () => {
@@ -163,6 +175,7 @@ export class Game extends Component<{}, State> {
                 if (currentTurn === space) {
                     count += 1;
                     if (count >= 4) {
+                        console.log('interval', interval, 'i', i);
                         win = true;
                     }
                 } else {
@@ -264,7 +277,7 @@ export class Game extends Component<{}, State> {
                 <NewPlayer isCompOn={isCompOn} currentTurn={currentTurn} />
                 <BoardSelect
                     updateBoardSize={this.updateBoardSize}
-                    opts={[6, 7, 8, 10, 11]}
+                    opts={[7, 8, 10, 11]}
                 />
             </div>
         );

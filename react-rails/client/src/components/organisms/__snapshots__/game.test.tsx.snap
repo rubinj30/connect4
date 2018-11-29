@@ -110,7 +110,6 @@ ShallowWrapper {
         <BoardSelect
           opts={
             Array [
-              6,
               7,
               8,
               10,
@@ -296,7 +295,6 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "opts": Array [
-            6,
             7,
             8,
             10,
@@ -410,7 +408,6 @@ ShallowWrapper {
           <BoardSelect
             opts={
               Array [
-                6,
                 7,
                 8,
                 10,
@@ -596,7 +593,6 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "opts": Array [
-              6,
               7,
               8,
               10,
@@ -742,7 +738,6 @@ ShallowWrapper {
         <BoardSelect
           opts={
             Array [
-              6,
               7,
               8,
               10,
@@ -928,7 +923,6 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "opts": Array [
-            6,
             7,
             8,
             10,
@@ -1042,7 +1036,6 @@ ShallowWrapper {
           <BoardSelect
             opts={
               Array [
-                6,
                 7,
                 8,
                 10,
@@ -1228,7 +1221,6 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "opts": Array [
-              6,
               7,
               8,
               10,

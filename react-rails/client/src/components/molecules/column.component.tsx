@@ -22,11 +22,23 @@ export const Column = ({
     currentTurn,
     isCompTurn
 }: ColumnProps) => {
+    const blank = function(space) {
+        // checks whether an element is blank
+        return space === ' ';
+    };
+
+    // TODO: can either add this as condition for handleClick or remove
+    const anyBlankSpaces: boolean = column.some(function(space) {
+        // checks whether an element is blank
+        return space === ' ';
+    });
     return (
         <div
             className="flex column justify-between items-center"
             data-index={dataIndex}
-            onClick={!win && !isCompTurn ? handleClick : undefined}
+            onClick={
+                !win && !isCompTurn ? handleClick : undefined
+            }
         >
             {column.map((piece, j) => (
                 <Space piece={piece} key={j} />
