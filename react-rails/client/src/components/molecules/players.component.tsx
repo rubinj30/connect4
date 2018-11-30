@@ -26,7 +26,7 @@ export class NewPlayer extends Component<Props, State> {
     };
 
     componentDidMount() {
-        this.getPlayers();
+        // this.getPlayers();
     }
 
     getPlayers = async () => {

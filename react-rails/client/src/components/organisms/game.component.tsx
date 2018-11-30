@@ -71,14 +71,16 @@ export class Game extends Component<{}, State> {
                     }
                 })
                 .filter(x => typeof x === 'number');
+        console.log(indexes);
         return indexes;
     };
 
     getSimulatedBoardMoves = (board, simulatedPiece) => {
         const indexes = this.getAvailColIndexes(board);
-        return indexes.map(colIndex =>
-            this.getMoveResults(colIndex, simulatedPiece)
-        );
+        return indexes.map(colIndex => {
+            console.log('COLINDEX');
+            return this.getMoveResults(colIndex, simulatedPiece);
+        });
     };
 
     // finds win move in simulations, if there is one
@@ -94,9 +96,7 @@ export class Game extends Component<{}, State> {
             const { win, winColIndex } = this.checkAllWinConditions(
                 intervals,
                 result.updatedBoard,
-
-                // TODO: hardcoded for 'R'
-                'R',
+                simulatedPiece,
                 flatIndex,
                 result.returnedColIndex
             );
@@ -116,10 +116,29 @@ export class Game extends Component<{}, State> {
             intervals,
             'R'
         );
-        const simulateWinObj = results.find(item => item.win === true);
-        const compDropIndex = simulateWinObj
-            ? simulateWinObj.winColIndex
-            : this.getRandomNum(numCols);
+
+        // If results contain a win, set the first one to the let var
+        const compWinObj = results.find(item => item.win === true);
+
+        // set index to random column for next move, if no possible wins are found for comp or comp to block
+        let compDropIndex = this.getRandomNum(numCols);
+
+        if (compWinObj) {
+            compDropIndex = compWinObj.winColIndex;
+        } else {
+            const playerSims = this.getSimulatedBoardMoves(board, 'B');
+            const results = this.getWinMoveFromSims(
+                playerSims,
+                numRows,
+                intervals,
+                'B'
+            );
+            const opponentWinObj = results.find(item => item.win === true);
+            if (opponentWinObj) {
+                console.log('setting to opponent win obj', opponentWinObj);
+                compDropIndex = opponentWinObj.winColIndex;
+            }
+        }
         setTimeout(() => {
             this.playMove(compDropIndex);
         }, 800);
@@ -190,7 +209,7 @@ export class Game extends Component<{}, State> {
         this.setState({
             board: updatedBoard,
             win,
-            lastDropped: { x, y: colIndex }
+            lastDropped: { x, y: returnedColIndex }
         });
     };
 
@@ -326,14 +345,11 @@ export class Game extends Component<{}, State> {
     };
 
     resetBoard = () => {
+        this.createBoard();
         this.changeTurn();
         this.setState(({ isCompTurn }) => {
             return { win: false, isCompTurn };
         });
-        // allows user to see briefly see board after modal moved
-        setTimeout(() => {
-            this.createBoard();
-        }, 500);
     };
 
     // called on dropdown select in subcomponent to update the size of the board
