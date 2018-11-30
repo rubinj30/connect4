@@ -158,7 +158,7 @@ describe('Game component', () => {
                     1,
                     4
                 );
-                expect(winCheck).toBeFalsy();
+                expect(winCheck.win).toBeFalsy();
             });
             it('should return true if win condition met on column', () => {
                 const winCheck = instance.winCheckByInterval(
@@ -169,7 +169,7 @@ describe('Game component', () => {
                     // checking with the 4th item in first column assuming this was last dropped in
                     4
                 );
-                expect(winCheck).toBeTruthy();
+                expect(winCheck.win).toBeTruthy();
             });
             it('should return true if win condition met on row', () => {
                 const winCheck = instance.winCheckByInterval(
@@ -180,7 +180,7 @@ describe('Game component', () => {
                     // this is the 3rd item in the 2nd row, which is emtpy but setup to check the correct intervals for the 3rd item in each array
                     8
                 );
-                expect(winCheck).toBeTruthy();
+                expect(winCheck.win).toBeTruthy();
             });
             it('should return true if diaganol win met', () => {
                 const winCheck = instance.winCheckByInterval(
@@ -191,7 +191,33 @@ describe('Game component', () => {
                     // 2nd item in 4th row
                     19
                 );
-                expect(winCheck).toBeTruthy();
+                expect(winCheck.win).toBeTruthy();
+            });
+        });
+        describe('checkColumnForWin', () => {
+            it('should return true if there are 4 in a row on a provided column that match currentTurn', () => {
+                instance = result.instance();
+                const win = instance.checkColumnForWin(
+                    ['R', 'B', 'B', 'B', 'B', ' '],
+                    'B'
+                );
+                expect(win).toBeTruthy();
+            });
+            it('should return false if there are 4 in a row on a provided column but do not match currentTurn', () => {
+                instance = result.instance();
+                const win = instance.checkColumnForWin(
+                    ['R', 'B', 'B', 'B', 'B', ' '],
+                    'R'
+                );
+                expect(win).toBeFalsy();
+            });
+            it('should return false if there are 4 or more in a col matching currentTurn, but they are not consecutive', () => {
+                instance = result.instance();
+                const win = instance.checkColumnForWin(
+                    ['B', 'B', 'R', 'B', 'B', 'B'],
+                    'B'
+                );
+                expect(win).toBeFalsy();
             });
         });
     });

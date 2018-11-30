@@ -30,10 +30,6 @@ updateAfterGame = (newTurn) => {
     game.currentTurn = newTurn;
 } 
 
-incrementWinLoss = () => {
-
-}
-
 const promptForMove = async () => {
     try {
         const { board, currentTurn } = { ...game };
