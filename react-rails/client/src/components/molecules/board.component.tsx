@@ -1,6 +1,6 @@
 import React from 'react';
 import { WinMessage } from '../molecules/win-message.component';
-import { BoardType } from '../organisms/game.component';
+import { BoardType, ComputerTurn } from '../organisms/game.component';
 import { Column } from '../molecules/column.component';
 import { PieceType } from '../atoms/space.component';
 
@@ -8,7 +8,7 @@ type Props = {
     currentTurn: PieceType;
     win: boolean;
     board: BoardType;
-    isCompTurn: boolean;
+    isCompTurn: ComputerTurn;
     resetBoard: any;
     handleClick: any;
 };

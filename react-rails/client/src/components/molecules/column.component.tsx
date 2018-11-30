@@ -1,5 +1,6 @@
 import React from 'react';
 import { Arrow } from '../atoms/arrow.component';
+import { ComputerTurn } from '../../components/organisms/game.component';
 import { PieceType, Space } from '../atoms/space.component';
 
 export type ColumnType = PieceType[];
@@ -10,7 +11,7 @@ type ColumnProps = {
     column: ColumnType;
     dataIndex: number;
     currentTurn: PieceType;
-    isCompTurn: boolean;
+    isCompTurn: ComputerTurn;
     handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
@@ -36,9 +37,7 @@ export const Column = ({
         <div
             className="flex column justify-between items-center"
             data-index={dataIndex}
-            onClick={
-                !win && !isCompTurn ? handleClick : undefined
-            }
+            onClick={!win && isCompTurn !== 'n' ? handleClick : undefined}
         >
             {column.map((piece, j) => (
                 <Space piece={piece} key={j} />

@@ -11,15 +11,12 @@ import './organisms.css';
 
 export type BoardType = ColumnType[];
 
-// type ComputerTurn = 'yes' | 'no' | 'off';
+export type ComputerTurn = 'y' | 'n' | 'off';
 type State = {
     // TODO: Combine these and maybe event currentTurn
-    isCompOn: boolean;
-    isCompTurn: boolean;
     currentTurn: PieceType;
     win: boolean;
     board: BoardType | [];
-    // cleanBoard: BoardType;
     numRows: number;
     numCols: number;
     intervals: number[] | [];
@@ -27,11 +24,11 @@ type State = {
         x: number;
         y: number;
     };
+    isCompTurn: ComputerTurn;
 };
 export class Game extends Component<{}, State> {
     state: State = {
-        isCompOn: false,
-        isCompTurn: false,
+        isCompTurn: 'off',
         currentTurn: 'B',
         win: false,
         lastDropped: {
@@ -48,8 +45,23 @@ export class Game extends Component<{}, State> {
         this.createBoard();
     }
 
+    // methods needed for AI
     getRandomNum = max => {
         return Math.floor(Math.random() * max);
+    };
+
+    getAvailColIndexes = board => {
+        const isColAvail = col => col.some(space => space === ' ');
+        const test =
+            board &&
+            board
+                .map((col, i) => {
+                    if (isColAvail(col)) {
+                        return i;
+                    }
+                })
+                .filter(x => x);
+        return test;
     };
 
     compMove = () => {
@@ -61,9 +73,11 @@ export class Game extends Component<{}, State> {
     };
 
     toggleCompTurn = () => {
-        this.setState(({ isCompTurn }) => {
-            return { isCompTurn: !isCompTurn };
-        });
+        this.state.isCompTurn !== 'off' &&
+            this.setState(({ isCompTurn }) => {
+                const compTurn = isCompTurn === 'y' ? 'n' : 'y';
+                return { isCompTurn: compTurn };
+            });
     };
 
     setWinCheckIntervals = () => {
@@ -77,7 +91,6 @@ export class Game extends Component<{}, State> {
     };
 
     createBoard = () => {
-        console.log('created');
         this.setState(({ numRows, numCols }) => {
             const col = Array(numRows).fill(' ');
             const board = Array(numCols).fill(col);
@@ -88,7 +101,13 @@ export class Game extends Component<{}, State> {
 
     // took out of handleClick so that it is not dependent on handleClick and can be used for computer moves
     playMove = async colIndex => {
-        const { board, currentTurn, intervals, isCompOn, numRows } = this.state;
+        const {
+            board,
+            currentTurn,
+            intervals,
+            isCompTurn,
+            numRows
+        } = this.state;
         const updatedBoard = this.replaceColumn(board, colIndex, currentTurn);
         const x = this.getIndexOfPiece(updatedBoard[colIndex]);
         const flatIndexOfLastDropped = await this.getFlatIndexOfLastDropped(
@@ -109,11 +128,9 @@ export class Game extends Component<{}, State> {
         }
 
         // only change turn if no one has won
-        !win && this.changeTurn();
-
+        this.changeTurn();
         // if the computer is playing, this will trigger the computer to move
-        isCompOn && this.toggleCompTurn();
-
+        this.toggleCompTurn();
         this.setState({
             board: updatedBoard,
             win,
@@ -125,20 +142,21 @@ export class Game extends Component<{}, State> {
         const clickedColIndex = Number(event.currentTarget.dataset.index);
         this.playMove(clickedColIndex);
 
-        const { win, isCompOn } = this.state;
+        const { win, isCompTurn } = this.state;
 
         // needs to run only if compIsOn and the column is not already full
-        !win && isCompOn && this.compMove();
+        !win && isCompTurn === 'y' && this.compMove();
     };
 
     changeTurn = () => {
-        this.setState(({ currentTurn }: { currentTurn: PieceType }) => {
-            if (currentTurn === 'B') {
-                return { currentTurn: 'R' };
-            } else {
-                return { currentTurn: 'B' };
-            }
-        });
+        !this.state.win &&
+            this.setState(({ currentTurn }: { currentTurn: PieceType }) => {
+                if (currentTurn === 'B') {
+                    return { currentTurn: 'R' };
+                } else {
+                    return { currentTurn: 'B' };
+                }
+            });
     };
 
     dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
@@ -165,7 +183,8 @@ export class Game extends Component<{}, State> {
                 : column;
         });
     };
-    resetCount = () => {};
+
+    // win check related methods
     winCheckByInterval = (board, currentTurn, interval, flatIndex) => {
         let win = false;
         let count = 0;
@@ -238,53 +257,52 @@ export class Game extends Component<{}, State> {
         this.createBoard();
         // TODO: only need to leave if not resetting board on player change
         this.changeTurn();
-        this.setState(({ isCompOn }) => {
-            return { win: false, isCompOn };
+        this.setState(({ isCompTurn }) => {
+            return { win: false, isCompTurn };
         });
     };
 
-    changeNumPlayers = () => {
-        this.setState(
-            ({
-                isCompOn,
-                currentTurn
-            }: {
-                isCompOn: boolean;
-                currentTurn: PieceType;
-            }) => {
-                // if changing to computer, human goes first
-                const newTurn = isCompOn ? 'B' : currentTurn;
-                return {
-                    isCompOn: !isCompOn,
-                    currentTurn: newTurn
-                };
+    changeCompTurn = (turnOff: boolean = false) => {
+        this.setState(({ isCompTurn }) => {
+            if (turnOff) {
+                return { isCompTurn: 'off' };
+            } else {
+                const newCompTurn = isCompTurn === 'y' ? 'n' : 'y';
+                return { isCompTurn: newCompTurn };
             }
-        );
+        });
     };
 
+    // // methods only for updating size of board
+    // changeNumPlayers = () => {
+    //     this.setState(
+    //         ({
+    //             isCompTurn,
+    //             currentTurn
+    //         }: {
+    //             isCompTurn: ComputerTurn;
+    //             currentTurn: PieceType;
+    //         }) => {
+    //             // if changing to computer, human goes first
+    //             const newTurn = isCompTurn !== 'off' ? 'B' : currentTurn;
+    //             const compTurn = this.changeCompTurn();
+    //             return {
+    //                 isCompTurn: compTurn,
+    //                 currentTurn: newTurn
+    //             };
+    //         }
+    //     );
+    // };
+
     updateBoardSize = event => {
-        console.log(event.currentTarget.value);
         const numCols = Number(event.currentTarget.value);
+        // assumes board always has one more column than row
         this.setState({ numCols, numRows: numCols - 1 });
         this.createBoard();
     };
 
-    getAvailColIndexes = board => {
-        const isColAvail = col => col.some(space => space === ' ');
-        const test =
-            board &&
-            board
-                .map((col, i) => {
-                    if (isColAvail(col)) {
-                        return i;
-                    }
-                })
-                .filter(x => x);
-        return test;
-    };
-
     render() {
-        const { currentTurn, board, win, isCompOn, isCompTurn } = this.state;
+        const { currentTurn, board, win, isCompTurn } = this.state;
         console.log(this.getAvailColIndexes(board));
         return (
             <div>
@@ -294,8 +312,8 @@ export class Game extends Component<{}, State> {
                         <Space piece={currentTurn} />
                     </span>
                     <NumPlayers
-                        changeNumPlayers={this.changeNumPlayers}
-                        isCompOn={isCompOn}
+                        changeCompTurn={this.changeCompTurn}
+                        isCompTurn={isCompTurn}
                     />
                 </div>
                 <Board
@@ -306,7 +324,7 @@ export class Game extends Component<{}, State> {
                     resetBoard={this.resetBoard}
                     handleClick={this.handleClick}
                 />
-                <NewPlayer isCompOn={isCompOn} currentTurn={currentTurn} />
+                <NewPlayer isCompTurn={isCompTurn} currentTurn={currentTurn} />
                 <BoardSelect
                     updateBoardSize={this.updateBoardSize}
                     opts={[7, 8, 10, 11]}

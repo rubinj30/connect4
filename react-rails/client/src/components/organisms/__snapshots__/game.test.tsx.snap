@@ -32,8 +32,8 @@ ShallowWrapper {
             />
           </span>
           <NumPlayers
-            changeNumPlayers={[Function]}
-            isCompOn={false}
+            changeCompTurn={[Function]}
+            isCompTurn="off"
           />
         </div>,
         <Board
@@ -99,13 +99,13 @@ ShallowWrapper {
           }
           currentTurn="B"
           handleClick={[Function]}
-          isCompTurn={false}
+          isCompTurn="off"
           resetBoard={[Function]}
           win={false}
         />,
         <NewPlayer
           currentTurn="B"
-          isCompOn={false}
+          isCompTurn="off"
         />,
         <BoardSelect
           opts={
@@ -139,8 +139,8 @@ ShallowWrapper {
               />
             </span>,
             <NumPlayers
-              changeNumPlayers={[Function]}
-              isCompOn={false}
+              changeCompTurn={[Function]}
+              isCompTurn="off"
             />,
           ],
           "className": "flex items-center justify-between",
@@ -192,10 +192,10 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "function",
+            "nodeType": "class",
             "props": Object {
-              "changeNumPlayers": [Function],
-              "isCompOn": false,
+              "changeCompTurn": [Function],
+              "isCompTurn": "off",
             },
             "ref": null,
             "rendered": null,
@@ -269,7 +269,7 @@ ShallowWrapper {
           ],
           "currentTurn": "B",
           "handleClick": [Function],
-          "isCompTurn": false,
+          "isCompTurn": "off",
           "resetBoard": [Function],
           "win": false,
         },
@@ -283,7 +283,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "currentTurn": "B",
-          "isCompOn": false,
+          "isCompTurn": "off",
         },
         "ref": null,
         "rendered": null,
@@ -330,8 +330,8 @@ ShallowWrapper {
               />
             </span>
             <NumPlayers
-              changeNumPlayers={[Function]}
-              isCompOn={false}
+              changeCompTurn={[Function]}
+              isCompTurn="off"
             />
           </div>,
           <Board
@@ -397,13 +397,13 @@ ShallowWrapper {
             }
             currentTurn="B"
             handleClick={[Function]}
-            isCompTurn={false}
+            isCompTurn="off"
             resetBoard={[Function]}
             win={false}
           />,
           <NewPlayer
             currentTurn="B"
-            isCompOn={false}
+            isCompTurn="off"
           />,
           <BoardSelect
             opts={
@@ -437,8 +437,8 @@ ShallowWrapper {
                 />
               </span>,
               <NumPlayers
-                changeNumPlayers={[Function]}
-                isCompOn={false}
+                changeCompTurn={[Function]}
+                isCompTurn="off"
               />,
             ],
             "className": "flex items-center justify-between",
@@ -490,10 +490,10 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "function",
+              "nodeType": "class",
               "props": Object {
-                "changeNumPlayers": [Function],
-                "isCompOn": false,
+                "changeCompTurn": [Function],
+                "isCompTurn": "off",
               },
               "ref": null,
               "rendered": null,
@@ -567,7 +567,7 @@ ShallowWrapper {
             ],
             "currentTurn": "B",
             "handleClick": [Function],
-            "isCompTurn": false,
+            "isCompTurn": "off",
             "resetBoard": [Function],
             "win": false,
           },
@@ -581,7 +581,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "currentTurn": "B",
-            "isCompOn": false,
+            "isCompTurn": "off",
           },
           "ref": null,
           "rendered": null,
@@ -660,8 +660,8 @@ ShallowWrapper {
             />
           </span>
           <NumPlayers
-            changeNumPlayers={[Function]}
-            isCompOn={false}
+            changeCompTurn={[Function]}
+            isCompTurn="off"
           />
         </div>,
         <Board
@@ -727,13 +727,13 @@ ShallowWrapper {
           }
           currentTurn="B"
           handleClick={[Function]}
-          isCompTurn={false}
+          isCompTurn="off"
           resetBoard={[Function]}
           win={true}
         />,
         <NewPlayer
           currentTurn="B"
-          isCompOn={false}
+          isCompTurn="off"
         />,
         <BoardSelect
           opts={
@@ -767,8 +767,8 @@ ShallowWrapper {
               />
             </span>,
             <NumPlayers
-              changeNumPlayers={[Function]}
-              isCompOn={false}
+              changeCompTurn={[Function]}
+              isCompTurn="off"
             />,
           ],
           "className": "flex items-center justify-between",
@@ -820,10 +820,10 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "function",
+            "nodeType": "class",
             "props": Object {
-              "changeNumPlayers": [Function],
-              "isCompOn": false,
+              "changeCompTurn": [Function],
+              "isCompTurn": "off",
             },
             "ref": null,
             "rendered": null,
@@ -897,7 +897,7 @@ ShallowWrapper {
           ],
           "currentTurn": "B",
           "handleClick": [Function],
-          "isCompTurn": false,
+          "isCompTurn": "off",
           "resetBoard": [Function],
           "win": true,
         },
@@ -911,7 +911,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "currentTurn": "B",
-          "isCompOn": false,
+          "isCompTurn": "off",
         },
         "ref": null,
         "rendered": null,
@@ -958,8 +958,8 @@ ShallowWrapper {
               />
             </span>
             <NumPlayers
-              changeNumPlayers={[Function]}
-              isCompOn={false}
+              changeCompTurn={[Function]}
+              isCompTurn="off"
             />
           </div>,
           <Board
@@ -1025,13 +1025,13 @@ ShallowWrapper {
             }
             currentTurn="B"
             handleClick={[Function]}
-            isCompTurn={false}
+            isCompTurn="off"
             resetBoard={[Function]}
             win={true}
           />,
           <NewPlayer
             currentTurn="B"
-            isCompOn={false}
+            isCompTurn="off"
           />,
           <BoardSelect
             opts={
@@ -1065,8 +1065,8 @@ ShallowWrapper {
                 />
               </span>,
               <NumPlayers
-                changeNumPlayers={[Function]}
-                isCompOn={false}
+                changeCompTurn={[Function]}
+                isCompTurn="off"
               />,
             ],
             "className": "flex items-center justify-between",
@@ -1118,10 +1118,10 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "function",
+              "nodeType": "class",
               "props": Object {
-                "changeNumPlayers": [Function],
-                "isCompOn": false,
+                "changeCompTurn": [Function],
+                "isCompTurn": "off",
               },
               "ref": null,
               "rendered": null,
@@ -1195,7 +1195,7 @@ ShallowWrapper {
             ],
             "currentTurn": "B",
             "handleClick": [Function],
-            "isCompTurn": false,
+            "isCompTurn": "off",
             "resetBoard": [Function],
             "win": true,
           },
@@ -1209,7 +1209,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "currentTurn": "B",
-            "isCompOn": false,
+            "isCompTurn": "off",
           },
           "ref": null,
           "rendered": null,

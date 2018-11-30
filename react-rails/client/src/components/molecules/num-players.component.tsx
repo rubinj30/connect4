@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { ComputerTurn } from '../organisms/game.component';
 
 type Props = {
-    isCompOn: boolean;
-    changeNumPlayers: (e: React.MouseEvent<any>) => void;
+    isCompTurn: ComputerTurn;
+    changeCompTurn: Function;
 };
 
-export const NumPlayers = ({ isCompOn, changeNumPlayers }: Props) => (
-    <div onClick={changeNumPlayers} className="br2">
-        <span className="pr1">Computer?</span>
-        <span
-            className={`pa2 ba b--blue option ${
-                isCompOn ? '' : 'bg-blue white bw2'
-            }`}
-        >
-            No
-        </span>
-        <span
-            className={`pa2 ba b--blue option ${
-                isCompOn ? 'bg-blue white bw2' : ''
-            }`}
-        >
-            Yes
-        </span>
-    </div>
-);
+export class NumPlayers extends Component<Props, {}> {
+    handleClick = () => {
+        console.log(this.props.isCompTurn);
+        this.props.changeCompTurn(this.props.isCompTurn !== 'off');
+    };
+
+    render() {
+        const { isCompTurn } = this.props;
+        return (
+            <div onClick={this.handleClick} className="br2">
+                <span className="pr1">Is computer on?</span>
+                <span
+                    className={`pa2 ba b--blue option ${
+                        isCompTurn !== 'off' ? '' : 'bg-blue white bw2'
+                    }`}
+                >
+                    No
+                </span>
+                <span
+                    className={`pa2 ba b--blue option ${
+                        isCompTurn !== 'off' ? 'bg-blue white bw2' : ''
+                    }`}
+                >
+                    Yes
+                </span>
+            </div>
+        );
+    }
+}

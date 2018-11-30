@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { PieceType } from '../atoms/space.component';
+import { ComputerTurn } from '../organisms/game.component';
 import axios from 'axios';
 
 type Props = {
     currentTurn: PieceType;
-    isCompOn: boolean;
+    isCompTurn: ComputerTurn;
 };
 
 type State = {
@@ -41,7 +42,7 @@ export class NewPlayer extends Component<Props, State> {
 
     render() {
         const { players } = this.state;
-        const { currentTurn, isCompOn } = this.props;
+        const { currentTurn, isCompTurn } = this.props;
         return (
             players && (
                 <div className="flex flex-column">
@@ -57,9 +58,9 @@ export class NewPlayer extends Component<Props, State> {
                         <div
                             className={`name bg-red ma2 pa2 white ${
                                 currentTurn === 'R' ? 'border' : ''
-                            } ${isCompOn ? 'b f5' : ''}`}
+                            } ${isCompTurn !== 'off' ? 'b f5' : ''}`}
                         >
-                            {isCompOn ? 'COMPUTER' : 'player 2'}
+                            {isCompTurn === 'off' ? 'COMPUTER' : 'player 2'}
                         </div>
                     </div>
                     {/* <select
