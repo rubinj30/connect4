@@ -81,19 +81,17 @@ export class Game extends Component<{}, State> {
         const indexes = this.getAvailColIndexes(board);
         const simulations = indexes.map((index, i) => {
             const sim = this.getMoveResults(index, 'R');
-            // if (!result.win) {
-            //     return;
-            // }
             return sim;
         });
         console.log('simulations', simulations);
+
+        
         // check win for both 'B' and 'R'. If 'R' can't win, but black can block them
         const results = simulations.map((result, i) => {
             // const firstBlankSpace = column.indexOf(' ');
             console.log('RESULT', result);
             const currentIndex = result.returnedColIndex;
 
-            // TODO: need to make sure this is getting the last piece dropped if there is one "dropped" or if it needs to get first open space
             const x = this.getIndexOfPiece(result.updatedBoard[currentIndex]);
             const flatIndex = this.getFlatIndexOfLastDropped(
                 x,
@@ -121,20 +119,6 @@ export class Game extends Component<{}, State> {
         setTimeout(() => {
             this.playMove(compDropIndex);
         }, 800);
-    };
-
-    // TODO: this randomly
-    // compMove = () => {
-    //     const { numCols } = this.state;
-    //     setTimeout(() => {
-    //         const randColIndex = this.getRandomNum(numCols);
-    //         this.playMove(randColIndex);
-    //     }, 800);
-    // };
-
-    checkForWinningMoves = () => {
-        const boardCopy = { ...this.state.board };
-        const colIndexes = this.getAvailColIndexes(boardCopy);
     };
 
     toggleCompTurn = () => {
@@ -202,34 +186,9 @@ export class Game extends Component<{}, State> {
         this.toggleCompTurn();
         this.setState({
             board: updatedBoard,
-            //TODO: uncomment
-            // win
-            win: false,
+            win,
             lastDropped: { x, y: colIndex }
         });
-    };
-
-    checkAllWinConditions = (
-        intervals,
-        updatedBoard,
-        currentTurn,
-        flatIndexOfLastDropped,
-        colIndex
-    ) => {
-        // first check win in column and only if false, run other checks
-        let win = this.checkColumnForWin(updatedBoard[colIndex], currentTurn);
-        let winFlatIndex;
-        if (!win) {
-            win = this.checkDiaganolAndRowWinConditions(
-                intervals,
-                updatedBoard,
-                currentTurn,
-                flatIndexOfLastDropped
-            );
-        }
-
-        // TODO: if colIndex wins, then won't need flatIndex
-        return { win, winFlatIndex, winColIndex: colIndex };
     };
 
     handleClick = async event => {
@@ -277,13 +236,35 @@ export class Game extends Component<{}, State> {
         });
     };
 
-    // win check related methods
+    // next 4 methods are used to check board for win
+    checkAllWinConditions = (
+        intervals,
+        updatedBoard,
+        currentTurn,
+        flatIndexOfLastDropped,
+        colIndex
+    ) => {
+        // first check win in column and only if false, run other checks
+        let win = this.checkColumnForWin(updatedBoard[colIndex], currentTurn);
+        let winFlatIndex;
+        if (!win) {
+            win = this.checkDiaganolAndRowWinConditions(
+                intervals,
+                updatedBoard,
+                currentTurn,
+                flatIndexOfLastDropped
+            );
+        }
+
+        // TODO: if colIndex wins, then won't need flatIndex
+        return { win, winFlatIndex, winColIndex: colIndex };
+    };
+
     winCheckByInterval = (board, currentTurn, interval, flatIndex) => {
         let win = false;
         let count = 0;
         let winFlatIndex;
         board.flat().forEach((space, i) => {
-            // only checks every 7 (or 5) spaces for piece
             if ((i - flatIndex) % interval === 0) {
                 if (currentTurn === space) {
                     count += 1;
@@ -350,13 +331,14 @@ export class Game extends Component<{}, State> {
     };
 
     resetBoard = () => {
-        setTimeout(() => {});
-        this.createBoard();
-        // TODO: only need to leave if not resetting board on player change
         this.changeTurn();
         this.setState(({ isCompTurn }) => {
             return { win: false, isCompTurn };
         });
+        // allows user to see briefly see board after modal moved
+        setTimeout(() => {
+            this.createBoard();
+        }, 500);
     };
 
     // called on dropdown select in subcomponent to update the size of the board
