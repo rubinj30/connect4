@@ -6,11 +6,9 @@ import { BoardSelect } from '../molecules/board-select.component';
 import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
 import { NewPlayer } from '../molecules/players.component';
-
 import './organisms.css';
 
 export type BoardType = ColumnType[];
-
 export type ComputerTurn = 'y' | 'n' | 'off';
 type State = {
     // TODO: Combine these and maybe event currentTurn
@@ -51,12 +49,12 @@ export class Game extends Component<{}, State> {
     };
 
     changeCompTurn = (turnOff: boolean = false) => {
-        this.setState(({ isCompTurn }) => {
+        this.setState(({ isCompTurn, currentTurn }) => {
             if (turnOff) {
-                return { isCompTurn: 'off' };
+                return { isCompTurn: 'off', currentTurn: currentTurn };
             } else {
                 const newCompTurn = isCompTurn === 'y' ? 'n' : 'y';
-                return { isCompTurn: newCompTurn };
+                return { isCompTurn: newCompTurn, currentTurn: 'B' };
             }
         });
     };
@@ -81,6 +79,11 @@ export class Game extends Component<{}, State> {
             const randColIndex = this.getRandomNum(numCols);
             this.playMove(randColIndex);
         }, 800);
+    };
+
+    checkForWinningMoves = () => {
+        const boardCopy = { ...this.state.board };
+        const colIndexes = this.getAvailColIndexes(boardCopy);
     };
 
     toggleCompTurn = () => {
@@ -111,14 +114,9 @@ export class Game extends Component<{}, State> {
     };
 
     // took out of handleClick so that it is not dependent on handleClick and can be used for computer moves
-    playMove = async colIndex => {
-        const {
-            board,
-            currentTurn,
-            intervals,
-            isCompTurn,
-            numRows
-        } = this.state;
+
+    simulateMove = async colIndex => {
+        const { board, currentTurn, intervals } = this.state;
         const updatedBoard = this.replaceColumn(board, colIndex, currentTurn);
         const x = this.getIndexOfPiece(updatedBoard[colIndex]);
         const flatIndexOfLastDropped = await this.getFlatIndexOfLastDropped(
@@ -137,9 +135,15 @@ export class Game extends Component<{}, State> {
                 flatIndexOfLastDropped
             );
         }
+        console.log(updatedBoard, 'win', win, 'x', x);
+        return { updatedBoard, win, x };
+    };
+
+    playMove = async colIndex => {
+        const { updatedBoard, win, x } = await this.simulateMove(colIndex);
 
         // only change turn if no one has won
-        this.changeTurn();
+        !win && this.changeTurn();
         // if the computer is playing, this will trigger the computer to move
         this.toggleCompTurn();
         this.setState({
@@ -160,14 +164,13 @@ export class Game extends Component<{}, State> {
     };
 
     changeTurn = () => {
-        !this.state.win &&
-            this.setState(({ currentTurn }: { currentTurn: PieceType }) => {
-                if (currentTurn === 'B') {
-                    return { currentTurn: 'R' };
-                } else {
-                    return { currentTurn: 'B' };
-                }
-            });
+        this.setState(({ currentTurn }: { currentTurn: PieceType }) => {
+            if (currentTurn === 'B') {
+                return { currentTurn: 'R' };
+            } else {
+                return { currentTurn: 'B' };
+            }
+        });
     };
 
     dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
