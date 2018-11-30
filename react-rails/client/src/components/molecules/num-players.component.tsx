@@ -8,7 +8,6 @@ type Props = {
 
 export class NumPlayers extends Component<Props, {}> {
     handleClick = () => {
-        console.log(this.props.isCompTurn);
         this.props.changeCompTurn(this.props.isCompTurn !== 'off');
     };
 
