@@ -74,44 +74,48 @@ export class Game extends Component<{}, State> {
         return indexes;
     };
 
-    compMove = () => {
-        const { board, intervals, numRows, numCols } = this.state;
-
-        // use while loop to keep checking until win and count the moves made
+    getSimulatedBoardMoves = (board, simulatedPiece) => {
         const indexes = this.getAvailColIndexes(board);
-        const simulations = indexes.map((index, i) => {
-            const sim = this.getMoveResults(index, 'R');
-            return sim;
-        });
-        console.log('simulations', simulations);
+        return indexes.map(colIndex =>
+            this.getMoveResults(colIndex, simulatedPiece)
+        );
+    };
 
-        
-        // check win for both 'B' and 'R'. If 'R' can't win, but black can block them
-        const results = simulations.map((result, i) => {
-            // const firstBlankSpace = column.indexOf(' ');
-            console.log('RESULT', result);
+    // finds win move in simulations, if there is one
+    getWinMoveFromSims = (sims, numRows, intervals, simulatedPiece) => {
+        const results = sims.map((result, i) => {
             const currentIndex = result.returnedColIndex;
-
             const x = this.getIndexOfPiece(result.updatedBoard[currentIndex]);
             const flatIndex = this.getFlatIndexOfLastDropped(
                 x,
                 result.returnedColIndex,
                 numRows
             );
-            const {
-                win,
-                winFlatIndex,
-                winColIndex
-            } = this.checkAllWinConditions(
+            const { win, winColIndex } = this.checkAllWinConditions(
                 intervals,
                 result.updatedBoard,
+
+                // TODO: hardcoded for 'R'
                 'R',
                 flatIndex,
                 result.returnedColIndex
             );
-            return { win, winFlatIndex, winColIndex };
+            return { win, winColIndex };
         });
+        return results;
+    };
 
+    compMove = () => {
+        const { board, intervals, numRows, numCols } = this.state;
+
+        // eventually use while loop to keep checking until win and count the moves made
+        const compSims = this.getSimulatedBoardMoves(board, 'R');
+        const results = this.getWinMoveFromSims(
+            compSims,
+            numRows,
+            intervals,
+            'R'
+        );
         const simulateWinObj = results.find(item => item.win === true);
         const compDropIndex = simulateWinObj
             ? simulateWinObj.winColIndex
@@ -160,14 +164,13 @@ export class Game extends Component<{}, State> {
         );
 
         // checks column, row, and both diaganol directions and returns win to be true if its true
-        const { win, winFlatIndex } = this.checkAllWinConditions(
+        const { win } = this.checkAllWinConditions(
             intervals,
             updatedBoard,
             currentTurn,
             flatIndexOfLastDropped,
             colIndex
         );
-        console.log(updatedBoard, 'win', win, 'x', x);
         return { updatedBoard, win, x, returnedColIndex: colIndex };
     };
 
@@ -246,7 +249,6 @@ export class Game extends Component<{}, State> {
     ) => {
         // first check win in column and only if false, run other checks
         let win = this.checkColumnForWin(updatedBoard[colIndex], currentTurn);
-        let winFlatIndex;
         if (!win) {
             win = this.checkDiaganolAndRowWinConditions(
                 intervals,
@@ -255,21 +257,17 @@ export class Game extends Component<{}, State> {
                 flatIndexOfLastDropped
             );
         }
-
-        // TODO: if colIndex wins, then won't need flatIndex
-        return { win, winFlatIndex, winColIndex: colIndex };
+        return { win, winColIndex: colIndex };
     };
 
     winCheckByInterval = (board, currentTurn, interval, flatIndex) => {
         let win = false;
         let count = 0;
-        let winFlatIndex;
         board.flat().forEach((space, i) => {
             if ((i - flatIndex) % interval === 0) {
                 if (currentTurn === space) {
                     count += 1;
                     if (count >= 4) {
-                        winFlatIndex = flatIndex;
                         win = true;
                     }
                 } else {
@@ -277,9 +275,7 @@ export class Game extends Component<{}, State> {
                 }
             }
         });
-
-        // TODO: return flatIndex?  and if so may need to update other places this function is used
-        return { win, winFlatIndex };
+        return { win };
     };
 
     checkColumnForWin = (column, currentTurn) => {
@@ -305,14 +301,13 @@ export class Game extends Component<{}, State> {
         flatIndex: number
     ) => {
         const winChecks = intervals.map(interval => {
-            const { win, winFlatIndex } = this.winCheckByInterval(
+            const { win } = this.winCheckByInterval(
                 board,
                 currentTurn,
                 interval,
                 flatIndex
             );
-            winFlatIndex && console.log('WINFLATINDEX', winFlatIndex);
-            return { win, winFlatIndex };
+            return { win };
         });
         // if at least at least one of win conditions checked is true, return true
         const winStatus = winChecks.some(item => item.win === true);
