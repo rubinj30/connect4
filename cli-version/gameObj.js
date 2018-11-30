@@ -2,7 +2,7 @@
 // 7 columns x 6 rows
 const game = {
     board: [
-        ['B', 'B', 'B', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' '],
@@ -35,6 +35,13 @@ const game = {
         wins: 0,
         losses: 0
     }
+};
+
+// TODO: import into index and run on start up and after wins
+export const createBoard = (numCols, numRows) => {
+    const col = Array(numRows).fill(' ');
+    const board = Array(numCols).fill(col);
+    game.board = board;
 };
 
 module.exports = game;
