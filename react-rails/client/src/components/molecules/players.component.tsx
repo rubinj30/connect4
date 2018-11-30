@@ -60,7 +60,7 @@ export class NewPlayer extends Component<Props, State> {
                                 currentTurn === 'R' ? 'border' : ''
                             } ${isCompTurn !== 'off' ? 'b f5' : ''}`}
                         >
-                            {isCompTurn === 'off' ? 'COMPUTER' : 'player 2'}
+                            {isCompTurn === 'off' ? 'player 2' : 'COMPUTER'}
                         </div>
                     </div>
                     {/* <select

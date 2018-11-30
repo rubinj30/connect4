@@ -25,8 +25,8 @@ export class NumPlayers extends Component<Props, {}> {
                     No
                 </span>
                 <span
-                    className={`pa2 ba b--blue option ${
-                        isCompTurn !== 'off' ? 'bg-blue white bw2' : ''
+                    className={`pa2 ba option ${
+                        isCompTurn !== 'off' ? 'bg-blue white bw2 b--red' : 'b--blue'
                     }`}
                 >
                     Yes
