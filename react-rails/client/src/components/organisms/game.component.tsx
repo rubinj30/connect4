@@ -50,6 +50,17 @@ export class Game extends Component<{}, State> {
         return Math.floor(Math.random() * max);
     };
 
+    changeCompTurn = (turnOff: boolean = false) => {
+        this.setState(({ isCompTurn }) => {
+            if (turnOff) {
+                return { isCompTurn: 'off' };
+            } else {
+                const newCompTurn = isCompTurn === 'y' ? 'n' : 'y';
+                return { isCompTurn: newCompTurn };
+            }
+        });
+    };
+
     getAvailColIndexes = board => {
         const isColAvail = col => col.some(space => space === ' ');
         const test =
@@ -194,7 +205,6 @@ export class Game extends Component<{}, State> {
                 if (currentTurn === space) {
                     count += 1;
                     if (count >= 4) {
-                        console.log('interval', interval, 'i', i);
                         win = true;
                     }
                 } else {
@@ -262,38 +272,7 @@ export class Game extends Component<{}, State> {
         });
     };
 
-    changeCompTurn = (turnOff: boolean = false) => {
-        this.setState(({ isCompTurn }) => {
-            if (turnOff) {
-                return { isCompTurn: 'off' };
-            } else {
-                const newCompTurn = isCompTurn === 'y' ? 'n' : 'y';
-                return { isCompTurn: newCompTurn };
-            }
-        });
-    };
-
-    // // methods only for updating size of board
-    // changeNumPlayers = () => {
-    //     this.setState(
-    //         ({
-    //             isCompTurn,
-    //             currentTurn
-    //         }: {
-    //             isCompTurn: ComputerTurn;
-    //             currentTurn: PieceType;
-    //         }) => {
-    //             // if changing to computer, human goes first
-    //             const newTurn = isCompTurn !== 'off' ? 'B' : currentTurn;
-    //             const compTurn = this.changeCompTurn();
-    //             return {
-    //                 isCompTurn: compTurn,
-    //                 currentTurn: newTurn
-    //             };
-    //         }
-    //     );
-    // };
-
+    // called on dropdown select in subcomponent to update the size of the board
     updateBoardSize = event => {
         const numCols = Number(event.currentTarget.value);
         // assumes board always has one more column than row
@@ -303,7 +282,7 @@ export class Game extends Component<{}, State> {
 
     render() {
         const { currentTurn, board, win, isCompTurn } = this.state;
-        console.log(this.getAvailColIndexes(board));
+        // console.log(this.getAvailColIndexes(board));
         return (
             <div>
                 <div className="flex items-center justify-between">
