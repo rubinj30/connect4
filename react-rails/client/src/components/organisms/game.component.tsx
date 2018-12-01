@@ -139,6 +139,7 @@ export class Game extends Component<{}, State> {
                 compDropIndex = opponentWinObj.winColIndex;
             }
         }
+        // delaying to make game more like playing another person
         setTimeout(() => {
             this.playMove(compDropIndex);
         }, 800);
@@ -174,9 +175,7 @@ export class Game extends Component<{}, State> {
     getMoveResults = (colIndex, currentTurn) => {
         // sometimes the move will be mocked so currentTurn will need to be passed as params instead of pulled from state
         const { board, intervals } = this.state;
-        console.log('getMOveResults colIndex', colIndex);
         const updatedBoard = this.replaceColumn(board, colIndex, currentTurn);
-        console.log('updated board ', updatedBoard, 'colIndex', colIndex);
         const x = this.getIndexOfPiece(updatedBoard[colIndex]);
         const flatIndexOfLastDropped = this.getFlatIndexOfLastDropped(
             x,
@@ -220,7 +219,7 @@ export class Game extends Component<{}, State> {
         this.playMove(clickedColIndex);
 
         const { win, isCompTurn } = this.state;
-
+        
         // needs to run only if compIsOn and the column is not already full
         !win && isCompTurn === 'y' && this.compMove();
     };

@@ -40,7 +40,6 @@ describe('Column', () => {
     it('anyBlankSpaces should allow handleClick to be called if there are blank spaces in a column', () => {
         const fixture = <Column {...mockProps} />;
         const result = mount(fixture);
-        const instance = result.instance();
         result.childAt(0).simulate('click');
         console.log(result.childAt(0).debug())
         expect(result.props().handleClick).toHaveBeenCalledTimes(1);
