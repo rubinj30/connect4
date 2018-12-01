@@ -105,7 +105,7 @@ export class Game extends Component<{}, State> {
         return results;
     };
 
-    compMove = () => {
+    compMove = async () => {
         const { board, intervals, numRows, numCols } = this.state;
 
         // eventually use while loop to keep checking until win and count the moves made
@@ -118,7 +118,7 @@ export class Game extends Component<{}, State> {
         );
 
         // If results contain a win, set the first one to the let var
-        const compWinObj = results.find(item => item.win === true);
+        const compWinObj = await results.find(item => item.win === true);
 
         // set index to random column for next move, if no possible wins are found for comp or comp to block
         let compDropIndex = this.getRandomNum(numCols);
@@ -364,7 +364,6 @@ export class Game extends Component<{}, State> {
 
     render() {
         const { currentTurn, board, win, isCompTurn } = this.state;
-        // console.log(this.getAvailColIndexes(board));
         return (
             <div>
                 <div className="flex items-center justify-between">
