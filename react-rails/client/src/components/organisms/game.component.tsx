@@ -13,6 +13,7 @@ export type ComputerTurn = 'y' | 'n' | 'off';
 type State = {
     // TODO: Combine these and maybe event currentTurn
     currentTurn: PieceType;
+    isCompTurn: ComputerTurn;
     win: boolean;
     board: BoardType | [];
     numRows: number;
@@ -22,7 +23,6 @@ type State = {
         x: number;
         y: number;
     };
-    isCompTurn: ComputerTurn;
 };
 export class Game extends Component<{}, State> {
     state: State = {

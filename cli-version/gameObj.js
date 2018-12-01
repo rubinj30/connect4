@@ -38,7 +38,7 @@ const game = {
 };
 
 // TODO: import into index and run on start up and after wins
-export const createBoard = (numCols, numRows) => {
+const createBoard = (numCols, numRows) => {
     const col = Array(numRows).fill(' ');
     const board = Array(numCols).fill(col);
     game.board = board;
