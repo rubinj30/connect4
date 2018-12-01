@@ -1,5 +1,5 @@
 {
-  "name": "connect4",
+  "name": "connect-4-react-rails",
   "engines": {
     "node": "11.1.0"
   },
