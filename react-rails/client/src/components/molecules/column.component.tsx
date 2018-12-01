@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Arrow } from '../atoms/arrow.component';
 import { ComputerTurn } from '../../components/organisms/game.component';
 import { PieceType, Space } from '../atoms/space.component';
 
 export type ColumnType = PieceType[];
 
-type ColumnProps = {
+type Props = {
     win: boolean;
     piece?: PieceType;
     column: ColumnType;
@@ -15,34 +15,39 @@ type ColumnProps = {
     handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
-export const Column = ({
-    win,
-    column,
-    dataIndex,
-    handleClick,
-    currentTurn,
-    isCompTurn
-}: ColumnProps) => {
-    const blank = function(space) {
-        // checks whether an element is blank
-        return space === ' ';
-    };
+export class Column extends Component<Props> {
 
-    // TODO: can either add this as condition for handleClick or remove
-    const anyBlankSpaces: boolean = column.some(function(space) {
-        // checks whether an element is blank
-        return space === ' ';
-    });
-    return (
-        <div
-            className="flex column justify-between items-center"
-            data-index={dataIndex}
-            onClick={!win && isCompTurn !== 'n' ? handleClick : undefined}
-        >
-            {column.map((piece, j) => (
-                <Space piece={piece} key={j} />
-            ))}
-            <Arrow currentTurn={currentTurn} win={win} />
-        </div>
-    );
-};
+    anyBlankSpaces = col =>
+        col.some(function(space) {
+            // checks whether an element is blank
+            return space === ' ';
+        });
+
+    render() {
+        const {
+            win,
+            isCompTurn,
+            dataIndex,
+            handleClick,
+            column,
+            currentTurn
+        } = this.props;
+
+        // only allow click for next move on columns that are not full, when current game has yet to be won
+        // and its not the computer's town
+        const isHandleClickAvailOnCOl =
+            !win && isCompTurn !== 'n' && this.anyBlankSpaces(column);
+        return (
+            <div
+                className="flex column justify-between items-center"
+                data-index={dataIndex}
+                onClick={isHandleClickAvailOnCOl ? handleClick : undefined}
+            >
+                {column.map((piece, j) => (
+                    <Space piece={piece} key={j} />
+                ))}
+                <Arrow currentTurn={currentTurn} win={win} />
+            </div>
+        );
+    }
+}

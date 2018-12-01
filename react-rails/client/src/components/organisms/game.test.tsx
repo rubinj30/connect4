@@ -3,9 +3,10 @@ jest.unmock('./game.component');
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { Game } from './game.component';
+import { winColumn, blankColumn } from '../mockData';
 
 describe('Game component', () => {
-    let fixture, result, instance, column, board, winColumn;
+    let fixture, result, instance, column, board;
     beforeEach(() => {
         fixture = <Game />;
         result = shallow(fixture);
@@ -24,10 +25,6 @@ describe('Game component', () => {
         expect(result).toMatchSnapshot();
     });
     describe('methods', () => {
-        let blankCol;
-        beforeEach(() => {
-            blankCol = [' ', ' ', ' ', ' ', ' ', ' '];
-        });
         it('changeTurn should change the currentTurn from "R" to "B" and vice versa', () => {
             result.setState({ currentTurn: 'R' });
             instance.changeTurn();
@@ -42,7 +39,7 @@ describe('Game component', () => {
         it('replaceColumn should call find first blank space and replace it with the piece in currentTurn', () => {
             const newBoard = instance.replaceColumn(board, 0, 'B');
             expect(newBoard).toEqual([
-                ['B', 'B', 'B', 'B', ' ', ' '],
+                winColumn,
                 column,
                 column,
                 column,
@@ -59,13 +56,13 @@ describe('Game component', () => {
             result.setState({ numRows: 6, numCols: 7 });
             instance.createBoard();
             expect(result.state().board).toEqual([
-                blankCol,
-                blankCol,
-                blankCol,
-                blankCol,
-                blankCol,
-                blankCol,
-                blankCol
+                blankColumn,
+                blankColumn,
+                blankColumn,
+                blankColumn,
+                blankColumn,
+                blankColumn,
+                blankColumn
             ]);
             result.setState({ numRows: 2, numCols: 2 });
             instance.createBoard();
@@ -104,47 +101,46 @@ describe('Game component', () => {
                 rightDiagWinBoard,
                 leftDiagWinBoard;
             beforeEach(() => {
-                winColumn = ['B', 'B', 'B', 'B', ' ', ' '];
                 nonWinBoard = [
                     column,
                     column,
                     column,
-                    blankCol,
+                    blankColumn,
                     column,
-                    blankCol,
+                    blankColumn,
                     column
                 ];
                 colWinBoard = [
                     winColumn,
                     column,
                     column,
-                    blankCol,
+                    blankColumn,
                     column,
-                    blankCol,
+                    blankColumn,
                     column
                 ];
                 rowWinBoard = [
-                    blankCol,
-                    blankCol,
-                    blankCol,
+                    blankColumn,
+                    blankColumn,
+                    blankColumn,
                     column,
                     column,
                     column,
                     column
                 ];
                 rightDiagWinBoard = [
-                    blankCol,
-                    blankCol,
+                    blankColumn,
+                    blankColumn,
                     column,
                     column,
                     column,
                     [' ', ' ', ' ', 'B', ' ', ' '],
-                    blankCol
+                    blankColumn
                 ];
                 leftDiagWinBoard = [
-                    blankCol,
-                    blankCol,
-                    blankCol,
+                    blankColumn,
+                    blankColumn,
+                    blankColumn,
                     [' ', 'B', ' ', ' ', ' ', ' '],
                     [' ', ' ', 'B', ' ', ' ', ' '],
                     [' ', ' ', ' ', 'B', ' ', ' '],
