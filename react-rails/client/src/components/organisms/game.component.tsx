@@ -44,37 +44,6 @@ export class Game extends Component<{}, State> {
     }
 
     // methods needed for AI
-    getRandomNum = max => {
-        return Math.floor(Math.random() * max);
-    };
-
-    changeCompTurn = (turnOff: boolean = false) => {
-        this.setState(({ isCompTurn, currentTurn }) => {
-            if (turnOff) {
-                return { isCompTurn: 'off', currentTurn: currentTurn };
-            } else {
-                const newCompTurn = isCompTurn === 'y' ? 'n' : 'y';
-                return { isCompTurn: newCompTurn, currentTurn: 'B' };
-            }
-        });
-    };
-
-    getAvailColIndexes = board => {
-        const isColAvail = col => col.some(space => space === ' ');
-        const indexes =
-            board &&
-            board
-                .map((col, i) => {
-                    if (isColAvail(col)) {
-                        console.log('log i', i);
-                        return i;
-                    }
-                })
-                .filter(x => typeof x === 'number');
-        console.log(indexes);
-        return indexes;
-    };
-
     getSimulatedBoardMoves = (board, simulatedPiece) => {
         const indexes = this.getAvailColIndexes(board);
         return indexes.map(colIndex => {
@@ -105,6 +74,9 @@ export class Game extends Component<{}, State> {
         return results;
     };
 
+    // checks simulated moves for wins - first for computer, then opponent
+    // if none found then uses random function
+    // then makes calls playMove with index provided
     compMove = async () => {
         const { board, intervals, numRows, numCols } = this.state;
 
@@ -120,8 +92,11 @@ export class Game extends Component<{}, State> {
         // If results contain a win, set the first one to the let var
         const compWinObj = await results.find(item => item.win === true);
 
+        // find indexes that can be played
+        const availIndexes = this.getAvailColIndexes(board)
+        
         // set index to random column for next move, if no possible wins are found for comp or comp to block
-        let compDropIndex = this.getRandomNum(numCols);
+        let compDropIndex = this.getRandomNum(availIndexes);
 
         if (compWinObj) {
             compDropIndex = compWinObj.winColIndex;
@@ -135,7 +110,6 @@ export class Game extends Component<{}, State> {
             );
             const opponentWinObj = results.find(item => item.win === true);
             if (opponentWinObj) {
-                console.log('setting to opponent win obj', opponentWinObj);
                 compDropIndex = opponentWinObj.winColIndex;
             }
         }
@@ -143,6 +117,39 @@ export class Game extends Component<{}, State> {
         setTimeout(() => {
             this.playMove(compDropIndex);
         }, 800);
+    };
+
+    getRandomNum = (indexes) => {
+        const random = indexes[Math.floor(Math.random() * indexes.length)];
+        return random;
+    };
+
+    changeCompTurn = (turnOff: boolean = false) => {
+        this.setState(({ isCompTurn, currentTurn }) => {
+            if (turnOff) {
+                return { isCompTurn: 'off', currentTurn: currentTurn };
+            } else {
+                const newCompTurn = isCompTurn === 'y' ? 'n' : 'y';
+                return { isCompTurn: newCompTurn, currentTurn: 'B' };
+            }
+        });
+    };
+
+    // finds the available columns that can be used by computer
+    getAvailColIndexes = board => {
+        const isColAvail = col => col.some(space => space === ' ');
+        const indexes =
+            board &&
+            board
+                .map((col, i) => {
+                    if (isColAvail(col)) {
+                        console.log('log i', i);
+                        return i;
+                    }
+                })
+                .filter(x => typeof x === 'number');
+        console.log(indexes);
+        return indexes;
     };
 
     toggleCompTurn = () => {
@@ -219,7 +226,7 @@ export class Game extends Component<{}, State> {
         this.playMove(clickedColIndex);
 
         const { win, isCompTurn } = this.state;
-        
+
         // needs to run only if compIsOn and the column is not already full
         !win && isCompTurn === 'y' && this.compMove();
     };

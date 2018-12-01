@@ -216,5 +216,12 @@ describe('Game component', () => {
                 expect(win).toBeFalsy();
             });
         });
+        describe('AI methods', () => {
+            it('getRandomNum should return a random number selected from an array of numbers', () => {
+                const randomNumbers = [245, 285, 3, 4809, 3333, 8, 10];
+                const rand = instance.getRandomNum(randomNumbers);
+                expect(randomNumbers.includes(rand)).toBeTruthy();
+            });
+        });
     });
 });
