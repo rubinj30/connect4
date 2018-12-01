@@ -138,8 +138,8 @@ describe('Game component', () => {
                     blankColumn,
                     blankColumn,
                     column,
-                    column,
-                    column,
+                    [' ', 'B', ' ', ' ', ' ', ' '],
+                    [' ', ' ', 'B', ' ', ' ', ' '],
                     [' ', ' ', ' ', 'B', ' ', ' '],
                     blankColumn
                 ];
@@ -147,10 +147,10 @@ describe('Game component', () => {
                     blankColumn,
                     blankColumn,
                     blankColumn,
-                    [' ', 'B', ' ', ' ', ' ', ' '],
-                    [' ', ' ', 'B', ' ', ' ', ' '],
+                    [' ', ' ', ' ', ' ', 'B', ' '],
                     [' ', ' ', ' ', 'B', ' ', ' '],
-                    [' ', ' ', ' ', ' ', 'B', ' ']
+                    [' ', ' ', 'B', ' ', ' ', ' '],
+                    [' ', 'B', ' ', ' ', ' ', ' ']
                 ];
             });
             it('should return false if win condition not met on column', () => {
@@ -192,6 +192,17 @@ describe('Game component', () => {
 
                     // 2nd item in 4th row
                     19
+                );
+                expect(winCheck.win).toBeTruthy();
+            });
+            it('should return true if diaganol win met in other direction', () => {
+                const winCheck = instance.winCheckByInterval(
+                    leftDiagWinBoard,
+                    'B',
+                    5,
+
+                    // 2nd item in 7th row
+                    37
                 );
                 expect(winCheck.win).toBeTruthy();
             });
