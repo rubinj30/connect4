@@ -93,8 +93,8 @@ export class Game extends Component<{}, State> {
         const compWinObj = await results.find(item => item.win === true);
 
         // find indexes that can be played
-        const availIndexes = this.getAvailColIndexes(board)
-        
+        const availIndexes = this.getAvailColIndexes(board);
+
         // set index to random column for next move, if no possible wins are found for comp or comp to block
         let compDropIndex = this.getRandomNum(availIndexes);
 
@@ -119,12 +119,12 @@ export class Game extends Component<{}, State> {
         }, 800);
     };
 
-    getRandomNum = (indexes) => {
-        const random = indexes[Math.floor(Math.random() * indexes.length)];
-        return random;
+    getRandomNum = indexes => {
+        return indexes[Math.floor(Math.random() * indexes.length)];
+        
     };
 
-    changeCompTurn = (turnOff: boolean = false) => {
+    changeCompTurn = (turnOff: boolean) => {
         this.setState(({ isCompTurn, currentTurn }) => {
             if (turnOff) {
                 return { isCompTurn: 'off', currentTurn: currentTurn };
@@ -136,7 +136,7 @@ export class Game extends Component<{}, State> {
     };
 
     // finds the available columns that can be used by computer
-    getAvailColIndexes = board => {
+    getAvailColIndexes = (board: BoardType) => {
         const isColAvail = col => col.some(space => space === ' ');
         const indexes =
             board &&

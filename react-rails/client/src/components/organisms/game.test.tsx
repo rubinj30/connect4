@@ -75,6 +75,12 @@ describe('Game component', () => {
             instance.componentDidMount();
             expect(createBoard).toHaveBeenCalledTimes(1);
         });
+        describe('getMoveResults', () => {
+            it('should return updated board', () => {
+                const { updatedBoard } = instance.getMoveResults(1, 'R');
+                expect(updatedBoard[1]).toEqual(['R', ' ', ' ', ' ', ' ', ' ']);
+            });
+        });
         describe('resetBoard', () => {
             it('resetBoard should call createBoard and changeTurn when called', () => {
                 const instance = result.instance();
@@ -221,6 +227,19 @@ describe('Game component', () => {
                 const randomNumbers = [245, 285, 3, 4809, 3333, 8, 10];
                 const rand = instance.getRandomNum(randomNumbers);
                 expect(randomNumbers.includes(rand)).toBeTruthy();
+            });
+            describe('toggleCompTurn ', () => {
+                it('should not affect compTurn if it is currently off', () => {
+                    instance.toggleCompTurn();
+                    expect(result.state().isCompTurn).toEqual('off');
+                });
+                it('should change isCompTurn "y" if "n", and vice-versa', () => {
+                    result.setState({ isCompTurn: 'n' });
+                    instance.toggleCompTurn();
+                    expect(result.state().isCompTurn).toEqual('y');
+                    instance.toggleCompTurn();
+                    expect(result.state().isCompTurn).toEqual('n');
+                });
             });
         });
     });
