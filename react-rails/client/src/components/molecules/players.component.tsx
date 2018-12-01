@@ -19,7 +19,7 @@ type Player = {
     losses: number;
 };
 
-export class NewPlayer extends Component<Props, State> {
+export class Players extends Component<Props, State> {
     state = {
         selectedPlayerName: { id: 0, name: 'Player 1', wins: 0, losses: 0 },
         players: [{ id: 0, name: 'Player 1', wins: 0, losses: 0 }]
@@ -63,16 +63,6 @@ export class NewPlayer extends Component<Props, State> {
                             {isCompTurn === 'off' ? 'player 2' : 'COMPUTER'}
                         </div>
                     </div>
-                    {/* <select
-                        className="w4 h2 ma2"
-                        onChange={this.updateDropdown}
-                    >
-                        {players.map(player => (
-                            <option key={player.id} value={player.name}>
-                                {player.name}
-                            </option>
-                        ))}
-                    </select> */}
                 </div>
             )
         );

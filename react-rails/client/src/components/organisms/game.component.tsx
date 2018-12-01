@@ -5,7 +5,7 @@ import { NumPlayers } from '../molecules/num-players.component';
 import { BoardSelect } from '../molecules/board-select.component';
 import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
-import { NewPlayer } from '../molecules/players.component';
+import { Players } from '../molecules/players.component';
 import './organisms.css';
 
 export type BoardType = ColumnType[];
@@ -383,7 +383,7 @@ export class Game extends Component<{}, State> {
                     resetBoard={this.resetBoard}
                     handleClick={this.handleClick}
                 />
-                <NewPlayer isCompTurn={isCompTurn} currentTurn={currentTurn} />
+                <Players isCompTurn={isCompTurn} currentTurn={currentTurn} />
                 <BoardSelect
                     updateBoardSize={this.updateBoardSize}
                     opts={[7, 8, 10, 11]}
