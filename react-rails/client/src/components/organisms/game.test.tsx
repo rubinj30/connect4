@@ -75,6 +75,11 @@ describe('Game component', () => {
             instance.componentDidMount();
             expect(createBoard).toHaveBeenCalledTimes(1);
         });
+        it('updateBoardSize', () => {
+            instance.updateBoardSize({ currentTarget: { value: 3 } });
+            expect(result.state().numCols).toEqual(3);
+            expect(result.state().numRows).toEqual(2);
+        });
         describe('getMoveResults', () => {
             it('should return updated board', () => {
                 const { updatedBoard } = instance.getMoveResults(1, 'R');
@@ -201,8 +206,8 @@ describe('Game component', () => {
                     'B',
                     5,
 
-                    // 2nd item in 7th row
-                    37
+                    // 3rd item in 6th row
+                    32
                 );
                 expect(winCheck.win).toBeTruthy();
             });
