@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Board } from '../molecules/board.component';
 import { ColumnType } from '../molecules/column.component';
 import { NumPlayers } from '../molecules/num-players.component';
+import { NewPlayer } from '../molecules/new-player.component';
 import { BoardSelect } from '../molecules/board-select.component';
 import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
@@ -23,6 +24,7 @@ type State = {
         x: number;
         y: number;
     };
+    isFormShowing: boolean;
 };
 export class Game extends Component<{}, State> {
     state: State = {
@@ -36,7 +38,8 @@ export class Game extends Component<{}, State> {
         board: [],
         numRows: 6,
         numCols: 7,
-        intervals: []
+        intervals: [],
+        isFormShowing: false
     };
 
     componentDidMount() {
@@ -121,7 +124,6 @@ export class Game extends Component<{}, State> {
 
     getRandomNum = indexes => {
         return indexes[Math.floor(Math.random() * indexes.length)];
-        
     };
 
     changeCompTurn = (turnOff: boolean) => {
@@ -368,8 +370,20 @@ export class Game extends Component<{}, State> {
         this.createBoard();
     };
 
+    toggleNewPlayerForm = () => {
+        this.setState(({ isFormShowing }) => {
+            return { isFormShowing: !isFormShowing };
+        });
+    };
+
     render() {
-        const { currentTurn, board, win, isCompTurn } = this.state;
+        const {
+            currentTurn,
+            board,
+            win,
+            isCompTurn,
+            isFormShowing
+        } = this.state;
         return (
             <div>
                 <div className="flex items-center justify-between">
@@ -382,6 +396,13 @@ export class Game extends Component<{}, State> {
                         isCompTurn={isCompTurn}
                     />
                 </div>
+                {isFormShowing && (
+                    <NewPlayer
+                        isFormShowing={isFormShowing}
+                        toggleNewPlayerForm={this.toggleNewPlayerForm}
+                    />
+                )}
+
                 <Board
                     currentTurn={currentTurn}
                     board={board}
