@@ -6,10 +6,11 @@ const {
     checkWin,
     getXCoordinate,
     displayBoard,
-    changeTurn
+    changeTurn,
+    getFlatIndexOfLastDropped
 } = require('./gamePlayFuncs.js');
 
-updateGameAfterMove = (
+const updateGameAfterMove = (
     updatedBoard,
     newTurn,
     winStatus,
@@ -25,10 +26,10 @@ updateGameAfterMove = (
     };
 };
 
-updateAfterGame = (newTurn) => {
+const updateAfterGame = newTurn => {
     game.board = game.blankBoard;
     game.currentTurn = newTurn;
-} 
+};
 
 const promptForMove = async () => {
     try {
@@ -36,7 +37,7 @@ const promptForMove = async () => {
 
         // show current state of the playing board in a playable view
         displayBoard(board, currentTurn);
-        console.log(`\nIt is ${currentTurn}'s move`);
+        console.log(`\n ==== It is ${currentTurn}'s move ==== `);
 
         // gets column index number from user
         const columnPlayedIndex = await getColumnPlayedIndex(currentTurn);
@@ -58,13 +59,13 @@ const promptForMove = async () => {
             columnPlayedIndex,
             board
         );
-
+        
         // should write condition to check each of the following only if win = false
-        const winStatus = checkWin(
+        let winStatus = checkWin(
             updatedBoard,
-            columnPlayedIndex,
             currentTurn,
-            flatIndex
+            flatIndex,
+            columnPlayedIndex
         );
 
         if (!winStatus) {

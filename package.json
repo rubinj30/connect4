@@ -1,0 +1,16 @@
+{
+  "name": "connect_4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "connect_4.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-cli": "cd cli-version && npm install && npm start",
+    "cli": "cd cli-version && node index.js",
+    "build-ui": "cd react-rails/client && npm install && npm start",
+    "ui": "cd react-rails/client && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
