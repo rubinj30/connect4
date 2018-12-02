@@ -6,3 +6,10 @@
 button {
     outline: none;
 }
+
+.arrow {
+    border-left: 30px solid #357edd;
+    border-right: 30px solid #357edd;
+    border-top: 20px solid #357edd;
+    z-index: 4;
+}

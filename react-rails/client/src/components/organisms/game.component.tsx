@@ -373,8 +373,8 @@ export class Game extends Component<{}, State> {
         return (
             <div>
                 <div className="flex items-center justify-between">
-                    <span className="flex items-center justify-between w-30">
-                        <span>Turn:</span>
+                    <span className="flex items-center justify-between">
+                        <span className="pr3">Turn:</span>
                         <Space piece={currentTurn} />
                     </span>
                     <NumPlayers

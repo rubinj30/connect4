@@ -22,7 +22,7 @@ export const Board = ({
     handleClick
 }: Props) => {
     return (
-        <div className="bg-blue h-100 pa3 flex flex-column items-center justify-center board">
+        <div className="bg-blue h-100 pa3 flex items-center justify-center board">
             {win && (
                 <WinMessage currentTurn={currentTurn} resetBoard={resetBoard} />
             )}

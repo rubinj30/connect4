@@ -199,7 +199,7 @@ ShallowWrapper {
           />,
         ],
       ],
-      "className": "bg-blue h-100 pa3 flex flex-column items-center justify-center board",
+      "className": "bg-blue h-100 pa3 flex items-center justify-center board",
     },
     "ref": null,
     "rendered": Array [
@@ -491,7 +491,7 @@ ShallowWrapper {
             />,
           ],
         ],
-        "className": "bg-blue h-100 pa3 flex flex-column items-center justify-center board",
+        "className": "bg-blue h-100 pa3 flex items-center justify-center board",
       },
       "ref": null,
       "rendered": Array [
