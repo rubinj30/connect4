@@ -5,11 +5,17 @@ import './atoms.css';
 type Type = 'submit' | 'reset' | 'button';
 
 type Props = {
-    className: string;
-    type: Type;
+    className?: string;
+    type?: Type;
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    label: string;
 };
-export const Button = ({ label, className, type, onClick }) => {
+export const Button = ({
+    label,
+    className,
+    type = 'button',
+    onClick
+}: Props) => {
     return (
         <button
             type={type}
