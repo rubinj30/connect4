@@ -15,11 +15,11 @@ describe('WinMessage', () => {
         expect(result).toBeDefined();
         expect(result).toMatchSnapshot();
     });
-    it('resetBoard function should run when the reset button is clicked', () => {
+    it.only('resetBoard function should run when the reset button is clicked', () => {
         const mockFunc = jest.fn();
         const fixture = <WinMessage currentTurn={'R'} resetBoard={mockFunc} />;
         const result = shallow(fixture);
-        const resetBoard = result.find('.pointer');
+        const resetBoard = result.find('Button');
         expect(mockFunc).toHaveBeenCalledTimes(0);
         resetBoard.simulate('click');
         expect(mockFunc).toHaveBeenCalledTimes(1);
