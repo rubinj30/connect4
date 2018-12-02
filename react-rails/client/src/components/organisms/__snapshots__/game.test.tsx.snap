@@ -22,9 +22,11 @@ ShallowWrapper {
           className="flex items-center justify-between"
         >
           <span
-            className="flex items-center justify-between w-30"
+            className="flex items-center justify-between"
           >
-            <span>
+            <span
+              className="pr3"
+            >
               Turn:
             </span>
             <Space
@@ -129,9 +131,11 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <span
-              className="flex items-center justify-between w-30"
+              className="flex items-center justify-between"
             >
-              <span>
+              <span
+                className="pr3"
+              >
                 Turn:
               </span>
               <Space
@@ -153,14 +157,16 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <span>
+                <span
+                  className="pr3"
+                >
                   Turn:
                 </span>,
                 <Space
                   piece="B"
                 />,
               ],
-              "className": "flex items-center justify-between w-30",
+              "className": "flex items-center justify-between",
             },
             "ref": null,
             "rendered": Array [
@@ -170,6 +176,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": "Turn:",
+                  "className": "pr3",
                 },
                 "ref": null,
                 "rendered": "Turn:",
@@ -320,9 +327,11 @@ ShallowWrapper {
             className="flex items-center justify-between"
           >
             <span
-              className="flex items-center justify-between w-30"
+              className="flex items-center justify-between"
             >
-              <span>
+              <span
+                className="pr3"
+              >
                 Turn:
               </span>
               <Space
@@ -427,9 +436,11 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <span
-                className="flex items-center justify-between w-30"
+                className="flex items-center justify-between"
               >
-                <span>
+                <span
+                  className="pr3"
+                >
                   Turn:
                 </span>
                 <Space
@@ -451,14 +462,16 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  <span>
+                  <span
+                    className="pr3"
+                  >
                     Turn:
                   </span>,
                   <Space
                     piece="B"
                   />,
                 ],
-                "className": "flex items-center justify-between w-30",
+                "className": "flex items-center justify-between",
               },
               "ref": null,
               "rendered": Array [
@@ -468,6 +481,7 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": "Turn:",
+                    "className": "pr3",
                   },
                   "ref": null,
                   "rendered": "Turn:",
@@ -650,9 +664,11 @@ ShallowWrapper {
           className="flex items-center justify-between"
         >
           <span
-            className="flex items-center justify-between w-30"
+            className="flex items-center justify-between"
           >
-            <span>
+            <span
+              className="pr3"
+            >
               Turn:
             </span>
             <Space
@@ -757,9 +773,11 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <span
-              className="flex items-center justify-between w-30"
+              className="flex items-center justify-between"
             >
-              <span>
+              <span
+                className="pr3"
+              >
                 Turn:
               </span>
               <Space
@@ -781,14 +799,16 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <span>
+                <span
+                  className="pr3"
+                >
                   Turn:
                 </span>,
                 <Space
                   piece="B"
                 />,
               ],
-              "className": "flex items-center justify-between w-30",
+              "className": "flex items-center justify-between",
             },
             "ref": null,
             "rendered": Array [
@@ -798,6 +818,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": "Turn:",
+                  "className": "pr3",
                 },
                 "ref": null,
                 "rendered": "Turn:",
@@ -948,9 +969,11 @@ ShallowWrapper {
             className="flex items-center justify-between"
           >
             <span
-              className="flex items-center justify-between w-30"
+              className="flex items-center justify-between"
             >
-              <span>
+              <span
+                className="pr3"
+              >
                 Turn:
               </span>
               <Space
@@ -1055,9 +1078,11 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <span
-                className="flex items-center justify-between w-30"
+                className="flex items-center justify-between"
               >
-                <span>
+                <span
+                  className="pr3"
+                >
                   Turn:
                 </span>
                 <Space
@@ -1079,14 +1104,16 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  <span>
+                  <span
+                    className="pr3"
+                  >
                     Turn:
                   </span>,
                   <Space
                     piece="B"
                   />,
                 ],
-                "className": "flex items-center justify-between w-30",
+                "className": "flex items-center justify-between",
               },
               "ref": null,
               "rendered": Array [
@@ -1096,6 +1123,7 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": "Turn:",
+                    "className": "pr3",
                   },
                   "ref": null,
                   "rendered": "Turn:",

@@ -16,7 +16,6 @@ type Props = {
 };
 
 export class Column extends Component<Props> {
-
     anyBlankSpaces = col =>
         col.some(function(space) {
             // checks whether an element is blank
@@ -39,14 +38,14 @@ export class Column extends Component<Props> {
             !win && isCompTurn !== 'n' && this.anyBlankSpaces(column);
         return (
             <div
-                className="flex column justify-between items-center"
+                className="flex flex-column column justify-between items-center"
                 data-index={dataIndex}
                 onClick={isHandleClickAvailOnCOl ? handleClick : undefined}
             >
-                {column.map((piece, j) => (
-                    <Space piece={piece} key={j} />
-                ))}
                 <Arrow currentTurn={currentTurn} win={win} />
+                {column
+                    .map((piece, j) => <Space piece={piece} key={j} />)
+                    .reverse()}
             </div>
         );
     }
