@@ -40,6 +40,9 @@ Rails
 Heroku
 
 #### To play in the UI
+1) go to https://connect-4-react-rails.herokuapp.com/ where it is deployed
+
+OR, to playin locally:
 1) in the root folder of the project, run `npm run build-ui`. This will install dependencies and start the app. 
 2) if you have already installed the dependencies you can run `npm run ui`
 3) just click on a column to drop you game piece there
