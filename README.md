@@ -1,7 +1,7 @@
 # Connect 4
 Goals:
 1) build a 2 person game on the command line
-2) build a 2 person game with a front end (hosted somewhere) - https://connect-4-react-rails.herokuapp.com/
+2) build a 2 person game with a front end (hosted somewhere) - https://connect-4-challenge.herokuapp.com/
 3) build an AI to play against
 
 I decided to use Node.js for the command line version and React and Rails for UI version. I searched on google for the size of a connect 4 board and saw there were a few different ones, but the standard size was 6 rows X 7 columns. I decided to start with this, but eventually added the option in the UI for different board sizes (the user indicates the number of columns, which determines the rows). I used an array of arrays to represent the board, with the inner arrays acting as columns (although when I print to the command line I transform them to where rows are the arrays). I knew I'd need 3 different characters to represent the game pieces. I went with 'R' (for red), 'B' (for black), and a ' ' (for open spaces). Throughout the code, I typically refer to game pieces 'R' and 'B' as "piece", and open spaces as "space". 
@@ -40,7 +40,7 @@ Rails
 Heroku
 
 #### To play in the UI
-1) go to https://connect-4-react-rails.herokuapp.com/ where it is deployed
+1) go to https://connect-4-challenge.herokuapp.com/where it is deployed
 
 OR, to playin locally:
 1) in the root folder of the project, run `npm run build-ui`. This will install dependencies and start the app. 
