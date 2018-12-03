@@ -1,5 +1,4 @@
 .winMsg {
-    /* transform: rotate(90deg); */
     border-radius: 5px;
 }
 
@@ -28,4 +27,8 @@
 
 .border {
   border: 10px solid #357edd;
+}
+
+.playerSelect {
+  width: 150px;
 }

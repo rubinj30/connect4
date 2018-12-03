@@ -7,6 +7,7 @@ import { BoardSelect } from '../molecules/board-select.component';
 import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
 import { Players } from '../molecules/players.component';
+import { Button } from '../atoms/button.component';
 import './organisms.css';
 
 export type BoardType = ColumnType[];
@@ -370,12 +371,6 @@ export class Game extends Component<{}, State> {
         this.createBoard();
     };
 
-    toggleNewPlayerForm = () => {
-        this.setState(({ isFormShowing }) => {
-            return { isFormShowing: !isFormShowing };
-        });
-    };
-
     render() {
         const {
             currentTurn,
@@ -396,13 +391,6 @@ export class Game extends Component<{}, State> {
                         isCompTurn={isCompTurn}
                     />
                 </div>
-                {isFormShowing && (
-                    <NewPlayer
-                        isFormShowing={isFormShowing}
-                        toggleNewPlayerForm={this.toggleNewPlayerForm}
-                    />
-                )}
-
                 <Board
                     currentTurn={currentTurn}
                     board={board}
@@ -416,6 +404,7 @@ export class Game extends Component<{}, State> {
                     updateBoardSize={this.updateBoardSize}
                     opts={[7, 8, 10, 11]}
                 />
+ 
             </div>
         );
     }
