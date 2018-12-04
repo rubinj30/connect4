@@ -27,14 +27,14 @@ ShallowWrapper {
           BLACK
            wins!
         </span>,
-        <div
-          className="pa2 br2 tc o-100 hover-bg-blue hover-white f5 bg-white pointer black"
+        <Button
+          className="o-100 black"
+          label="Reset Board"
           onClick={[MockFunction]}
-        >
-          Reset Board
-        </div>,
+          type="button"
+        />,
       ],
-      "className": "bg-black z-5 o-60 br3 absolute w-60 h-50 flex flex-column items-center justify-center pa5 f3 winMsg white ",
+      "className": "bg-black z-5 o-60 br3 absolute w-60 h-50 flex flex-column items-center justify-center pa2 f3 winMsg white ",
     },
     "ref": null,
     "rendered": Array [
@@ -59,15 +59,16 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": "Reset Board",
-          "className": "pa2 br2 tc o-100 hover-bg-blue hover-white f5 bg-white pointer black",
+          "className": "o-100 black",
+          "label": "Reset Board",
           "onClick": [MockFunction],
+          "type": "button",
         },
         "ref": null,
-        "rendered": "Reset Board",
-        "type": "div",
+        "rendered": null,
+        "type": [Function],
       },
     ],
     "type": "div",
@@ -85,14 +86,14 @@ ShallowWrapper {
             BLACK
              wins!
           </span>,
-          <div
-            className="pa2 br2 tc o-100 hover-bg-blue hover-white f5 bg-white pointer black"
+          <Button
+            className="o-100 black"
+            label="Reset Board"
             onClick={[MockFunction]}
-          >
-            Reset Board
-          </div>,
+            type="button"
+          />,
         ],
-        "className": "bg-black z-5 o-60 br3 absolute w-60 h-50 flex flex-column items-center justify-center pa5 f3 winMsg white ",
+        "className": "bg-black z-5 o-60 br3 absolute w-60 h-50 flex flex-column items-center justify-center pa2 f3 winMsg white ",
       },
       "ref": null,
       "rendered": Array [
@@ -117,15 +118,16 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": "Reset Board",
-            "className": "pa2 br2 tc o-100 hover-bg-blue hover-white f5 bg-white pointer black",
+            "className": "o-100 black",
+            "label": "Reset Board",
             "onClick": [MockFunction],
+            "type": "button",
           },
           "ref": null,
-          "rendered": "Reset Board",
-          "type": "div",
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",
@@ -178,14 +180,14 @@ ShallowWrapper {
           RED
            wins!
         </span>,
-        <div
-          className="pa2 br2 tc o-100 hover-bg-blue hover-white f5 bg-white pointer red"
+        <Button
+          className="o-100 red"
+          label="Reset Board"
           onClick={[MockFunction]}
-        >
-          Reset Board
-        </div>,
+          type="button"
+        />,
       ],
-      "className": "bg-red z-5 o-60 br3 absolute w-60 h-50 flex flex-column items-center justify-center pa5 f3 winMsg white ",
+      "className": "bg-red z-5 o-60 br3 absolute w-60 h-50 flex flex-column items-center justify-center pa2 f3 winMsg white ",
     },
     "ref": null,
     "rendered": Array [
@@ -210,15 +212,16 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": "Reset Board",
-          "className": "pa2 br2 tc o-100 hover-bg-blue hover-white f5 bg-white pointer red",
+          "className": "o-100 red",
+          "label": "Reset Board",
           "onClick": [MockFunction],
+          "type": "button",
         },
         "ref": null,
-        "rendered": "Reset Board",
-        "type": "div",
+        "rendered": null,
+        "type": [Function],
       },
     ],
     "type": "div",
@@ -236,14 +239,14 @@ ShallowWrapper {
             RED
              wins!
           </span>,
-          <div
-            className="pa2 br2 tc o-100 hover-bg-blue hover-white f5 bg-white pointer red"
+          <Button
+            className="o-100 red"
+            label="Reset Board"
             onClick={[MockFunction]}
-          >
-            Reset Board
-          </div>,
+            type="button"
+          />,
         ],
-        "className": "bg-red z-5 o-60 br3 absolute w-60 h-50 flex flex-column items-center justify-center pa5 f3 winMsg white ",
+        "className": "bg-red z-5 o-60 br3 absolute w-60 h-50 flex flex-column items-center justify-center pa2 f3 winMsg white ",
       },
       "ref": null,
       "rendered": Array [
@@ -268,15 +271,16 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": "Reset Board",
-            "className": "pa2 br2 tc o-100 hover-bg-blue hover-white f5 bg-white pointer red",
+            "className": "o-100 red",
+            "label": "Reset Board",
             "onClick": [MockFunction],
+            "type": "button",
           },
           "ref": null,
-          "rendered": "Reset Board",
-          "type": "div",
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",

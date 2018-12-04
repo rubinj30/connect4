@@ -53,7 +53,7 @@ Alternatively, to start the app you can:
 1) `cd react-rails/client`
 2) `npm install` dependencies
 3) `npm start` to start the app
-NOTE: i have a rails back-end that I intend to build out, but its not currently being used for game play
+NOTE - I have a rails back-end that I intend to build out to track player win-loss records, but I still have to build out the front-end to make the api calls, and decided to move past it since it was not in the required levels and wanted to turn in a reasonable amount of time
 
 ## Checking for win
 Currently, I have two functions that specifically check for a winning combination. There are other supplemental ones involved, but two main ones that are the same in both the CLI and React version.

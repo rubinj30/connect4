@@ -20,8 +20,9 @@ const replaceColumn = (board, columnIndex, currentTurn) => {
     );
 };
 
-const declareWin = currentTurn =>
-    console.log(`\n  ===================================\n  ============= ${currentTurn} WINS! =============\n  ===================================`);
+const changeTurn = turn => {
+    return turn === 'B' ? 'R' : 'B';
+};
 
 // will check a given array for 4 in a row and return win status
 // true if there are ever 4 in a row
@@ -62,10 +63,17 @@ const checkFlatBoardForWin = (board, currentTurn, interval, flatIndex) => {
     return win;
 };
 
-// given row index, return each item from that index in each column to create
-// a row array
-const transformRowToColumn = (board, rowIndex) =>
-    board.map(column => column[rowIndex]);
+// Calls the two functions that check for a win and returns true if any of thos are true
+const checkWin = (updatedBoard, turn, flatIndex, colIndex) => {
+    let win = false;
+    const colCheck = checkColumnForWin(updatedBoard[colIndex], turn);
+    const diaganolL = checkFlatBoardForWin(updatedBoard, turn, 7, flatIndex);
+    const diaganolR = checkFlatBoardForWin(updatedBoard, turn, 5, flatIndex);
+    const rowCheck = checkFlatBoardForWin(updatedBoard, turn, 6, flatIndex);
+
+    // if one of the following are true then return true
+    return colCheck || diaganolL || diaganolR || rowCheck;
+};
 
 const getXCoordinate = column => {
     const firstBlankSpace = column.indexOf(' ');
@@ -78,20 +86,9 @@ const getFlatIndexOfLastDropped = (xCoord, yCoord, board) => {
     return flatBoardIndex;
 };
 
+// Next 3 functions are only used to print to console for players
 const rotateBoard = board =>
     board[0].map((col, i) => board.map(row => row[row.length - 1 - i]));
-
-// TODO: make sure to optimize all params passed once all check funcs are called
-//  and should set it up to only continue to next if the previous is false
-const checkWin = (updatedBoard, turn, flatIndex, colIndex) => {
-    const colCheck = checkColumnForWin(updatedBoard[colIndex], turn);
-    const diaganolL = checkFlatBoardForWin(updatedBoard, turn, 7, flatIndex);
-    const diaganolR = checkFlatBoardForWin(updatedBoard, turn, 5, flatIndex);
-    const rowCheck = checkFlatBoardForWin(updatedBoard, turn, 6, flatIndex);
-
-    // if one of the following are true then return true
-    return colCheck || diaganolL || diaganolR || rowCheck;
-};
 
 const displayBoard = (board) => {
     rotatedBoard = rotateBoard(board);
@@ -102,9 +99,8 @@ const displayBoard = (board) => {
     console.log(rotatedBoard);
 };
 
-const changeTurn = turn => {
-    return turn === 'B' ? 'R' : 'B';
-};
+const declareWin = currentTurn =>
+    console.log(`\n  ===================================\n  ============= ${currentTurn} WINS! =============\n  ===================================`);
 
 module.exports = {
     checkWin,

@@ -3,18 +3,18 @@ import { ComputerTurn } from '../organisms/game.component';
 
 type Props = {
     isCompTurn: ComputerTurn;
-    changeCompTurn: Function;
+    changeCompTurn: any;
 };
 
 export class NumPlayers extends Component<Props, {}> {
     handleClick = () => {
-        this.props.changeCompTurn(this.props.isCompTurn !== 'off');
+        this.props.changeCompTurn();
     };
 
     render() {
         const { isCompTurn } = this.props;
         return (
-            <div onClick={this.handleClick} className="br2">
+            <div onClick={this.props.changeCompTurn} className="br2">
                 <span className="pr1">Is computer on?</span>
                 <span
                     className={`pa2 ba b--blue option ${
