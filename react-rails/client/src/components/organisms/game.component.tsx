@@ -77,7 +77,7 @@ export class Game extends Component<{}, State> {
     // if none found then uses random function
     // then makes calls playMove with index provided
     compMove = async () => {
-        const { board, intervals, numRows, numCols } = this.state;
+        const { board, intervals, numRows } = this.state;
 
         // eventually use while loop to keep checking until win and count the moves made
         const compSims = this.getSimulatedBoardMoves(board, 'R');
