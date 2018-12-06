@@ -3,7 +3,7 @@ jest.unmock('./game.component');
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { Game } from './game.component';
-import { winColumn, blankColumn } from '../mockData';
+import { winColumn, blankColumn, nonWinBoard, someColsFull } from '../mockData';
 
 describe('Game component', () => {
     let fixture, result, instance, column, board;
@@ -86,6 +86,12 @@ describe('Game component', () => {
                 expect(updatedBoard[1]).toEqual(['R', ' ', ' ', ' ', ' ', ' ']);
             });
         });
+        it('getAvailColIndexes should return an array of available indexes for board passed as param', () => {
+            const allIndexesAvail = instance.getAvailColIndexes(nonWinBoard);
+            expect(allIndexesAvail).toEqual([0, 1, 2, 3, 4, 5, 6]);
+            const someIndexesAvail = instance.getAvailColIndexes(someColsFull);
+            expect(someIndexesAvail).toEqual([2, 3, 4, 5, 6]);
+        });
         describe('resetBoard', () => {
             it('resetBoard should call createBoard and changeTurn when called', () => {
                 const instance = result.instance();
@@ -106,21 +112,8 @@ describe('Game component', () => {
         });
 
         describe('winCheckByInterval ', () => {
-            let nonWinBoard,
-                colWinBoard,
-                rowWinBoard,
-                rightDiagWinBoard,
-                leftDiagWinBoard;
+            let colWinBoard, rowWinBoard, rightDiagWinBoard, leftDiagWinBoard;
             beforeEach(() => {
-                nonWinBoard = [
-                    column,
-                    column,
-                    column,
-                    blankColumn,
-                    column,
-                    blankColumn,
-                    column
-                ];
                 colWinBoard = [
                     winColumn,
                     column,
@@ -257,6 +250,31 @@ describe('Game component', () => {
                     expect(result.state().isCompTurn).toEqual('n');
                 });
             });
+            describe('getSimulatedBoardMoves ', () => {
+                it('calls getMoveResults', () => {
+                    const mockGetMoveResults = jest.spyOn(
+                        instance,
+                        'getMoveResults'
+                    );
+                    instance.getSimulatedBoardMoves(nonWinBoard, 'B');
+                    expect(mockGetMoveResults).toHaveBeenCalled();
+                });
+                it('calls getMoveResults', () => {
+                    const mockGetIndexes = jest.spyOn(
+                        instance,
+                        'getAvailColIndexes'
+                    );
+                    instance.getSimulatedBoardMoves(nonWinBoard, 'B');
+                    expect(mockGetIndexes).toHaveBeenCalled();
+                });
+            });
         });
     });
 });
+
+// getSimulatedBoardMoves = (board, simulatedPiece) => {
+//     const indexes = this.getAvailColIndexes(board);
+//     return indexes.map(colIndex => {
+//         return this.getMoveResults(colIndex, simulatedPiece);
+//     });
+// };

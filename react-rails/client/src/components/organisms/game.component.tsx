@@ -51,7 +51,6 @@ export class Game extends Component<{}, State> {
     getSimulatedBoardMoves = (board, simulatedPiece) => {
         const indexes = this.getAvailColIndexes(board);
         return indexes.map(colIndex => {
-            console.log('COLINDEX');
             return this.getMoveResults(colIndex, simulatedPiece);
         });
     };
@@ -82,7 +81,7 @@ export class Game extends Component<{}, State> {
     // if none found then uses random function
     // then makes calls playMove with index provided
     compMove = async () => {
-        const { board, intervals, numRows, numCols } = this.state;
+        const { board, intervals, numRows } = this.state;
 
         // eventually use while loop to keep checking until win and count the moves made
         const compSims = this.getSimulatedBoardMoves(board, 'R');
@@ -127,6 +126,31 @@ export class Game extends Component<{}, State> {
         return indexes[Math.floor(Math.random() * indexes.length)];
     };
 
+    // finds the available columns that can be used by computer
+    getAvailColIndexes = (board: BoardType) => {
+        const isColAvail = col => col.some(space => space === ' ');
+        const indexes =
+            board &&
+            board
+                .map((col, i) => {
+                    if (isColAvail(col)) {
+                        return i;
+                    }
+                })
+                .filter(x => typeof x === 'number');
+        return indexes;
+    };
+
+    // if computer is playing, this toggles b/w it being computer turn and player turn
+    toggleCompTurn = () => {
+        this.state.isCompTurn !== 'off' &&
+            this.setState(({ isCompTurn }) => {
+                const compTurn = isCompTurn === 'y' ? 'n' : 'y';
+                return { isCompTurn: compTurn };
+            });
+    };
+
+    // turns computer on and off
     changeCompTurn = (turnOff: boolean) => {
         this.setState(({ isCompTurn, currentTurn }) => {
             if (turnOff) {
@@ -138,31 +162,18 @@ export class Game extends Component<{}, State> {
         });
     };
 
-    // finds the available columns that can be used by computer
-    getAvailColIndexes = (board: BoardType) => {
-        const isColAvail = col => col.some(space => space === ' ');
-        const indexes =
-            board &&
-            board
-                .map((col, i) => {
-                    if (isColAvail(col)) {
-                        console.log('log i', i);
-                        return i;
-                    }
-                })
-                .filter(x => typeof x === 'number');
-        console.log(indexes);
-        return indexes;
+    // changes turns between 'black' and 'red' pieces
+    changeTurn = () => {
+        this.setState(({ currentTurn }: { currentTurn: PieceType }) => {
+            if (currentTurn === 'B') {
+                return { currentTurn: 'R' };
+            } else {
+                return { currentTurn: 'B' };
+            }
+        });
     };
 
-    toggleCompTurn = () => {
-        this.state.isCompTurn !== 'off' &&
-            this.setState(({ isCompTurn }) => {
-                const compTurn = isCompTurn === 'y' ? 'n' : 'y';
-                return { isCompTurn: compTurn };
-            });
-    };
-
+    // used in checking diaganolly for wins and rows
     setWinCheckIntervals = () => {
         this.setState(({ numCols }: { numCols: number }) => {
             // first three standard sizes mentioned on wikipedia say the board has 1 more column than rows
@@ -171,15 +182,6 @@ export class Game extends Component<{}, State> {
             const intervals = [numCols - 2, numCols - 1, numCols];
             return { intervals };
         });
-    };
-
-    createBoard = () => {
-        this.setState(({ numRows, numCols }) => {
-            const col = Array(numRows).fill(' ');
-            const board = Array(numCols).fill(col);
-            return { board };
-        });
-        this.setWinCheckIntervals();
     };
 
     getMoveResults = (colIndex, currentTurn) => {
@@ -213,7 +215,7 @@ export class Game extends Component<{}, State> {
             currentTurn
         );
         // only change turn if no one has won
-        !win && this.changeTurn();
+        !win && this.toggleCompTurn();
 
         // if the computer is playing, this will trigger the computer to move
         this.toggleCompTurn();
@@ -232,41 +234,6 @@ export class Game extends Component<{}, State> {
 
         // needs to run only if compIsOn and the column is not already full
         !win && isCompTurn === 'y' && this.compMove();
-    };
-
-    changeTurn = () => {
-        this.setState(({ currentTurn }: { currentTurn: PieceType }) => {
-            if (currentTurn === 'B') {
-                return { currentTurn: 'R' };
-            } else {
-                return { currentTurn: 'B' };
-            }
-        });
-    };
-
-    dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
-        let landed;
-        const newColumn = column.map(space => {
-            if (space === ' ' && !landed) {
-                landed = true;
-                return piece;
-            } else {
-                return space;
-            }
-        });
-        return newColumn;
-    };
-
-    replaceColumn = (
-        board: BoardType,
-        columnIndex: number,
-        currentTurn: PieceType
-    ) => {
-        return board.map((column, i) => {
-            return columnIndex === i
-                ? this.dropPieceInColumn(column, currentTurn)
-                : column;
-        });
     };
 
     // next 4 methods are used to check board for win
@@ -355,11 +322,46 @@ export class Game extends Component<{}, State> {
         return flatBoardIndex;
     };
 
+    dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
+        let landed;
+        const newColumn = column.map(space => {
+            if (space === ' ' && !landed) {
+                landed = true;
+                return piece;
+            } else {
+                return space;
+            }
+        });
+        return newColumn;
+    };
+
+    replaceColumn = (
+        board: BoardType,
+        columnIndex: number,
+        currentTurn: PieceType
+    ) => {
+        return board.map((column, i) => {
+            return columnIndex === i
+                ? this.dropPieceInColumn(column, currentTurn)
+                : column;
+        });
+    };
+
+    createBoard = () => {
+        this.setState(({ numRows, numCols }) => {
+            const col = Array(numRows).fill(' ');
+            const board = Array(numCols).fill(col);
+            return { board };
+        });
+        this.setWinCheckIntervals();
+    };
+
     resetBoard = () => {
         this.createBoard();
         this.changeTurn();
-        this.setState(({ isCompTurn }) => {
-            return { win: false, isCompTurn };
+        this.setState(({ isCompTurn, currentTurn }) => {
+            const turn = isCompTurn !== 'off' ? 'B' : currentTurn;
+            return { win: false, currentTurn: turn };
         });
     };
 
