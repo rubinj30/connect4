@@ -30,10 +30,30 @@ export const WinLoss = ({
     player: PlayerType;
     defaultString: string;
 }) => (
-    <div className={`w-25 flex justify-center ${player.name === defaultString ? 'hide' : null}`}>
+    <div
+        className={`w-25 flex justify-center ${
+            player.name === defaultString ? 'hide' : null
+        }`}
+    >
         {player.wins} - {player.losses}
     </div>
 );
+
+const CurrentPlayer = ({ player, currentTurn, isFirst }) => {
+    return (
+        <>
+            {isFirst && <WinLoss player={player} defaultString={'Player 1'} />}
+            <div
+                className={`name bg-black ma2 pa2 white ${
+                    currentTurn === 'B' ? 'border' : ''
+                }`}
+            >
+                {player.name}
+            </div>
+            {!isFirst && <WinLoss player={player} defaultString={'Player 1'} />}
+        </>
+    );
+};
 
 export class Players extends Component<Props, State> {
     state = {
@@ -83,17 +103,11 @@ export class Players extends Component<Props, State> {
                 <div className="flex flex-column items-center">
                     <div className={`flex justify-around w-100 items-center`}>
                         {/* can be its own atoms */}
-                        <WinLoss
+                        <CurrentPlayer
+                            currentTurn={currentTurn}
                             player={playerOne}
-                            defaultString={'Player 1'}
+                            isFirst={true}
                         />
-                        <div
-                            className={`name bg-black ma2 pa2 white ${
-                                currentTurn === 'B' ? 'border' : ''
-                            }`}
-                        >
-                            {playerOne.name}
-                        </div>
                         <div
                             className={`name bg-red ma2 pa2 white ${
                                 currentTurn === 'R' ? 'border' : ''
