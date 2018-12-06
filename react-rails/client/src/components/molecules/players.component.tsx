@@ -30,7 +30,7 @@ export const WinLoss = ({
     player: PlayerType;
     defaultString: string;
 }) => (
-    <div className={`w-25 ${player.name === defaultString ? 'hide' : null}`}>
+    <div className={`w-25 flex justify-center ${player.name === defaultString ? 'hide' : null}`}>
         {player.wins} - {player.losses}
     </div>
 );
