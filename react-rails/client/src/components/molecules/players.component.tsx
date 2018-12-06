@@ -5,26 +5,40 @@ import { NewPlayer } from './new-player.component';
 import { Button } from '../atoms/button.component';
 import axios from 'axios';
 
+export type PlayerType = {
+    name: string;
+    wins: number;
+    losses: number;
+};
+
 type Props = {
     currentTurn: PieceType;
     isCompTurn: ComputerTurn;
 };
 
 type State = {
-    selectedPlayerName: Player;
-    players: Player[] | [];
+    playerOne: PlayerType;
+    playerTwo: PlayerType;
+    players: PlayerType[] | [];
     isFormShowing: boolean;
 };
 
-type Player = {
-    name: string;
-    wins: number;
-    losses: number;
-};
+export const WinLoss = ({
+    player,
+    defaultString
+}: {
+    player: PlayerType;
+    defaultString: string;
+}) => (
+    <div className={`w-25 ${player.name === defaultString ? 'hide' : null}`}>
+        {player.wins} - {player.losses}
+    </div>
+);
 
 export class Players extends Component<Props, State> {
     state = {
-        selectedPlayerName: { id: 0, name: 'Player 1', wins: 0, losses: 0 },
+        playerOne: { id: 0, name: 'Player 1', wins: 0, losses: 0 },
+        playerTwo: { id: 0, name: 'Player 2', wins: 0, losses: 0 },
         players: [{ id: 0, name: 'Player 1', wins: 0, losses: 0 }],
         isFormShowing: false
     };
@@ -38,10 +52,21 @@ export class Players extends Component<Props, State> {
         this.setState({ players: data });
     };
 
-    updateDropdown = event => {
-        const name = event.currentTarget.value;
-        // just updating name but will need to update entire obj
-        this.setState({ selectedPlayerName: name });
+    // combine this and the other
+    updatePlayerOne = event => {
+        const id = event.currentTarget.value;
+        var value = this.state.players.filter((player, i) => {
+            return player.id === Number(id);
+        });
+        this.setState({ playerOne: value[0] });
+    };
+
+    updatePlayerTwo = event => {
+        const id = event.currentTarget.value;
+        var value = this.state.players.filter((player, i) => {
+            return player.id === Number(id);
+        });
+        this.setState({ playerTwo: value[0] });
     };
 
     toggleNewPlayerForm = () => {
@@ -51,44 +76,53 @@ export class Players extends Component<Props, State> {
     };
 
     render() {
-        const { players, isFormShowing } = this.state;
+        const { playerOne, playerTwo, players, isFormShowing } = this.state;
         const { currentTurn, isCompTurn } = this.props;
         return (
             players && (
                 <div className="flex flex-column items-center">
-                    <div className={`flex justify-around`}>
+                    <div className={`flex justify-around w-100 items-center`}>
+                        {/* can be its own atoms */}
+                        <WinLoss
+                            player={playerOne}
+                            defaultString={'Player 1'}
+                        />
                         <div
                             className={`name bg-black ma2 pa2 white ${
                                 currentTurn === 'B' ? 'border' : ''
                             }`}
                         >
-                            player 1
+                            {playerOne.name}
                         </div>
                         <div
                             className={`name bg-red ma2 pa2 white ${
                                 currentTurn === 'R' ? 'border' : ''
                             } ${isCompTurn !== 'off' ? 'b f5' : ''}`}
                         >
-                            {isCompTurn === 'off' ? 'player 2' : 'COMPUTER'}
+                            {isCompTurn === 'off' ? playerTwo.name : 'COMPUTER'}
                         </div>
+                        <WinLoss
+                            player={playerTwo}
+                            defaultString={'Player 2'}
+                        />
                     </div>
                     <div>
                         <select
                             className="playerSelect h2 ma2 pa2"
-                            onChange={this.updateDropdown}
+                            onChange={this.updatePlayerOne}
                         >
                             {players.map(player => (
-                                <option key={player.id} value={player.name}>
+                                <option key={player.id} value={player.id}>
                                     {player.name}
                                 </option>
                             ))}
                         </select>
                         <select
                             className="playerSelect h2 ma2 pa2"
-                            onChange={this.updateDropdown}
+                            onChange={this.updatePlayerTwo}
                         >
                             {players.map(player => (
-                                <option key={player.id} value={player.name}>
+                                <option key={player.id} value={player.id}>
                                     {player.name}
                                 </option>
                             ))}

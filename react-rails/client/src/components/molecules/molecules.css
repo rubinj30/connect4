@@ -3,32 +3,35 @@
 }
 
 .column {
-  width: 100%;
+    width: 100%;
 }
 
 .column:hover .red {
-  border-top: red 20px solid
+    border-top: red 20px solid;
 }
 
 .column:hover .black {
-  border-top: black 20px solid
+    border-top: black 20px solid;
 }
 
 .name {
-  padding: 10px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 130px;
-  height: 60px;
-
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 60px;
 }
 
 .border {
-  border: 10px solid #357edd;
+    border: 10px solid #357edd;
 }
 
 .playerSelect {
-  width: 150px;
+    width: 150px;
+}
+
+.hide {
+    visibility: hidden;
 }
