@@ -118,14 +118,27 @@ describe('Atoms', () => {
                 <CurrentPlayer
                     player={mockPlayer}
                     color={'red'}
-                    isCompTurn={'y'}
+                    isCompTurn={'off'}
                     isFirst={false}
                 />
             );
             const result = shallow(fixture);
             expect(result).toBeDefined();
             expect(result.text()).toContain('mock player');
-            expect(result).toMatchSnapshot();
+        });
+        it('should render properly if second player is the computer', () => {
+            const mockPlayer = { name: 'mock player', wins: 2, losses: 3 };
+            const fixture = (
+                <CurrentPlayer
+                    player={mockPlayer}
+                    color={'red'}
+                    isCompTurn={'y'}
+                    isFirst={false}
+                />
+            );
+            const result = shallow(fixture);
+            expect(result).toBeDefined();
+            expect(result.text()).toContain('COMPUTER');
         });
     });
 });
