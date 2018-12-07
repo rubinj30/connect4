@@ -3,7 +3,7 @@
 }
 
 .column {
-    width: 100%;
+    width: 65px;
 }
 
 .column:hover .red {
@@ -14,22 +14,8 @@
     border-top: black 20px solid;
 }
 
-.name {
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 130px;
-    height: 60px;
-}
-
 .border {
     border: 10px solid #357edd;
-}
-
-.playerSelect {
-    width: 150px;
 }
 
 .hide {

@@ -3,6 +3,8 @@ import { PieceType } from '../atoms/space.component';
 import { ComputerTurn } from '../organisms/game.component';
 import { NewPlayer } from './new-player.component';
 import { Button } from '../atoms/button.component';
+import { PlayerSelect } from '../atoms/player-select.component';
+import { CurrentPlayer } from '../atoms/current-player.component';
 import axios from 'axios';
 
 export type PlayerType = {
@@ -21,38 +23,6 @@ type State = {
     playerTwo: PlayerType;
     players: PlayerType[] | [];
     isFormShowing: boolean;
-};
-
-export const WinLoss = ({
-    player,
-    defaultString
-}: {
-    player: PlayerType;
-    defaultString: string;
-}) => (
-    <div
-        className={`w-25 flex justify-center ${
-            player.name === defaultString ? 'hide' : null
-        }`}
-    >
-        {player.wins} - {player.losses}
-    </div>
-);
-
-const CurrentPlayer = ({ player, currentTurn, isFirst }) => {
-    return (
-        <>
-            {isFirst && <WinLoss player={player} defaultString={'Player 1'} />}
-            <div
-                className={`name bg-black ma2 pa2 white ${
-                    currentTurn === 'B' ? 'border' : ''
-                }`}
-            >
-                {player.name}
-            </div>
-            {!isFirst && <WinLoss player={player} defaultString={'Player 1'} />}
-        </>
-    );
 };
 
 export class Players extends Component<Props, State> {
@@ -102,45 +72,28 @@ export class Players extends Component<Props, State> {
             players && (
                 <div className="flex flex-column items-center">
                     <div className={`flex justify-around w-100 items-center`}>
-                        {/* can be its own atoms */}
                         <CurrentPlayer
-                            currentTurn={currentTurn}
+                            color={'black'}
                             player={playerOne}
                             isFirst={true}
+                            isCompTurn={isCompTurn}
                         />
-                        <div
-                            className={`name bg-red ma2 pa2 white ${
-                                currentTurn === 'R' ? 'border' : ''
-                            } ${isCompTurn !== 'off' ? 'b f5' : ''}`}
-                        >
-                            {isCompTurn === 'off' ? playerTwo.name : 'COMPUTER'}
-                        </div>
-                        <WinLoss
+                        <CurrentPlayer
+                            color={'red'}
                             player={playerTwo}
-                            defaultString={'Player 2'}
+                            isFirst={false}
+                            isCompTurn={isCompTurn}
                         />
                     </div>
-                    <div>
-                        <select
-                            className="playerSelect h2 ma2 pa2"
-                            onChange={this.updatePlayerOne}
-                        >
-                            {players.map(player => (
-                                <option key={player.id} value={player.id}>
-                                    {player.name}
-                                </option>
-                            ))}
-                        </select>
-                        <select
-                            className="playerSelect h2 ma2 pa2"
-                            onChange={this.updatePlayerTwo}
-                        >
-                            {players.map(player => (
-                                <option key={player.id} value={player.id}>
-                                    {player.name}
-                                </option>
-                            ))}
-                        </select>
+                    <div className="w-100 flex justify-around">
+                        <PlayerSelect
+                            players={players}
+                            updateDropdown={this.updatePlayerOne}
+                        />
+                        <PlayerSelect
+                            players={players}
+                            updateDropdown={this.updatePlayerTwo}
+                        />
                     </div>
                     <Button
                         label={'Create New Player'}

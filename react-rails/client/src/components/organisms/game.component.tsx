@@ -215,7 +215,7 @@ export class Game extends Component<{}, State> {
             currentTurn
         );
         // only change turn if no one has won
-        !win && this.toggleCompTurn();
+        !win && this.changeTurn();
 
         // if the computer is playing, this will trigger the computer to move
         this.toggleCompTurn();

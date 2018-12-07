@@ -13,3 +13,17 @@ button {
     border-top: 20px solid #357edd;
     z-index: 1;
 }
+
+.playerSelect {
+    width: 175px;
+}
+
+.name {
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 60px;
+}

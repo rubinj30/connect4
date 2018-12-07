@@ -20,71 +20,249 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": <div
-        className="flex justify-around"
-      >
+      "children": Array [
         <div
-          className="name bg-black ma2 pa2 white border"
+          className="flex justify-around w-100 items-center"
         >
-          player 1
-        </div>
+          <CurrentPlayer
+            color="black"
+            isCompTurn="y"
+            isFirst={true}
+            player={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              }
+            }
+          />
+          <CurrentPlayer
+            color="red"
+            isCompTurn="y"
+            isFirst={false}
+            player={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              }
+            }
+          />
+        </div>,
         <div
-          className="name bg-red ma2 pa2 white  b f5"
+          className="w-100 flex justify-around"
         >
-          COMPUTER
-        </div>
-      </div>,
-      "className": "flex flex-column",
+          <PlayerSelect
+            players={
+              Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ]
+            }
+            updateDropdown={[Function]}
+          />
+          <PlayerSelect
+            players={
+              Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ]
+            }
+            updateDropdown={[Function]}
+          />
+        </div>,
+        <Button
+          className="w5"
+          label="Create New Player"
+          onClick={[Function]}
+        />,
+        false,
+      ],
+      "className": "flex flex-column items-center",
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <div
-            className="name bg-black ma2 pa2 white border"
-          >
-            player 1
-          </div>,
-          <div
-            className="name bg-red ma2 pa2 white  b f5"
-          >
-            COMPUTER
-          </div>,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <CurrentPlayer
+              color="black"
+              isCompTurn="y"
+              isFirst={true}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
+            />,
+            <CurrentPlayer
+              color="red"
+              isCompTurn="y"
+              isFirst={false}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
+            />,
+          ],
+          "className": "flex justify-around w-100 items-center",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "color": "black",
+              "isCompTurn": "y",
+              "isFirst": true,
+              "player": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "color": "red",
+              "isCompTurn": "y",
+              "isFirst": false,
+              "player": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
         ],
-        "className": "flex justify-around",
+        "type": "div",
       },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "player 1",
-            "className": "name bg-black ma2 pa2 white border",
-          },
-          "ref": null,
-          "rendered": "player 1",
-          "type": "div",
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />,
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />,
+          ],
+          "className": "w-100 flex justify-around",
         },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "COMPUTER",
-            "className": "name bg-red ma2 pa2 white  b f5",
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "players": Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ],
+              "updateDropdown": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
           },
-          "ref": null,
-          "rendered": "COMPUTER",
-          "type": "div",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "players": Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ],
+              "updateDropdown": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "className": "w5",
+          "label": "Create New Player",
+          "onClick": [Function],
         },
-      ],
-      "type": "div",
-    },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      false,
+    ],
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -93,71 +271,249 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": <div
-          className="flex justify-around"
-        >
+        "children": Array [
           <div
-            className="name bg-black ma2 pa2 white border"
+            className="flex justify-around w-100 items-center"
           >
-            player 1
-          </div>
+            <CurrentPlayer
+              color="black"
+              isCompTurn="y"
+              isFirst={true}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
+            />
+            <CurrentPlayer
+              color="red"
+              isCompTurn="y"
+              isFirst={false}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
+            />
+          </div>,
           <div
-            className="name bg-red ma2 pa2 white  b f5"
+            className="w-100 flex justify-around"
           >
-            COMPUTER
-          </div>
-        </div>,
-        "className": "flex flex-column",
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />
+          </div>,
+          <Button
+            className="w5"
+            label="Create New Player"
+            onClick={[Function]}
+          />,
+          false,
+        ],
+        "className": "flex flex-column items-center",
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <div
-              className="name bg-black ma2 pa2 white border"
-            >
-              player 1
-            </div>,
-            <div
-              className="name bg-red ma2 pa2 white  b f5"
-            >
-              COMPUTER
-            </div>,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <CurrentPlayer
+                color="black"
+                isCompTurn="y"
+                isFirst={true}
+                player={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  }
+                }
+              />,
+              <CurrentPlayer
+                color="red"
+                isCompTurn="y"
+                isFirst={false}
+                player={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 2",
+                    "wins": 0,
+                  }
+                }
+              />,
+            ],
+            "className": "flex justify-around w-100 items-center",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "color": "black",
+                "isCompTurn": "y",
+                "isFirst": true,
+                "player": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "color": "red",
+                "isCompTurn": "y",
+                "isFirst": false,
+                "player": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
           ],
-          "className": "flex justify-around",
+          "type": "div",
         },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "player 1",
-              "className": "name bg-black ma2 pa2 white border",
-            },
-            "ref": null,
-            "rendered": "player 1",
-            "type": "div",
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <PlayerSelect
+                players={
+                  Array [
+                    Object {
+                      "id": 0,
+                      "losses": 0,
+                      "name": "Player 1",
+                      "wins": 0,
+                    },
+                  ]
+                }
+                updateDropdown={[Function]}
+              />,
+              <PlayerSelect
+                players={
+                  Array [
+                    Object {
+                      "id": 0,
+                      "losses": 0,
+                      "name": "Player 1",
+                      "wins": 0,
+                    },
+                  ]
+                }
+                updateDropdown={[Function]}
+              />,
+            ],
+            "className": "w-100 flex justify-around",
           },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "COMPUTER",
-              "className": "name bg-red ma2 pa2 white  b f5",
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "players": Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ],
+                "updateDropdown": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
             },
-            "ref": null,
-            "rendered": "COMPUTER",
-            "type": "div",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "players": Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ],
+                "updateDropdown": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "className": "w5",
+            "label": "Create New Player",
+            "onClick": [Function],
           },
-        ],
-        "type": "div",
-      },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        false,
+      ],
       "type": "div",
     },
   ],
@@ -201,71 +557,249 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": <div
-        className="flex justify-around"
-      >
+      "children": Array [
         <div
-          className="name bg-black ma2 pa2 white border"
+          className="flex justify-around w-100 items-center"
         >
-          player 1
-        </div>
+          <CurrentPlayer
+            color="black"
+            isCompTurn="n"
+            isFirst={true}
+            player={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              }
+            }
+          />
+          <CurrentPlayer
+            color="red"
+            isCompTurn="n"
+            isFirst={false}
+            player={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              }
+            }
+          />
+        </div>,
         <div
-          className="name bg-red ma2 pa2 white  b f5"
+          className="w-100 flex justify-around"
         >
-          COMPUTER
-        </div>
-      </div>,
-      "className": "flex flex-column",
+          <PlayerSelect
+            players={
+              Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ]
+            }
+            updateDropdown={[Function]}
+          />
+          <PlayerSelect
+            players={
+              Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ]
+            }
+            updateDropdown={[Function]}
+          />
+        </div>,
+        <Button
+          className="w5"
+          label="Create New Player"
+          onClick={[Function]}
+        />,
+        false,
+      ],
+      "className": "flex flex-column items-center",
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <div
-            className="name bg-black ma2 pa2 white border"
-          >
-            player 1
-          </div>,
-          <div
-            className="name bg-red ma2 pa2 white  b f5"
-          >
-            COMPUTER
-          </div>,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <CurrentPlayer
+              color="black"
+              isCompTurn="n"
+              isFirst={true}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
+            />,
+            <CurrentPlayer
+              color="red"
+              isCompTurn="n"
+              isFirst={false}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
+            />,
+          ],
+          "className": "flex justify-around w-100 items-center",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "color": "black",
+              "isCompTurn": "n",
+              "isFirst": true,
+              "player": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "color": "red",
+              "isCompTurn": "n",
+              "isFirst": false,
+              "player": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
         ],
-        "className": "flex justify-around",
+        "type": "div",
       },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "player 1",
-            "className": "name bg-black ma2 pa2 white border",
-          },
-          "ref": null,
-          "rendered": "player 1",
-          "type": "div",
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />,
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />,
+          ],
+          "className": "w-100 flex justify-around",
         },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "COMPUTER",
-            "className": "name bg-red ma2 pa2 white  b f5",
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "players": Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ],
+              "updateDropdown": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
           },
-          "ref": null,
-          "rendered": "COMPUTER",
-          "type": "div",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "players": Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ],
+              "updateDropdown": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "className": "w5",
+          "label": "Create New Player",
+          "onClick": [Function],
         },
-      ],
-      "type": "div",
-    },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      false,
+    ],
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -274,71 +808,249 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": <div
-          className="flex justify-around"
-        >
+        "children": Array [
           <div
-            className="name bg-black ma2 pa2 white border"
+            className="flex justify-around w-100 items-center"
           >
-            player 1
-          </div>
+            <CurrentPlayer
+              color="black"
+              isCompTurn="n"
+              isFirst={true}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
+            />
+            <CurrentPlayer
+              color="red"
+              isCompTurn="n"
+              isFirst={false}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
+            />
+          </div>,
           <div
-            className="name bg-red ma2 pa2 white  b f5"
+            className="w-100 flex justify-around"
           >
-            COMPUTER
-          </div>
-        </div>,
-        "className": "flex flex-column",
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />
+          </div>,
+          <Button
+            className="w5"
+            label="Create New Player"
+            onClick={[Function]}
+          />,
+          false,
+        ],
+        "className": "flex flex-column items-center",
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <div
-              className="name bg-black ma2 pa2 white border"
-            >
-              player 1
-            </div>,
-            <div
-              className="name bg-red ma2 pa2 white  b f5"
-            >
-              COMPUTER
-            </div>,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <CurrentPlayer
+                color="black"
+                isCompTurn="n"
+                isFirst={true}
+                player={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  }
+                }
+              />,
+              <CurrentPlayer
+                color="red"
+                isCompTurn="n"
+                isFirst={false}
+                player={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 2",
+                    "wins": 0,
+                  }
+                }
+              />,
+            ],
+            "className": "flex justify-around w-100 items-center",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "color": "black",
+                "isCompTurn": "n",
+                "isFirst": true,
+                "player": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "color": "red",
+                "isCompTurn": "n",
+                "isFirst": false,
+                "player": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
           ],
-          "className": "flex justify-around",
+          "type": "div",
         },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "player 1",
-              "className": "name bg-black ma2 pa2 white border",
-            },
-            "ref": null,
-            "rendered": "player 1",
-            "type": "div",
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <PlayerSelect
+                players={
+                  Array [
+                    Object {
+                      "id": 0,
+                      "losses": 0,
+                      "name": "Player 1",
+                      "wins": 0,
+                    },
+                  ]
+                }
+                updateDropdown={[Function]}
+              />,
+              <PlayerSelect
+                players={
+                  Array [
+                    Object {
+                      "id": 0,
+                      "losses": 0,
+                      "name": "Player 1",
+                      "wins": 0,
+                    },
+                  ]
+                }
+                updateDropdown={[Function]}
+              />,
+            ],
+            "className": "w-100 flex justify-around",
           },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "COMPUTER",
-              "className": "name bg-red ma2 pa2 white  b f5",
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "players": Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ],
+                "updateDropdown": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
             },
-            "ref": null,
-            "rendered": "COMPUTER",
-            "type": "div",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "players": Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ],
+                "updateDropdown": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "className": "w5",
+            "label": "Create New Player",
+            "onClick": [Function],
           },
-        ],
-        "type": "div",
-      },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        false,
+      ],
       "type": "div",
     },
   ],
@@ -382,71 +1094,249 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": <div
-        className="flex justify-around"
-      >
+      "children": Array [
         <div
-          className="name bg-black ma2 pa2 white border"
+          className="flex justify-around w-100 items-center"
         >
-          player 1
-        </div>
+          <CurrentPlayer
+            color="black"
+            isCompTurn="off"
+            isFirst={true}
+            player={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              }
+            }
+          />
+          <CurrentPlayer
+            color="red"
+            isCompTurn="off"
+            isFirst={false}
+            player={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              }
+            }
+          />
+        </div>,
         <div
-          className="name bg-red ma2 pa2 white  "
+          className="w-100 flex justify-around"
         >
-          player 2
-        </div>
-      </div>,
-      "className": "flex flex-column",
+          <PlayerSelect
+            players={
+              Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ]
+            }
+            updateDropdown={[Function]}
+          />
+          <PlayerSelect
+            players={
+              Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ]
+            }
+            updateDropdown={[Function]}
+          />
+        </div>,
+        <Button
+          className="w5"
+          label="Create New Player"
+          onClick={[Function]}
+        />,
+        false,
+      ],
+      "className": "flex flex-column items-center",
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <div
-            className="name bg-black ma2 pa2 white border"
-          >
-            player 1
-          </div>,
-          <div
-            className="name bg-red ma2 pa2 white  "
-          >
-            player 2
-          </div>,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <CurrentPlayer
+              color="black"
+              isCompTurn="off"
+              isFirst={true}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
+            />,
+            <CurrentPlayer
+              color="red"
+              isCompTurn="off"
+              isFirst={false}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
+            />,
+          ],
+          "className": "flex justify-around w-100 items-center",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "color": "black",
+              "isCompTurn": "off",
+              "isFirst": true,
+              "player": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "color": "red",
+              "isCompTurn": "off",
+              "isFirst": false,
+              "player": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
         ],
-        "className": "flex justify-around",
+        "type": "div",
       },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "player 1",
-            "className": "name bg-black ma2 pa2 white border",
-          },
-          "ref": null,
-          "rendered": "player 1",
-          "type": "div",
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />,
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />,
+          ],
+          "className": "w-100 flex justify-around",
         },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": "player 2",
-            "className": "name bg-red ma2 pa2 white  ",
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "players": Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ],
+              "updateDropdown": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
           },
-          "ref": null,
-          "rendered": "player 2",
-          "type": "div",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "players": Array [
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              ],
+              "updateDropdown": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "className": "w5",
+          "label": "Create New Player",
+          "onClick": [Function],
         },
-      ],
-      "type": "div",
-    },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      false,
+    ],
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -455,71 +1345,249 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": <div
-          className="flex justify-around"
-        >
+        "children": Array [
           <div
-            className="name bg-black ma2 pa2 white border"
+            className="flex justify-around w-100 items-center"
           >
-            player 1
-          </div>
+            <CurrentPlayer
+              color="black"
+              isCompTurn="off"
+              isFirst={true}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
+            />
+            <CurrentPlayer
+              color="red"
+              isCompTurn="off"
+              isFirst={false}
+              player={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
+            />
+          </div>,
           <div
-            className="name bg-red ma2 pa2 white  "
+            className="w-100 flex justify-around"
           >
-            player 2
-          </div>
-        </div>,
-        "className": "flex flex-column",
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />
+            <PlayerSelect
+              players={
+                Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ]
+              }
+              updateDropdown={[Function]}
+            />
+          </div>,
+          <Button
+            className="w5"
+            label="Create New Player"
+            onClick={[Function]}
+          />,
+          false,
+        ],
+        "className": "flex flex-column items-center",
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <div
-              className="name bg-black ma2 pa2 white border"
-            >
-              player 1
-            </div>,
-            <div
-              className="name bg-red ma2 pa2 white  "
-            >
-              player 2
-            </div>,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <CurrentPlayer
+                color="black"
+                isCompTurn="off"
+                isFirst={true}
+                player={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  }
+                }
+              />,
+              <CurrentPlayer
+                color="red"
+                isCompTurn="off"
+                isFirst={false}
+                player={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 2",
+                    "wins": 0,
+                  }
+                }
+              />,
+            ],
+            "className": "flex justify-around w-100 items-center",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "color": "black",
+                "isCompTurn": "off",
+                "isFirst": true,
+                "player": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "color": "red",
+                "isCompTurn": "off",
+                "isFirst": false,
+                "player": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
           ],
-          "className": "flex justify-around",
+          "type": "div",
         },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "player 1",
-              "className": "name bg-black ma2 pa2 white border",
-            },
-            "ref": null,
-            "rendered": "player 1",
-            "type": "div",
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <PlayerSelect
+                players={
+                  Array [
+                    Object {
+                      "id": 0,
+                      "losses": 0,
+                      "name": "Player 1",
+                      "wins": 0,
+                    },
+                  ]
+                }
+                updateDropdown={[Function]}
+              />,
+              <PlayerSelect
+                players={
+                  Array [
+                    Object {
+                      "id": 0,
+                      "losses": 0,
+                      "name": "Player 1",
+                      "wins": 0,
+                    },
+                  ]
+                }
+                updateDropdown={[Function]}
+              />,
+            ],
+            "className": "w-100 flex justify-around",
           },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "player 2",
-              "className": "name bg-red ma2 pa2 white  ",
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "players": Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ],
+                "updateDropdown": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
             },
-            "ref": null,
-            "rendered": "player 2",
-            "type": "div",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "players": Array [
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  },
+                ],
+                "updateDropdown": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "className": "w5",
+            "label": "Create New Player",
+            "onClick": [Function],
           },
-        ],
-        "type": "div",
-      },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        false,
+      ],
       "type": "div",
     },
   ],

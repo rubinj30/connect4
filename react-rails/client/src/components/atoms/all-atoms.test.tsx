@@ -3,6 +3,8 @@ import { Arrow } from './arrow.component';
 import { Space } from './space.component';
 import { Title } from './title.component';
 import { Button } from './button.component';
+import { WinLoss } from './win-loss.component';
+import { CurrentPlayer } from './current-player.component';
 import { shallow } from 'enzyme';
 
 describe('Atoms', () => {
@@ -72,6 +74,58 @@ describe('Atoms', () => {
             const result = shallow(fixture);
             expect(result).toBeDefined();
             expect(result.props().className).toEqual('arrow ');
+        });
+    });
+    describe('WinLoss', () => {
+        it('should render with "hide" class when default player', () => {
+            const mockPlayer = { name: 'Player 1', wins: 2, losses: 3 };
+            const fixture = (
+                <WinLoss defaultString={'Player 1'} player={mockPlayer} />
+            );
+            const result = shallow(fixture);
+            expect(result).toBeDefined();
+            expect(result.exists('.hide')).toEqual(true);
+        });
+        it('should render properly when any player is selected other than default', () => {
+            const mockPlayer = { name: 'mock player', wins: 2, losses: 3 };
+            const fixture = (
+                <WinLoss defaultString={'Player 1'} player={mockPlayer} />
+            );
+            const result = shallow(fixture);
+            expect(result).toBeDefined();
+            expect(result.exists('.hide')).toEqual(false);
+        });
+    });
+    describe('CurrentPlayer', () => {
+        it('should render properly if first player', () => {
+            const mockPlayer = { name: 'mock player', wins: 2, losses: 3 };
+            const fixture = (
+                <CurrentPlayer
+                    player={mockPlayer}
+                    color={'black'}
+                    isCompTurn={'off'}
+                    isFirst={true}
+                />
+            );
+            const result = shallow(fixture);
+            expect(result).toBeDefined();
+            expect(result.text()).toContain('mock player');
+            expect(result).toMatchSnapshot();
+        });
+        it('should render properly if second player', () => {
+            const mockPlayer = { name: 'mock player', wins: 2, losses: 3 };
+            const fixture = (
+                <CurrentPlayer
+                    player={mockPlayer}
+                    color={'red'}
+                    isCompTurn={'y'}
+                    isFirst={false}
+                />
+            );
+            const result = shallow(fixture);
+            expect(result).toBeDefined();
+            expect(result.text()).toContain('mock player');
+            expect(result).toMatchSnapshot();
         });
     });
 });
