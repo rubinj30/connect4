@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Board } from '../molecules/board.component';
 import { ColumnType } from '../molecules/column.component';
 import { NumPlayers } from '../molecules/num-players.component';
-import { NewPlayer } from '../molecules/new-player.component';
 import { BoardSelect } from '../molecules/board-select.component';
 import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
 import { Players } from '../molecules/players.component';
-import { Button } from '../atoms/button.component';
 import './organisms.css';
 
 export type BoardType = ColumnType[];
@@ -25,7 +23,6 @@ type State = {
         x: number;
         y: number;
     };
-    isFormShowing: boolean;
 };
 export class Game extends Component<{}, State> {
     state: State = {
@@ -40,7 +37,6 @@ export class Game extends Component<{}, State> {
         numRows: 6,
         numCols: 7,
         intervals: [],
-        isFormShowing: false
     };
 
     componentDidMount() {
@@ -379,7 +375,6 @@ export class Game extends Component<{}, State> {
             board,
             win,
             isCompTurn,
-            isFormShowing
         } = this.state;
         return (
             <div>
@@ -401,12 +396,14 @@ export class Game extends Component<{}, State> {
                     resetBoard={this.resetBoard}
                     handleClick={this.handleClick}
                 />
-                <Players isCompTurn={isCompTurn} currentTurn={currentTurn} />
+                <Players
+                    isCompTurn={isCompTurn}
+                    currentTurn={currentTurn}
+                />
                 <BoardSelect
                     updateBoardSize={this.updateBoardSize}
                     opts={[7, 8, 10, 11]}
                 />
- 
             </div>
         );
     }
