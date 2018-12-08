@@ -110,6 +110,12 @@ describe('Game component', () => {
                 expect(result.state().win).toBeFalsy();
             });
         });
+        it('setWinCheckIntervals should get an array of intervals based on the number of rows and update state', () => {
+            result.setState({ numRows: 12 });
+            const instance = result.instance();
+            instance.setWinCheckIntervals();
+            expect(result.state().intervals).toEqual([11, 12, 13])
+        });
 
         describe('winCheckByInterval ', () => {
             let colWinBoard, rowWinBoard, rightDiagWinBoard, leftDiagWinBoard;

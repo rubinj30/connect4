@@ -169,13 +169,11 @@ export class Game extends Component<{}, State> {
         });
     };
 
-    // used in checking diaganolly for wins and rows
+    // used in checking diaganolly and horizontally for wins and rows
     setWinCheckIntervals = () => {
-        this.setState(({ numCols }: { numCols: number }) => {
-            // first three standard sizes mentioned on wikipedia say the board has 1 more column than rows
-            // these intervals assume that is always the case
-            // win checks should work for any size board as long as there is one more column than row
-            const intervals = [numCols - 2, numCols - 1, numCols];
+        this.setState(({ numRows }: { numRows: number }) => {
+            // these are based on number of rows on a board
+            const intervals = [numRows - 1, numRows, numRows + 1];
             return { intervals };
         });
     };
@@ -367,6 +365,13 @@ export class Game extends Component<{}, State> {
         // assumes board always has one more column than row
         this.setState({ numCols, numRows: numCols - 1 });
         this.createBoard();
+    };
+
+    transformRowToColumn = (board, rowIndex) =>
+        board.map(column => column[rowIndex]);
+
+    getFirstIndexOfPattern = (column, pattern) => {
+        return column.join('').lastIndexOf(pattern);
     };
 
     render() {
