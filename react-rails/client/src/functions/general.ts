@@ -1,26 +1,28 @@
 import { PieceType, ColumnType } from '../types';
 
-export const getRandomNum = indexes => {
-    return indexes[Math.floor(Math.random() * indexes.length)];
-};
-
-export const checkColumnForWin = (
-    column: ColumnType,
-    currentTurn: PieceType
-) => {
-    let win = false;
-    let count = 0;
-    column.forEach((space, i) => {
-        if (space === currentTurn) {
-            count += 1;
-            if (count >= 4) {
-                win = true;
-            }
+export const dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
+    let landed;
+    const newColumn = column.map(space => {
+        if (space === ' ' && !landed) {
+            landed = true;
+            return piece;
         } else {
-            count = 0;
+            return space;
         }
     });
-    return win;
+    return newColumn;
+};
+
+export const replaceColumn = (
+    board: ColumnType[],
+    columnIndex: number,
+    currentTurn: PieceType
+) => {
+    return board.map((column, i) => {
+        return columnIndex === i
+            ? dropPieceInColumn(column, currentTurn)
+            : column;
+    });
 };
 
 // finds the available columns that can be used by computer
@@ -53,10 +55,14 @@ export const getFlatIndexOfLastDropped = (
     return flatBoardIndex;
 };
 
+export const getRandomNum = indexes => {
+    return indexes[Math.floor(Math.random() * indexes.length)];
+};
+
 // not using the below
 const transformRowToColumn = (board: ColumnType, rowIndex: number) =>
-board.map(column => column[rowIndex]);
+    board.map(column => column[rowIndex]);
 
-const getFirstIndexOfPattern = (column, pattern) => {
-return column.join('').lastIndexOf(pattern);
+const getFirstIndexOfPattern = (column: ColumnType, pattern: string) => {
+    return column.join('').indexOf(pattern);
 };

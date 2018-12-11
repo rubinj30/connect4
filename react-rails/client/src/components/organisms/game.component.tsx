@@ -6,12 +6,17 @@ import { Space } from '../atoms/space.component';
 import { Players } from '../molecules/players.component';
 import { ComputerTurn, PieceType, ColumnType } from '../../types';
 import {
-    getRandomNum,
     checkColumnForWin,
+    winCheckByInterval,
+    checkDiaganolAndRowWinConditions
+} from '../../functions/win-check';
+import {
+    getRandomNum,
     getAvailColIndexes,
     getIndexOfPiece,
-    getFlatIndexOfLastDropped
-} from '../../functions/functions';
+    getFlatIndexOfLastDropped,
+    replaceColumn
+} from '../../functions/general';
 
 import './organisms.css';
 
@@ -54,16 +59,19 @@ export class Game extends Component<{}, State> {
         board: ColumnType[],
         simulatedPiece: PieceType
     ) => {
+        console.log('Orig board', board);
         const indexes = getAvailColIndexes(board);
-        return indexes.map(colIndex => {
-            return this.getMoveResults(colIndex, simulatedPiece);
+        const simulated =  indexes.map(colIndex => {
+            return this.getMoveResults(board, colIndex, simulatedPiece);
         });
+        console.log(simulated);
+        return simulated;
     };
 
     // finds win move in simulations, if there is one
     getWinMoveFromSims = (sims, numRows, intervals, simulatedPiece) => {
         const results = sims.map((result, i) => {
-            const currentIndex = result.returnedColIndex;
+            const currentIndex = i;
             const x = getIndexOfPiece(result.updatedBoard[currentIndex]);
             const flatIndex = getFlatIndexOfLastDropped(
                 x,
@@ -75,7 +83,7 @@ export class Game extends Component<{}, State> {
                 result.updatedBoard,
                 simulatedPiece,
                 flatIndex,
-                result.returnedColIndex
+                i
             );
             return { win, winColIndex };
         });
@@ -89,8 +97,8 @@ export class Game extends Component<{}, State> {
         const { board, intervals, numRows } = this.state;
 
         // eventually use while loop to keep checking until win and count the moves made
-        const compSims = this.getSimulatedBoardMoves(board, 'R');
-        const results = this.getWinMoveFromSims(
+        const compSims = await this.getSimulatedBoardMoves(board, 'R');
+        const results = await this.getWinMoveFromSims(
             compSims,
             numRows,
             intervals,
@@ -98,7 +106,7 @@ export class Game extends Component<{}, State> {
         );
 
         // If results contain a win, set the first one to the let var
-        const compWinObj = await results.find(item => item.win === true);
+        const compWinObj = results.find(item => item.win === true);
 
         // find indexes that can be played
         const availIndexes = getAvailColIndexes(board);
@@ -109,8 +117,8 @@ export class Game extends Component<{}, State> {
         if (compWinObj) {
             compDropIndex = compWinObj.winColIndex;
         } else {
-            const playerSims = this.getSimulatedBoardMoves(board, 'B');
-            const results = this.getWinMoveFromSims(
+            const playerSims = await this.getSimulatedBoardMoves(board, 'B');
+            const results = await this.getWinMoveFromSims(
                 playerSims,
                 numRows,
                 intervals,
@@ -168,10 +176,10 @@ export class Game extends Component<{}, State> {
         });
     };
 
-    getMoveResults = (colIndex, currentTurn) => {
+    getMoveResults = (board, colIndex, currentTurn) => {
         // sometimes the move will be mocked so currentTurn will need to be passed as params instead of pulled from state
-        const { board, intervals } = this.state;
-        const updatedBoard = this.replaceColumn(board, colIndex, currentTurn);
+        const { intervals } = this.state;
+        const updatedBoard = replaceColumn(board, colIndex, currentTurn);
         const x = getIndexOfPiece(updatedBoard[colIndex]);
         const flatIndexOfLastDropped = getFlatIndexOfLastDropped(
             x,
@@ -193,8 +201,9 @@ export class Game extends Component<{}, State> {
     // took out of handleClick so that it is not dependent on handleClick and can be used for computer moves
     playMove = colIndex => {
         // going to pass to getMoveResults, but only on actual move
-        const { currentTurn } = this.state;
+        const { currentTurn, board} = this.state;
         const { updatedBoard, win, x, returnedColIndex } = this.getMoveResults(
+            board,
             colIndex,
             currentTurn
         );
@@ -231,7 +240,7 @@ export class Game extends Component<{}, State> {
         // first check win in column and only if false, run other checks
         let win = checkColumnForWin(updatedBoard[colIndex], currentTurn);
         if (!win) {
-            win = this.checkDiaganolAndRowWinConditions(
+            win = checkDiaganolAndRowWinConditions(
                 intervals,
                 updatedBoard,
                 currentTurn,
@@ -239,69 +248,6 @@ export class Game extends Component<{}, State> {
             );
         }
         return { win, winColIndex: colIndex };
-    };
-
-    winCheckByInterval = (board, currentTurn, interval, flatIndex) => {
-        let win = false;
-        let count = 0;
-        board.flat().forEach((space, i) => {
-            if ((i - flatIndex) % interval === 0) {
-                if (currentTurn === space) {
-                    count += 1;
-                    if (count >= 4) {
-                        win = true;
-                    }
-                } else {
-                    count = 0;
-                }
-            }
-        });
-        return { win };
-    };
-
-    checkDiaganolAndRowWinConditions = (
-        intervals: number[],
-        board: ColumnType[],
-        currentTurn: PieceType,
-        flatIndex: number
-    ) => {
-        const winChecks = intervals.map(interval => {
-            const { win } = this.winCheckByInterval(
-                board,
-                currentTurn,
-                interval,
-                flatIndex
-            );
-            return { win };
-        });
-        // if at least at least one of win conditions checked is true, return true
-        const winStatus = winChecks.some(item => item.win === true);
-        return winStatus;
-    };
-
-    dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
-        let landed;
-        const newColumn = column.map(space => {
-            if (space === ' ' && !landed) {
-                landed = true;
-                return piece;
-            } else {
-                return space;
-            }
-        });
-        return newColumn;
-    };
-
-    replaceColumn = (
-        board: ColumnType[],
-        columnIndex: number,
-        currentTurn: PieceType
-    ) => {
-        return board.map((column, i) => {
-            return columnIndex === i
-                ? this.dropPieceInColumn(column, currentTurn)
-                : column;
-        });
     };
 
     createBoard = () => {
