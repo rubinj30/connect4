@@ -14,7 +14,7 @@ export const blankBoard: ColumnType[] = [
     blankColumn
 ];
 
-export const nonWinBoard = [
+export const nonWinBoard: ColumnType[] = [
     altColumn,
     blankColumn,
     altColumn,
@@ -24,7 +24,7 @@ export const nonWinBoard = [
     altColumn
 ];
 
-export const someColsFull = [
+export const someColsFull: ColumnType[] = [
     fullColumn,
     fullColumn,
     blankColumn,
@@ -34,11 +34,51 @@ export const someColsFull = [
     blankColumn
 ];
 
-export const firstColAlmostWinBoard = [
+export const firstColAlmostWinBoard: ColumnType[] = [
     almostWinColumn,
     blankColumn,
     blankColumn,
     blankColumn,
     blankColumn,
     blankColumn
+];
+
+export const lastColWinBoard: ColumnType[] = [
+    blankColumn,
+    blankColumn,
+    almostWinColumn,
+    blankColumn,
+    almostWinColumn,
+    blankColumn,
+    winColumn
+];
+
+export const rowWinBoard: ColumnType[] = [
+    blankColumn,
+    blankColumn,
+    blankColumn,
+    almostWinColumn,
+    almostWinColumn,
+    almostWinColumn,
+    almostWinColumn
+];
+
+export const rightDiagWinBoard: ColumnType[] = [
+    blankColumn,
+    blankColumn,
+    almostWinColumn,
+    [' ', 'B', ' ', ' ', ' ', ' '],
+    [' ', ' ', 'B', ' ', ' ', ' '],
+    [' ', ' ', ' ', 'B', ' ', ' '],
+    blankColumn
+];
+
+export const leftDiagWinBoard: ColumnType[] = [
+    blankColumn,
+    blankColumn,
+    blankColumn,
+    [' ', ' ', ' ', ' ', 'B', ' '],
+    [' ', ' ', ' ', 'B', ' ', ' '],
+    [' ', ' ', 'B', ' ', ' ', ' '],
+    [' ', 'B', ' ', ' ', ' ', ' ']
 ];

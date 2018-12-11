@@ -1,66 +1,27 @@
 import {
-    almostWinColumn,
-    winColumn,
-    blankColumn,
+    rowWinBoard,
+    lastColWinBoard,
     nonWinBoard,
-    someColsFull
+    leftDiagWinBoard,
+    rightDiagWinBoard
 } from '../components/mockData';
 
 import { winCheckByInterval, checkColumnForWin, checkAllWinConditions } from './win-check';
 describe('functions that check the current board to see if a winning move has been played', () => {
     // TODO: write tests for this function
     describe('checkAllWinConditions', () => {
-        it('should return a win status and the winning column index played', () => {
+        it('should return a win status and the column index of the winning move played', () => {
             
-        })
+        });
     });
     describe('winCheckByInterval ', () => {
-        let colWinBoard, rowWinBoard, rightDiagWinBoard, leftDiagWinBoard;
-        beforeEach(() => {
-            colWinBoard = [
-                winColumn,
-                almostWinColumn,
-                almostWinColumn,
-                blankColumn,
-                almostWinColumn,
-                blankColumn,
-                almostWinColumn
-            ];
-            rowWinBoard = [
-                blankColumn,
-                blankColumn,
-                blankColumn,
-                almostWinColumn,
-                almostWinColumn,
-                almostWinColumn,
-                almostWinColumn
-            ];
-            rightDiagWinBoard = [
-                blankColumn,
-                blankColumn,
-                almostWinColumn,
-                [' ', 'B', ' ', ' ', ' ', ' '],
-                [' ', ' ', 'B', ' ', ' ', ' '],
-                [' ', ' ', ' ', 'B', ' ', ' '],
-                blankColumn
-            ];
-            leftDiagWinBoard = [
-                blankColumn,
-                blankColumn,
-                blankColumn,
-                [' ', ' ', ' ', ' ', 'B', ' '],
-                [' ', ' ', ' ', 'B', ' ', ' '],
-                [' ', ' ', 'B', ' ', ' ', ' '],
-                [' ', 'B', ' ', ' ', ' ', ' ']
-            ];
-        });
         it('should return false if win condition not met on column', () => {
             const winCheck = winCheckByInterval(nonWinBoard, 'B', 1, 4);
             expect(winCheck.win).toBeFalsy();
         });
         it('should return true if win condition met on column', () => {
             const winCheck = winCheckByInterval(
-                colWinBoard,
+                lastColWinBoard,
                 'B',
                 1,
 
