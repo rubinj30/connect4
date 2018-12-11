@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
+import { PieceType } from '../../types';
 import './atoms.css';
-
-export type PieceType = 'B' | 'R' | SpaceType;
-type SpaceType = ' ';
 
 type Props = {
     piece: PieceType;

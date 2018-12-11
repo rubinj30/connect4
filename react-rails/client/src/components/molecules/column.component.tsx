@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Arrow } from '../atoms/arrow.component';
-import { ComputerTurn } from '../../components/organisms/game.component';
-import { PieceType, Space } from '../atoms/space.component';
-
-export type ColumnType = PieceType[];
+import { Space } from '../atoms/space.component';
+import { PieceType, ColumnType, ComputerTurn } from '../../types';
 
 type Props = {
     win: boolean;
@@ -16,7 +14,7 @@ type Props = {
 };
 
 export class Column extends Component<Props> {
-    anyBlankSpaces = col =>
+    anyBlankSpaces = (col: ColumnType) =>
         col.some(function(space) {
             // checks whether an element is blank
             return space === ' ';

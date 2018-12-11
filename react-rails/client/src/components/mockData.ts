@@ -1,5 +1,4 @@
-import { PieceType } from './atoms/space.component';
-import { ColumnType } from './molecules/column.component';
+import { PieceType, ColumnType } from '../types';
 export const altColumn = ['B', 'R', 'B', ' ', ' ', ' '];
 export const winColumn: PieceType[] = ['B', 'B', 'B', 'B', ' ', ' '];
 export const blankColumn: PieceType[] = [' ', ' ', ' ', ' ', ' ', ' '];

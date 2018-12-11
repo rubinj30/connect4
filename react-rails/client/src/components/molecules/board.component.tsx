@@ -1,16 +1,15 @@
 import React from 'react';
 import { WinMessage } from '../molecules/win-message.component';
-import { BoardType, ComputerTurn } from '../organisms/game.component';
 import { Column } from '../molecules/column.component';
-import { PieceType } from '../atoms/space.component';
+import { PieceType, ColumnType, ComputerTurn } from '../../types';
 
 type Props = {
     currentTurn: PieceType;
     win: boolean;
-    board: BoardType;
+    board: ColumnType[];
     isCompTurn: ComputerTurn;
-    resetBoard: any;
-    handleClick: any;
+    resetBoard: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    handleClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 export const Board = ({

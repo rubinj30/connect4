@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import { Board } from '../molecules/board.component';
-import { ColumnType } from '../molecules/column.component';
 import { NumPlayers } from '../molecules/num-players.component';
 import { BoardSelect } from '../molecules/board-select.component';
-import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
 import { Players } from '../molecules/players.component';
+import { ComputerTurn, PieceType, ColumnType } from '../../types';
+import {
+    getRandomNum,
+    checkColumnForWin,
+    getAvailColIndexes,
+    getIndexOfPiece,
+    getFlatIndexOfLastDropped
+} from '../../functions/functions';
+
 import './organisms.css';
 
-export type BoardType = ColumnType[];
-export type ComputerTurn = 'y' | 'n' | 'off';
 type State = {
     // TODO: Combine these and maybe event currentTurn
     currentTurn: PieceType;
     isCompTurn: ComputerTurn;
     win: boolean;
-    board: BoardType | [];
+    board: ColumnType[] | [];
     numRows: number;
     numCols: number;
     intervals: number[] | [];
@@ -24,6 +29,7 @@ type State = {
         y: number;
     };
 };
+
 export class Game extends Component<{}, State> {
     state: State = {
         isCompTurn: 'off',
@@ -44,8 +50,11 @@ export class Game extends Component<{}, State> {
     }
 
     // methods needed for AI
-    getSimulatedBoardMoves = (board, simulatedPiece) => {
-        const indexes = this.getAvailColIndexes(board);
+    getSimulatedBoardMoves = (
+        board: ColumnType[],
+        simulatedPiece: PieceType
+    ) => {
+        const indexes = getAvailColIndexes(board);
         return indexes.map(colIndex => {
             return this.getMoveResults(colIndex, simulatedPiece);
         });
@@ -55,8 +64,8 @@ export class Game extends Component<{}, State> {
     getWinMoveFromSims = (sims, numRows, intervals, simulatedPiece) => {
         const results = sims.map((result, i) => {
             const currentIndex = result.returnedColIndex;
-            const x = this.getIndexOfPiece(result.updatedBoard[currentIndex]);
-            const flatIndex = this.getFlatIndexOfLastDropped(
+            const x = getIndexOfPiece(result.updatedBoard[currentIndex]);
+            const flatIndex = getFlatIndexOfLastDropped(
                 x,
                 result.returnedColIndex,
                 numRows
@@ -92,10 +101,10 @@ export class Game extends Component<{}, State> {
         const compWinObj = await results.find(item => item.win === true);
 
         // find indexes that can be played
-        const availIndexes = this.getAvailColIndexes(board);
+        const availIndexes = getAvailColIndexes(board);
 
         // set index to random column for next move, if no possible wins are found for comp or comp to block
-        let compDropIndex = this.getRandomNum(availIndexes);
+        let compDropIndex = getRandomNum(availIndexes);
 
         if (compWinObj) {
             compDropIndex = compWinObj.winColIndex;
@@ -116,25 +125,6 @@ export class Game extends Component<{}, State> {
         setTimeout(() => {
             this.playMove(compDropIndex);
         }, 800);
-    };
-
-    getRandomNum = indexes => {
-        return indexes[Math.floor(Math.random() * indexes.length)];
-    };
-
-    // finds the available columns that can be used by computer
-    getAvailColIndexes = (board: BoardType) => {
-        const isColAvail = col => col.some(space => space === ' ');
-        const indexes =
-            board &&
-            board
-                .map((col, i) => {
-                    if (isColAvail(col)) {
-                        return i;
-                    }
-                })
-                .filter(x => typeof x === 'number');
-        return indexes;
     };
 
     // if computer is playing, this toggles b/w it being computer turn and player turn
@@ -182,8 +172,8 @@ export class Game extends Component<{}, State> {
         // sometimes the move will be mocked so currentTurn will need to be passed as params instead of pulled from state
         const { board, intervals } = this.state;
         const updatedBoard = this.replaceColumn(board, colIndex, currentTurn);
-        const x = this.getIndexOfPiece(updatedBoard[colIndex]);
-        const flatIndexOfLastDropped = this.getFlatIndexOfLastDropped(
+        const x = getIndexOfPiece(updatedBoard[colIndex]);
+        const flatIndexOfLastDropped = getFlatIndexOfLastDropped(
             x,
             colIndex,
             board[0].length
@@ -239,7 +229,7 @@ export class Game extends Component<{}, State> {
         colIndex
     ) => {
         // first check win in column and only if false, run other checks
-        let win = this.checkColumnForWin(updatedBoard[colIndex], currentTurn);
+        let win = checkColumnForWin(updatedBoard[colIndex], currentTurn);
         if (!win) {
             win = this.checkDiaganolAndRowWinConditions(
                 intervals,
@@ -269,25 +259,9 @@ export class Game extends Component<{}, State> {
         return { win };
     };
 
-    checkColumnForWin = (column, currentTurn) => {
-        let win = false;
-        let count = 0;
-        column.forEach((space, i) => {
-            if (space === currentTurn) {
-                count += 1;
-                if (count >= 4) {
-                    win = true;
-                }
-            } else {
-                count = 0;
-            }
-        });
-        return win;
-    };
-
     checkDiaganolAndRowWinConditions = (
         intervals: number[],
-        board: BoardType,
+        board: ColumnType[],
         currentTurn: PieceType,
         flatIndex: number
     ) => {
@@ -305,17 +279,6 @@ export class Game extends Component<{}, State> {
         return winStatus;
     };
 
-    getIndexOfPiece = (column: ColumnType) => {
-        const firstBlankSpace = column.indexOf(' ');
-        const index = firstBlankSpace > -1 ? firstBlankSpace : column.length;
-        return index - 1;
-    };
-
-    getFlatIndexOfLastDropped = (x: number, y: number, colLength: number) => {
-        const flatBoardIndex = x + y * colLength;
-        return flatBoardIndex;
-    };
-
     dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
         let landed;
         const newColumn = column.map(space => {
@@ -330,7 +293,7 @@ export class Game extends Component<{}, State> {
     };
 
     replaceColumn = (
-        board: BoardType,
+        board: ColumnType[],
         columnIndex: number,
         currentTurn: PieceType
     ) => {
@@ -360,18 +323,11 @@ export class Game extends Component<{}, State> {
     };
 
     // called on dropdown select in subcomponent to update the size of the board
-    updateBoardSize = event => {
+    updateBoardSize = (event: React.FormEvent<HTMLSelectElement>) => {
         const numCols = Number(event.currentTarget.value);
         // assumes board always has one more column than row
         this.setState({ numCols, numRows: numCols - 1 });
         this.createBoard();
-    };
-
-    transformRowToColumn = (board, rowIndex) =>
-        board.map(column => column[rowIndex]);
-
-    getFirstIndexOfPattern = (column, pattern) => {
-        return column.join('').lastIndexOf(pattern);
     };
 
     render() {

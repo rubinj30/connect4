@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { PieceType } from '../atoms/space.component';
-import { ComputerTurn } from '../organisms/game.component';
+import { PieceType, ComputerTurn } from '../../types';
 import axios from 'axios';
 
 type Props = {
