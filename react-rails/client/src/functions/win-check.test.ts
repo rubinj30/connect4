@@ -6,8 +6,14 @@ import {
     someColsFull
 } from '../components/mockData';
 
-import { winCheckByInterval, checkColumnForWin } from './win-check';
-describe('standalone functions that the current board for a win', () => {
+import { winCheckByInterval, checkColumnForWin, checkAllWinConditions } from './win-check';
+describe('functions that check the current board to see if a winning move has been played', () => {
+    // TODO: write tests for this function
+    describe('checkAllWinConditions', () => {
+        it('should return a win status and the winning column index played', () => {
+            
+        })
+    });
     describe('winCheckByInterval ', () => {
         let colWinBoard, rowWinBoard, rightDiagWinBoard, leftDiagWinBoard;
         beforeEach(() => {

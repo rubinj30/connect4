@@ -61,3 +61,23 @@ export const checkDiaganolAndRowWinConditions = (
     const winStatus = winChecks.some(item => item.win === true);
     return winStatus;
 };
+
+export const checkAllWinConditions = (
+    intervals,
+    updatedBoard,
+    currentTurn,
+    flatIndexOfLastDropped,
+    colIndex
+) => {
+    // first check win in column and only if false, run other checks
+    let win = checkColumnForWin(updatedBoard[colIndex], currentTurn);
+    if (!win) {
+        win = checkDiaganolAndRowWinConditions(
+            intervals,
+            updatedBoard,
+            currentTurn,
+            flatIndexOfLastDropped
+        );
+    }
+    return { win, winColIndex: colIndex };
+};

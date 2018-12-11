@@ -5,11 +5,7 @@ import { BoardSelect } from '../molecules/board-select.component';
 import { Space } from '../atoms/space.component';
 import { Players } from '../molecules/players.component';
 import { ComputerTurn, PieceType, ColumnType } from '../../types';
-import {
-    checkColumnForWin,
-    winCheckByInterval,
-    checkDiaganolAndRowWinConditions
-} from '../../functions/win-check';
+import { checkAllWinConditions } from '../../functions/win-check';
 import {
     getRandomNum,
     getAvailColIndexes,
@@ -61,7 +57,7 @@ export class Game extends Component<{}, State> {
     ) => {
         console.log('Orig board', board);
         const indexes = getAvailColIndexes(board);
-        const simulated =  indexes.map(colIndex => {
+        const simulated = indexes.map(colIndex => {
             return this.getMoveResults(board, colIndex, simulatedPiece);
         });
         console.log(simulated);
@@ -78,7 +74,7 @@ export class Game extends Component<{}, State> {
                 result.returnedColIndex,
                 numRows
             );
-            const { win, winColIndex } = this.checkAllWinConditions(
+            const { win, winColIndex } = checkAllWinConditions(
                 intervals,
                 result.updatedBoard,
                 simulatedPiece,
@@ -188,7 +184,7 @@ export class Game extends Component<{}, State> {
         );
 
         // checks column, row, and both diaganol directions and returns win to be true if its true
-        const { win } = this.checkAllWinConditions(
+        const { win } = checkAllWinConditions(
             intervals,
             updatedBoard,
             currentTurn,
@@ -201,7 +197,7 @@ export class Game extends Component<{}, State> {
     // took out of handleClick so that it is not dependent on handleClick and can be used for computer moves
     playMove = colIndex => {
         // going to pass to getMoveResults, but only on actual move
-        const { currentTurn, board} = this.state;
+        const { currentTurn, board } = this.state;
         const { updatedBoard, win, x, returnedColIndex } = this.getMoveResults(
             board,
             colIndex,
@@ -227,27 +223,6 @@ export class Game extends Component<{}, State> {
 
         // needs to run only if compIsOn and the column is not already full
         !win && isCompTurn === 'y' && this.compMove();
-    };
-
-    // next 4 methods are used to check board for win
-    checkAllWinConditions = (
-        intervals,
-        updatedBoard,
-        currentTurn,
-        flatIndexOfLastDropped,
-        colIndex
-    ) => {
-        // first check win in column and only if false, run other checks
-        let win = checkColumnForWin(updatedBoard[colIndex], currentTurn);
-        if (!win) {
-            win = checkDiaganolAndRowWinConditions(
-                intervals,
-                updatedBoard,
-                currentTurn,
-                flatIndexOfLastDropped
-            );
-        }
-        return { win, winColIndex: colIndex };
     };
 
     createBoard = () => {
