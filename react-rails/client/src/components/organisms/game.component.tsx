@@ -127,9 +127,9 @@ export class Game extends Component<{}, State> {
                 // also returning the first column played
                 const secondRound = this.simulateSeconRoundMoves(compSims);
                 let win = { status: false, firstColPlayed: 0 };
-                secondRound.forEach((sims, i) => {
+                const test = secondRound.filter((sims, i) => {
                     // console.log('sims', sims.simulated);
-                    return sims.simulated.forEach((secondRoundSim, j) => {
+                    const wins = sims.simulated.filter((secondRoundSim, j) => {
                         // console.log(secondRoundSim);
                         if (secondRoundSim.win === true) {
                             win.status = true;
@@ -137,9 +137,16 @@ export class Game extends Component<{}, State> {
                             win.firstColPlayed =
                                 secondRoundSim.returnedColIndex;
                         }
-                        console.log('win', win);
+                        return secondRoundSim.win === true;
                     });
+                    console.log('wins', wins);
+                    return wins.length > 0;
                 });
+                console.log(test);
+                if (test.length > 0) {
+                    console.log('played ', test[0].firstDroppedIndex);
+                    compDropIndex = test[0].firstDroppedIndex;
+                }
                 // const results = await this.getWinMoveFromSims(
                 //     playerSims,
                 //     numRows,
