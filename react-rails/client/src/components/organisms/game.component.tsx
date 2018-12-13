@@ -55,12 +55,10 @@ export class Game extends Component<{}, State> {
         board: ColumnType[],
         simulatedPiece: PieceType
     ) => {
-        console.log('Orig board', board);
         const indexes = getAvailColIndexes(board);
         const simulated = indexes.map(colIndex => {
             return this.getMoveResults(board, colIndex, simulatedPiece);
         });
-        console.log(simulated);
         return simulated;
     };
 
@@ -123,12 +121,51 @@ export class Game extends Component<{}, State> {
             const opponentWinObj = results.find(item => item.win === true);
             if (opponentWinObj) {
                 compDropIndex = opponentWinObj.winColIndex;
+            } else {
+                // if still no win from player or comp, play each previously simulated board
+                // returning a simulated board for each column, for each of the previously played boards
+                // also returning the first column played
+                const secondRound = this.simulateSeconRoundMoves(compSims);
+                let win = { status: false, firstColPlayed: 0 };
+                secondRound.forEach((sims, i) => {
+                    // console.log('sims', sims.simulated);
+                    return sims.simulated.forEach((secondRoundSim, j) => {
+                        // console.log(secondRoundSim);
+                        if (secondRoundSim.win === true) {
+                            win.status = true;
+                            // console.log(secondRoundSim);
+                            win.firstColPlayed =
+                                secondRoundSim.returnedColIndex;
+                        }
+                        console.log('win', win);
+                    });
+                });
+                // const results = await this.getWinMoveFromSims(
+                //     playerSims,
+                //     numRows,
+                //     intervals,
+                //     'B'
+                // );
             }
         }
         // delaying to make game more like playing another person
         setTimeout(() => {
             this.playMove(compDropIndex);
         }, 800);
+    };
+
+    simulateSeconRoundMoves = sims => {
+        const secondRound = sims.map((sim, i) => {
+            const simulated = this.getSimulatedBoardMoves(
+                sim.updatedBoard,
+                'R'
+            );
+            return {
+                simulated: simulated,
+                firstDroppedIndex: sim.returnedColIndex
+            };
+        });
+        return secondRound;
     };
 
     // if computer is playing, this toggles b/w it being computer turn and player turn
