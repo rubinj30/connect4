@@ -118,6 +118,7 @@ export class Game extends Component<{}, State> {
                 intervals,
                 'B'
             );
+
             const opponentWinObj = results.find(item => item.win === true);
             if (opponentWinObj) {
                 compDropIndex = opponentWinObj.winColIndex;
@@ -127,32 +128,20 @@ export class Game extends Component<{}, State> {
                 // also returning the first column played
                 const secondRound = this.simulateSeconRoundMoves(compSims);
                 let win = { status: false, firstColPlayed: 0 };
-                const test = secondRound.filter((sims, i) => {
-                    // console.log('sims', sims.simulated);
+                const secondRoundWins = secondRound.filter((sims, i) => {
                     const wins = sims.simulated.filter((secondRoundSim, j) => {
-                        // console.log(secondRoundSim);
                         if (secondRoundSim.win === true) {
                             win.status = true;
-                            // console.log(secondRoundSim);
                             win.firstColPlayed =
                                 secondRoundSim.returnedColIndex;
                         }
                         return secondRoundSim.win === true;
                     });
-                    console.log('wins', wins);
                     return wins.length > 0;
                 });
-                console.log(test);
-                if (test.length > 0) {
-                    console.log('played ', test[0].firstDroppedIndex);
-                    compDropIndex = test[0].firstDroppedIndex;
+                if (secondRoundWins.length > 0) {
+                    compDropIndex = secondRoundWins[0].firstDroppedIndex;
                 }
-                // const results = await this.getWinMoveFromSims(
-                //     playerSims,
-                //     numRows,
-                //     intervals,
-                //     'B'
-                // );
             }
         }
         // delaying to make game more like playing another person
@@ -259,14 +248,13 @@ export class Game extends Component<{}, State> {
         });
     };
 
-    handleClick = async event => {
-        const clickedColIndex = Number(event.currentTarget.dataset.index);
-        this.playMove(clickedColIndex);
-
+    handleClick = event => {
         const { win, isCompTurn } = this.state;
-
-        // needs to run only if compIsOn and the column is not already full
-        !win && isCompTurn === 'y' && this.compMove();
+        const clickedColIndex = Number(event.currentTarget.dataset.index);
+        Promise.resolve(this.playMove(clickedColIndex)).then(() => {
+            // needs to run only if compIsOn and the column is not already full
+            !win && isCompTurn === 'y' && this.compMove();
+        });
     };
 
     createBoard = () => {
