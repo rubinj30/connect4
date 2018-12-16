@@ -90,17 +90,11 @@ export class Game extends Component<{}, State> {
     compMove = async () => {
         const { board, intervals, numRows } = this.state;
 
-        // eventually use while loop to keep checking until win and count the moves made
+        // if no win in any of these, they'll be used for a 2nd simulation of computer's turn
         const compSims = await this.getSimulatedBoardMoves(board, 'R');
-        const results = await this.getWinMoveFromSims(
-            compSims,
-            numRows,
-            intervals,
-            'R'
-        );
 
         // If results contain a win, set the first one to the let var
-        const compWinObj = results.find(item => item.win === true);
+        const compWinObj = compSims.find(sim => sim.win === true);
 
         // find indexes that can be played
         const availIndexes = getAvailColIndexes(board);
@@ -109,37 +103,27 @@ export class Game extends Component<{}, State> {
         let compDropIndex = getRandomNum(availIndexes);
 
         if (compWinObj) {
-            compDropIndex = compWinObj.winColIndex;
+            compDropIndex = compWinObj.returnedColIndex;
         } else {
             const playerSims = await this.getSimulatedBoardMoves(board, 'B');
-            const results = await this.getWinMoveFromSims(
-                playerSims,
-                numRows,
-                intervals,
-                'B'
-            );
 
-            const opponentWinObj = results.find(item => item.win === true);
+            const opponentWinObj = playerSims.find(item => item.win === true);
             if (opponentWinObj) {
-                compDropIndex = opponentWinObj.winColIndex;
+                compDropIndex = opponentWinObj.returnedColIndex;
             } else {
                 // if still no win from player or comp, play each previously simulated board
                 // returning a simulated board for each column, for each of the previously played boards
                 // also returning the first column played
                 const secondRound = this.simulateSeconRoundMoves(compSims);
-                let win = { status: false, firstColPlayed: 0 };
                 const secondRoundWins = secondRound.filter((sims, i) => {
                     const wins = sims.simulated.filter((secondRoundSim, j) => {
-                        if (secondRoundSim.win === true) {
-                            win.status = true;
-                            win.firstColPlayed =
-                                secondRoundSim.returnedColIndex;
-                        }
                         return secondRoundSim.win === true;
                     });
                     return wins.length > 0;
                 });
                 if (secondRoundWins.length > 0) {
+                    // if there is a win on the 2nd round, then drop the first simulation column
+                    // this assumes that if the player does not block this, then the win will be avail
                     compDropIndex = secondRoundWins[0].firstDroppedIndex;
                 }
             }
