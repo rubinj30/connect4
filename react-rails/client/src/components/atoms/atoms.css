@@ -1,6 +1,11 @@
 .space {
     height: 2.5rem;
     width: 2.5rem;
+    box-shadow: inset 1px 1px 1px rgb(0, 0, 0, 0.26);
+}
+
+.empty {
+    box-shadow: inset 1px 3px 4px rgb(0, 0, 0, 0.36);
 }
 
 button {
