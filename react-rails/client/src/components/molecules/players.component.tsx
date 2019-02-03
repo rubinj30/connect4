@@ -10,6 +10,7 @@ export type PlayerType = {
     name: string;
     wins: number;
     losses: number;
+    id: number;
 };
 
 type Props = {

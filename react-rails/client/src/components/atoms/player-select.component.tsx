@@ -2,7 +2,17 @@ import React from 'react';
 import { PlayerType } from '../molecules/players.component';
 import './atoms.css';
 
-export const PlayerSelect = ({ players, updateDropdown, otherPlayer }) => (
+type Props = {
+    players: PlayerType[];
+    otherPlayer: PlayerType;
+    updateDropdown: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export const PlayerSelect = ({
+    players,
+    updateDropdown,
+    otherPlayer
+}: Props) => (
     <select className="playerSelect h2 ma2 pa2" onChange={updateDropdown}>
         <option value="" hidden>
             -- saved player --
