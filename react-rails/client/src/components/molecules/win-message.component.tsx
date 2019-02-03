@@ -1,7 +1,6 @@
 import React from 'react';
-import { PieceType } from '../atoms/space.component';
 import { Button } from '../atoms/button.component';
-
+import { PieceType } from '../../types';
 import './molecules.css';
 
 type Props = {

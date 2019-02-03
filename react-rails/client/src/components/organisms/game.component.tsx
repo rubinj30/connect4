@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
 import { Board } from '../molecules/board.component';
-import { ColumnType } from '../molecules/column.component';
 import { NumPlayers } from '../molecules/num-players.component';
 import { BoardSelect } from '../molecules/board-select.component';
-import { PieceType } from '../atoms/space.component';
 import { Space } from '../atoms/space.component';
 import { Players } from '../molecules/players.component';
+import { ComputerTurn, PieceType, ColumnType } from '../../types';
+import { checkAllWinConditions } from '../../functions/win-check';
+import {
+    getRandomNum,
+    getAvailColIndexes,
+    getIndexOfPiece,
+    getFlatIndexOfLastDropped,
+    replaceColumn
+} from '../../functions/general';
+
 import './organisms.css';
 
-export type BoardType = ColumnType[];
-export type ComputerTurn = 'y' | 'n' | 'off';
 type State = {
     // TODO: Combine these and maybe event currentTurn
     currentTurn: PieceType;
     isCompTurn: ComputerTurn;
     win: boolean;
-    board: BoardType | [];
+    board: ColumnType[] | [];
     numRows: number;
     numCols: number;
     intervals: number[] | [];
@@ -24,6 +30,7 @@ type State = {
         y: number;
     };
 };
+
 export class Game extends Component<{}, State> {
     state: State = {
         isCompTurn: 'off',
@@ -44,29 +51,33 @@ export class Game extends Component<{}, State> {
     }
 
     // methods needed for AI
-    getSimulatedBoardMoves = (board, simulatedPiece) => {
-        const indexes = this.getAvailColIndexes(board);
-        return indexes.map(colIndex => {
-            return this.getMoveResults(colIndex, simulatedPiece);
+    getSimulatedBoardMoves = (
+        board: ColumnType[],
+        simulatedPiece: PieceType
+    ) => {
+        const indexes = getAvailColIndexes(board);
+        const simulated = indexes.map(colIndex => {
+            return this.getMoveResults(board, colIndex, simulatedPiece);
         });
+        return simulated;
     };
 
     // finds win move in simulations, if there is one
     getWinMoveFromSims = (sims, numRows, intervals, simulatedPiece) => {
         const results = sims.map((result, i) => {
-            const currentIndex = result.returnedColIndex;
-            const x = this.getIndexOfPiece(result.updatedBoard[currentIndex]);
-            const flatIndex = this.getFlatIndexOfLastDropped(
+            const currentIndex = i;
+            const x = getIndexOfPiece(result.updatedBoard[currentIndex]);
+            const flatIndex = getFlatIndexOfLastDropped(
                 x,
                 result.returnedColIndex,
                 numRows
             );
-            const { win, winColIndex } = this.checkAllWinConditions(
+            const { win, winColIndex } = checkAllWinConditions(
                 intervals,
                 result.updatedBoard,
                 simulatedPiece,
                 flatIndex,
-                result.returnedColIndex
+                i
             );
             return { win, winColIndex };
         });
@@ -79,37 +90,42 @@ export class Game extends Component<{}, State> {
     compMove = async () => {
         const { board, intervals, numRows } = this.state;
 
-        // eventually use while loop to keep checking until win and count the moves made
-        const compSims = this.getSimulatedBoardMoves(board, 'R');
-        const results = this.getWinMoveFromSims(
-            compSims,
-            numRows,
-            intervals,
-            'R'
-        );
+        // if no win in any of these, they'll be used for a 2nd simulation of computer's turn
+        const compSims = await this.getSimulatedBoardMoves(board, 'R');
 
         // If results contain a win, set the first one to the let var
-        const compWinObj = await results.find(item => item.win === true);
+        const compWinObj = compSims.find(sim => sim.win === true);
 
         // find indexes that can be played
-        const availIndexes = this.getAvailColIndexes(board);
+        const availIndexes = getAvailColIndexes(board);
 
         // set index to random column for next move, if no possible wins are found for comp or comp to block
-        let compDropIndex = this.getRandomNum(availIndexes);
+        let compDropIndex = getRandomNum(availIndexes);
 
         if (compWinObj) {
-            compDropIndex = compWinObj.winColIndex;
+            compDropIndex = compWinObj.returnedColIndex;
         } else {
-            const playerSims = this.getSimulatedBoardMoves(board, 'B');
-            const results = this.getWinMoveFromSims(
-                playerSims,
-                numRows,
-                intervals,
-                'B'
-            );
-            const opponentWinObj = results.find(item => item.win === true);
+            const playerSims = await this.getSimulatedBoardMoves(board, 'B');
+
+            const opponentWinObj = playerSims.find(item => item.win === true);
             if (opponentWinObj) {
-                compDropIndex = opponentWinObj.winColIndex;
+                compDropIndex = opponentWinObj.returnedColIndex;
+            } else {
+                // if still no win from player or comp, play each previously simulated board
+                // returning a simulated board for each column, for each of the previously played boards
+                // also returning the first column played
+                const secondRound = this.simulateSeconRoundMoves(compSims);
+                const secondRoundWins = secondRound.filter((sims, i) => {
+                    const wins = sims.simulated.filter((secondRoundSim, j) => {
+                        return secondRoundSim.win === true;
+                    });
+                    return wins.length > 0;
+                });
+                if (secondRoundWins.length > 0) {
+                    // if there is a win on the 2nd round, then drop the first simulation column
+                    // this assumes that if the player does not block this, then the win will be avail
+                    compDropIndex = secondRoundWins[0].firstDroppedIndex;
+                }
             }
         }
         // delaying to make game more like playing another person
@@ -118,23 +134,18 @@ export class Game extends Component<{}, State> {
         }, 800);
     };
 
-    getRandomNum = indexes => {
-        return indexes[Math.floor(Math.random() * indexes.length)];
-    };
-
-    // finds the available columns that can be used by computer
-    getAvailColIndexes = (board: BoardType) => {
-        const isColAvail = col => col.some(space => space === ' ');
-        const indexes =
-            board &&
-            board
-                .map((col, i) => {
-                    if (isColAvail(col)) {
-                        return i;
-                    }
-                })
-                .filter(x => typeof x === 'number');
-        return indexes;
+    simulateSeconRoundMoves = sims => {
+        const secondRound = sims.map((sim, i) => {
+            const simulated = this.getSimulatedBoardMoves(
+                sim.updatedBoard,
+                'R'
+            );
+            return {
+                simulated: simulated,
+                firstDroppedIndex: sim.returnedColIndex
+            };
+        });
+        return secondRound;
     };
 
     // if computer is playing, this toggles b/w it being computer turn and player turn
@@ -169,30 +180,28 @@ export class Game extends Component<{}, State> {
         });
     };
 
-    // used in checking diaganolly for wins and rows
+    // used in checking diaganolly and horizontally for wins and rows
     setWinCheckIntervals = () => {
-        this.setState(({ numCols }: { numCols: number }) => {
-            // first three standard sizes mentioned on wikipedia say the board has 1 more column than rows
-            // these intervals assume that is always the case
-            // win checks should work for any size board as long as there is one more column than row
-            const intervals = [numCols - 2, numCols - 1, numCols];
+        this.setState(({ numRows }: { numRows: number }) => {
+            // these are based on number of rows on a board
+            const intervals = [numRows - 1, numRows, numRows + 1];
             return { intervals };
         });
     };
 
-    getMoveResults = (colIndex, currentTurn) => {
+    getMoveResults = (board, colIndex, currentTurn) => {
         // sometimes the move will be mocked so currentTurn will need to be passed as params instead of pulled from state
-        const { board, intervals } = this.state;
-        const updatedBoard = this.replaceColumn(board, colIndex, currentTurn);
-        const x = this.getIndexOfPiece(updatedBoard[colIndex]);
-        const flatIndexOfLastDropped = this.getFlatIndexOfLastDropped(
+        const { intervals } = this.state;
+        const updatedBoard = replaceColumn(board, colIndex, currentTurn);
+        const x = getIndexOfPiece(updatedBoard[colIndex]);
+        const flatIndexOfLastDropped = getFlatIndexOfLastDropped(
             x,
             colIndex,
             board[0].length
         );
 
         // checks column, row, and both diaganol directions and returns win to be true if its true
-        const { win } = this.checkAllWinConditions(
+        const { win } = checkAllWinConditions(
             intervals,
             updatedBoard,
             currentTurn,
@@ -205,8 +214,9 @@ export class Game extends Component<{}, State> {
     // took out of handleClick so that it is not dependent on handleClick and can be used for computer moves
     playMove = colIndex => {
         // going to pass to getMoveResults, but only on actual move
-        const { currentTurn } = this.state;
+        const { currentTurn, board } = this.state;
         const { updatedBoard, win, x, returnedColIndex } = this.getMoveResults(
+            board,
             colIndex,
             currentTurn
         );
@@ -222,124 +232,12 @@ export class Game extends Component<{}, State> {
         });
     };
 
-    handleClick = async event => {
-        const clickedColIndex = Number(event.currentTarget.dataset.index);
-        this.playMove(clickedColIndex);
-
+    handleClick = event => {
         const { win, isCompTurn } = this.state;
-
-        // needs to run only if compIsOn and the column is not already full
-        !win && isCompTurn === 'y' && this.compMove();
-    };
-
-    // next 4 methods are used to check board for win
-    checkAllWinConditions = (
-        intervals,
-        updatedBoard,
-        currentTurn,
-        flatIndexOfLastDropped,
-        colIndex
-    ) => {
-        // first check win in column and only if false, run other checks
-        let win = this.checkColumnForWin(updatedBoard[colIndex], currentTurn);
-        if (!win) {
-            win = this.checkDiaganolAndRowWinConditions(
-                intervals,
-                updatedBoard,
-                currentTurn,
-                flatIndexOfLastDropped
-            );
-        }
-        return { win, winColIndex: colIndex };
-    };
-
-    winCheckByInterval = (board, currentTurn, interval, flatIndex) => {
-        let win = false;
-        let count = 0;
-        board.flat().forEach((space, i) => {
-            if ((i - flatIndex) % interval === 0) {
-                if (currentTurn === space) {
-                    count += 1;
-                    if (count >= 4) {
-                        win = true;
-                    }
-                } else {
-                    count = 0;
-                }
-            }
-        });
-        return { win };
-    };
-
-    checkColumnForWin = (column, currentTurn) => {
-        let win = false;
-        let count = 0;
-        column.forEach((space, i) => {
-            if (space === currentTurn) {
-                count += 1;
-                if (count >= 4) {
-                    win = true;
-                }
-            } else {
-                count = 0;
-            }
-        });
-        return win;
-    };
-
-    checkDiaganolAndRowWinConditions = (
-        intervals: number[],
-        board: BoardType,
-        currentTurn: PieceType,
-        flatIndex: number
-    ) => {
-        const winChecks = intervals.map(interval => {
-            const { win } = this.winCheckByInterval(
-                board,
-                currentTurn,
-                interval,
-                flatIndex
-            );
-            return { win };
-        });
-        // if at least at least one of win conditions checked is true, return true
-        const winStatus = winChecks.some(item => item.win === true);
-        return winStatus;
-    };
-
-    getIndexOfPiece = (column: ColumnType) => {
-        const firstBlankSpace = column.indexOf(' ');
-        const index = firstBlankSpace > -1 ? firstBlankSpace : column.length;
-        return index - 1;
-    };
-
-    getFlatIndexOfLastDropped = (x: number, y: number, colLength: number) => {
-        const flatBoardIndex = x + y * colLength;
-        return flatBoardIndex;
-    };
-
-    dropPieceInColumn = (column: ColumnType, piece: PieceType) => {
-        let landed;
-        const newColumn = column.map(space => {
-            if (space === ' ' && !landed) {
-                landed = true;
-                return piece;
-            } else {
-                return space;
-            }
-        });
-        return newColumn;
-    };
-
-    replaceColumn = (
-        board: BoardType,
-        columnIndex: number,
-        currentTurn: PieceType
-    ) => {
-        return board.map((column, i) => {
-            return columnIndex === i
-                ? this.dropPieceInColumn(column, currentTurn)
-                : column;
+        const clickedColIndex = Number(event.currentTarget.dataset.index);
+        Promise.resolve(this.playMove(clickedColIndex)).then(() => {
+            // needs to run only if compIsOn and the column is not already full
+            !win && isCompTurn === 'y' && this.compMove();
         });
     };
 
@@ -362,7 +260,7 @@ export class Game extends Component<{}, State> {
     };
 
     // called on dropdown select in subcomponent to update the size of the board
-    updateBoardSize = event => {
+    updateBoardSize = (event: React.FormEvent<HTMLSelectElement>) => {
         const numCols = Number(event.currentTarget.value);
         // assumes board always has one more column than row
         this.setState({ numCols, numRows: numCols - 1 });

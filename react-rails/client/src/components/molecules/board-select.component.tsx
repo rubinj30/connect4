@@ -1,6 +1,11 @@
 import React from 'react';
 
-export const BoardSelect = ({ opts, updateBoardSize }) => {
+type Props = {
+    opts: number[];
+    updateBoardSize: (e: React.FormEvent<HTMLSelectElement>) => void;
+};
+
+export const BoardSelect = ({ opts, updateBoardSize }: Props) => {
     return (
         <span>
             <span># of Columns: </span>

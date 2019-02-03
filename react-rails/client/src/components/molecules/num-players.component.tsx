@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ComputerTurn } from '../organisms/game.component';
+import { ComputerTurn } from '../../types';
 
 type Props = {
     isCompTurn: ComputerTurn;
@@ -25,7 +25,9 @@ export class NumPlayers extends Component<Props, {}> {
                 </span>
                 <span
                     className={`pa2 ba option ${
-                        isCompTurn !== 'off' ? 'bg-blue white bw2 b--red' : 'b--blue'
+                        isCompTurn !== 'off'
+                            ? 'bg-blue white bw2 b--red'
+                            : 'b--blue'
                     }`}
                 >
                     Yes

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { PieceType } from '../atoms/space.component';
-import { ComputerTurn } from '../organisms/game.component';
 import { NewPlayer } from './new-player.component';
 import { Button } from '../atoms/button.component';
 import { PlayerSelect } from '../atoms/player-select.component';
 import { CurrentPlayer } from '../atoms/current-player.component';
+import { PieceType, ComputerTurn } from '../../types';
 import axios from 'axios';
 
 export type PlayerType = {
