@@ -41,7 +41,7 @@ export class Players extends Component<Props, State> {
         this.setState({ players: data });
     };
 
-    // combine this and the other
+    // TODO: combine this and the other
     updatePlayerOne = event => {
         const id = event.currentTarget.value;
         var value = this.state.players.filter((player, i) => {
@@ -88,10 +88,12 @@ export class Players extends Component<Props, State> {
                         <PlayerSelect
                             players={players}
                             updateDropdown={this.updatePlayerOne}
+                            otherPlayer={this.state.playerTwo}
                         />
                         <PlayerSelect
                             players={players}
                             updateDropdown={this.updatePlayerTwo}
+                            otherPlayer={this.state.playerOne}
                         />
                     </div>
                     <Button
