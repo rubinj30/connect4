@@ -43,7 +43,7 @@ export class Game extends Component<{}, State> {
         board: [],
         numRows: 6,
         numCols: 7,
-        intervals: [],
+        intervals: []
     };
 
     componentDidMount() {
@@ -268,18 +268,16 @@ export class Game extends Component<{}, State> {
     };
 
     render() {
-        const {
-            currentTurn,
-            board,
-            win,
-            isCompTurn,
-        } = this.state;
+        const { currentTurn, board, win, isCompTurn } = this.state;
         return (
             <div>
                 <div className="flex items-center justify-between">
                     <span className="flex items-center justify-between">
                         <span className="pr3">Turn:</span>
-                        <Space piece={currentTurn} />
+                        <Space
+                            piece={currentTurn}
+                            className="currentTurnPiece"
+                        />
                     </span>
                     <NumPlayers
                         changeCompTurn={this.changeCompTurn}
@@ -294,10 +292,7 @@ export class Game extends Component<{}, State> {
                     resetBoard={this.resetBoard}
                     handleClick={this.handleClick}
                 />
-                <Players
-                    isCompTurn={isCompTurn}
-                    currentTurn={currentTurn}
-                />
+                <Players isCompTurn={isCompTurn} currentTurn={currentTurn} />
                 <BoardSelect
                     updateBoardSize={this.updateBoardSize}
                     opts={[7, 8, 10, 11]}

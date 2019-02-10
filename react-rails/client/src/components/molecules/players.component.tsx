@@ -3,6 +3,7 @@ import { NewPlayer } from './new-player.component';
 import { Button } from '../atoms/button.component';
 import { PlayerSelect } from '../atoms/player-select.component';
 import { CurrentPlayer } from '../atoms/current-player.component';
+import { Collapse } from 'react-collapse';
 import { PieceType, ComputerTurn } from '../../types';
 import axios from 'axios';
 
@@ -102,12 +103,17 @@ export class Players extends Component<Props, State> {
                         onClick={this.toggleNewPlayerForm}
                         className={'w5'}
                     />
-                    {isFormShowing && (
-                        <NewPlayer
-                            isFormShowing={isFormShowing}
-                            toggleNewPlayerForm={this.toggleNewPlayerForm}
-                        />
-                    )}
+                    {
+                        <Collapse
+                            isOpened={isFormShowing}
+                            springConfig={{ stiffness: 260, damping: 26 }}
+                        >
+                            <NewPlayer
+                                isFormShowing={isFormShowing}
+                                toggleNewPlayerForm={this.toggleNewPlayerForm}
+                            />
+                        </Collapse>
+                    }
                 </div>
             )
         );

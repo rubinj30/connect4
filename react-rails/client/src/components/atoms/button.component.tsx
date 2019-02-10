@@ -19,7 +19,7 @@ export const Button = ({
     return (
         <button
             type={type}
-            className={`pointer tc pa2 br2 hover-bg-blue hover-white bg-white f5 ${className}`}
+            className={`pointer tc pa2 br2 bg-white ma1 blue f5 ${className}`}
             onClick={onClick}
         >
             {label}

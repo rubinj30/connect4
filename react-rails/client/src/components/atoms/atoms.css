@@ -12,6 +12,10 @@ button {
     outline: none;
 }
 
+button:hover {
+    background: #e2efff;
+}
+
 .arrow {
     border-left: 30px solid #357edd;
     border-right: 30px solid #357edd;
