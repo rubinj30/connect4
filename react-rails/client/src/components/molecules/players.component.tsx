@@ -69,17 +69,20 @@ export class Players extends Component<Props, State> {
     render() {
         const { playerOne, playerTwo, players, isFormShowing } = this.state;
         const { currentTurn, isCompTurn } = this.props;
+        console.log(currentTurn);
         return (
             players && (
                 <div className="flex flex-column items-center">
                     <div className={`flex justify-around w-100 items-center`}>
                         <CurrentPlayer
+                            className={'B' === currentTurn && 'border'}
                             color={'black'}
                             player={playerOne}
                             isFirst={true}
                             isCompTurn={isCompTurn}
                         />
                         <CurrentPlayer
+                            className={'R' === currentTurn && 'border'}
                             color={'red'}
                             player={playerTwo}
                             isFirst={false}

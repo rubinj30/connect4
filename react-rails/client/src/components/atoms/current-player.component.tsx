@@ -2,7 +2,16 @@ import React from 'react';
 import { WinLoss } from '../atoms/win-loss.component';
 import './atoms.css';
 
-export const CurrentPlayer = ({ player, color, isFirst, isCompTurn }) => {
+export const CurrentPlayer = ({
+    player,
+    color,
+    isFirst,
+    isCompTurn,
+    className
+}) => {
+    console.log(color);
+    console.log(player);
+
     const playerName =
         !isFirst && isCompTurn !== 'off' ? 'COMPUTER' : player.name;
     const compStyle = isCompTurn !== 'off' && !isFirst ? 'b f5' : '';
@@ -10,9 +19,7 @@ export const CurrentPlayer = ({ player, color, isFirst, isCompTurn }) => {
         <>
             {isFirst && <WinLoss player={player} defaultString={'Player 1'} />}
             <div
-                className={`name ma2 w-100 pa2 white bg-${color} ${compStyle} ${
-                    isFirst ? 'border' : ''
-                }`}
+                className={`name ma2 w-100 pa2 white bg-${color} ${compStyle} ${className}`}
             >
                 {playerName}
             </div>
