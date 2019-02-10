@@ -113,6 +113,7 @@ export class Players extends Component<Props, State> {
                             <NewPlayer
                                 isFormShowing={isFormShowing}
                                 toggleNewPlayerForm={this.toggleNewPlayerForm}
+                                getPlayers={this.getPlayers}
                             />
                         </Collapse>
                     }
