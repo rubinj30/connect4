@@ -82,7 +82,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": "LABEL",
-      "className": "pointer tc pa2 br2 hover-bg-blue hover-white bg-white f5 ",
+      "className": "pointer tc pa2 br2 bg-white ma1 blue f5 ",
       "onClick": [MockFunction],
       "type": "button",
     },
@@ -97,7 +97,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": "LABEL",
-        "className": "pointer tc pa2 br2 hover-bg-blue hover-white bg-white f5 ",
+        "className": "pointer tc pa2 br2 bg-white ma1 blue f5 ",
         "onClick": [MockFunction],
         "type": "button",
       },
@@ -166,7 +166,7 @@ ShallowWrapper {
           }
         />,
         <div
-          className="name ma2 w-100 pa2 white bg-black  border"
+          className="name ma2 w-100 pa2 white bg-black  undefined"
         >
           mock player
         </div>,
@@ -197,7 +197,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": "mock player",
-          "className": "name ma2 w-100 pa2 white bg-black  border",
+          "className": "name ma2 w-100 pa2 white bg-black  undefined",
         },
         "ref": null,
         "rendered": "mock player",
@@ -225,7 +225,7 @@ ShallowWrapper {
             }
           />,
           <div
-            className="name ma2 w-100 pa2 white bg-black  border"
+            className="name ma2 w-100 pa2 white bg-black  undefined"
           >
             mock player
           </div>,
@@ -256,7 +256,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "mock player",
-            "className": "name ma2 w-100 pa2 white bg-black  border",
+            "className": "name ma2 w-100 pa2 white bg-black  undefined",
           },
           "ref": null,
           "rendered": "mock player",
@@ -306,7 +306,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "className": "bg-black br-100 ma1 space",
+      "className": "bg-black br-100 ma1 space undefined false",
     },
     "ref": null,
     "rendered": null,
@@ -318,7 +318,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "className": "bg-black br-100 ma1 space",
+        "className": "bg-black br-100 ma1 space undefined false",
       },
       "ref": null,
       "rendered": null,
@@ -364,7 +364,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "className": "bg-white br-100 ma1 space",
+      "className": "bg-white br-100 ma1 space undefined empty",
     },
     "ref": null,
     "rendered": null,
@@ -376,7 +376,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "className": "bg-white br-100 ma1 space",
+        "className": "bg-white br-100 ma1 space undefined empty",
       },
       "ref": null,
       "rendered": null,
@@ -422,7 +422,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "className": "bg-red br-100 ma1 space",
+      "className": "bg-red br-100 ma1 space undefined false",
     },
     "ref": null,
     "rendered": null,
@@ -434,7 +434,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "className": "bg-red br-100 ma1 space",
+        "className": "bg-red br-100 ma1 space undefined false",
       },
       "ref": null,
       "rendered": null,

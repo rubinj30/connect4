@@ -9,9 +9,6 @@ export const CurrentPlayer = ({
     isCompTurn,
     className
 }) => {
-    console.log(color);
-    console.log(player);
-
     const playerName =
         !isFirst && isCompTurn !== 'off' ? 'COMPUTER' : player.name;
     const compStyle = isCompTurn !== 'off' && !isFirst ? 'b f5' : '';

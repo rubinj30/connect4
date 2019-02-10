@@ -25,6 +25,7 @@ ShallowWrapper {
           className="flex justify-around w-100 items-center"
         >
           <CurrentPlayer
+            className="border"
             color="black"
             isCompTurn="y"
             isFirst={true}
@@ -38,6 +39,7 @@ ShallowWrapper {
             }
           />
           <CurrentPlayer
+            className={false}
             color="red"
             isCompTurn="y"
             isFirst={false}
@@ -55,6 +57,14 @@ ShallowWrapper {
           className="w-100 flex justify-around"
         >
           <PlayerSelect
+            otherPlayer={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              }
+            }
             players={
               Array [
                 Object {
@@ -68,6 +78,14 @@ ShallowWrapper {
             updateDropdown={[Function]}
           />
           <PlayerSelect
+            otherPlayer={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              }
+            }
             players={
               Array [
                 Object {
@@ -86,7 +104,33 @@ ShallowWrapper {
           label="Create New Player"
           onClick={[Function]}
         />,
-        false,
+        <Collapse
+          fixedHeight={-1}
+          forceInitialAnimation={false}
+          hasNestedCollapse={false}
+          isOpened={false}
+          onMeasure={[Function]}
+          onRender={[Function]}
+          onRest={[Function]}
+          springConfig={
+            Object {
+              "damping": 26,
+              "stiffness": 260,
+            }
+          }
+          style={Object {}}
+          theme={
+            Object {
+              "collapse": "ReactCollapse--collapse",
+              "content": "ReactCollapse--content",
+            }
+          }
+        >
+          <NewPlayer
+            isFormShowing={false}
+            toggleNewPlayerForm={[Function]}
+          />
+        </Collapse>,
       ],
       "className": "flex flex-column items-center",
     },
@@ -99,6 +143,7 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <CurrentPlayer
+              className="border"
               color="black"
               isCompTurn="y"
               isFirst={true}
@@ -112,6 +157,7 @@ ShallowWrapper {
               }
             />,
             <CurrentPlayer
+              className={false}
               color="red"
               isCompTurn="y"
               isFirst={false}
@@ -134,6 +180,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "className": "border",
               "color": "black",
               "isCompTurn": "y",
               "isFirst": true,
@@ -153,6 +200,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "className": false,
               "color": "red",
               "isCompTurn": "y",
               "isFirst": false,
@@ -177,6 +225,14 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -190,6 +246,14 @@ ShallowWrapper {
               updateDropdown={[Function]}
             />,
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -212,6 +276,12 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "otherPlayer": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              },
               "players": Array [
                 Object {
                   "id": 0,
@@ -231,6 +301,12 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "otherPlayer": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              },
               "players": Array [
                 Object {
                   "id": 0,
@@ -261,7 +337,47 @@ ShallowWrapper {
         "rendered": null,
         "type": [Function],
       },
-      false,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <NewPlayer
+            isFormShowing={false}
+            toggleNewPlayerForm={[Function]}
+          />,
+          "fixedHeight": -1,
+          "forceInitialAnimation": false,
+          "hasNestedCollapse": false,
+          "isOpened": false,
+          "onMeasure": [Function],
+          "onRender": [Function],
+          "onRest": [Function],
+          "springConfig": Object {
+            "damping": 26,
+            "stiffness": 260,
+          },
+          "style": Object {},
+          "theme": Object {
+            "collapse": "ReactCollapse--collapse",
+            "content": "ReactCollapse--content",
+          },
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "isFormShowing": false,
+            "toggleNewPlayerForm": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
     ],
     "type": "div",
   },
@@ -276,6 +392,7 @@ ShallowWrapper {
             className="flex justify-around w-100 items-center"
           >
             <CurrentPlayer
+              className="border"
               color="black"
               isCompTurn="y"
               isFirst={true}
@@ -289,6 +406,7 @@ ShallowWrapper {
               }
             />
             <CurrentPlayer
+              className={false}
               color="red"
               isCompTurn="y"
               isFirst={false}
@@ -306,6 +424,14 @@ ShallowWrapper {
             className="w-100 flex justify-around"
           >
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -319,6 +445,14 @@ ShallowWrapper {
               updateDropdown={[Function]}
             />
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -337,7 +471,33 @@ ShallowWrapper {
             label="Create New Player"
             onClick={[Function]}
           />,
-          false,
+          <Collapse
+            fixedHeight={-1}
+            forceInitialAnimation={false}
+            hasNestedCollapse={false}
+            isOpened={false}
+            onMeasure={[Function]}
+            onRender={[Function]}
+            onRest={[Function]}
+            springConfig={
+              Object {
+                "damping": 26,
+                "stiffness": 260,
+              }
+            }
+            style={Object {}}
+            theme={
+              Object {
+                "collapse": "ReactCollapse--collapse",
+                "content": "ReactCollapse--content",
+              }
+            }
+          >
+            <NewPlayer
+              isFormShowing={false}
+              toggleNewPlayerForm={[Function]}
+            />
+          </Collapse>,
         ],
         "className": "flex flex-column items-center",
       },
@@ -350,6 +510,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <CurrentPlayer
+                className="border"
                 color="black"
                 isCompTurn="y"
                 isFirst={true}
@@ -363,6 +524,7 @@ ShallowWrapper {
                 }
               />,
               <CurrentPlayer
+                className={false}
                 color="red"
                 isCompTurn="y"
                 isFirst={false}
@@ -385,6 +547,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "className": "border",
                 "color": "black",
                 "isCompTurn": "y",
                 "isFirst": true,
@@ -404,6 +567,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "className": false,
                 "color": "red",
                 "isCompTurn": "y",
                 "isFirst": false,
@@ -428,6 +592,14 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <PlayerSelect
+                otherPlayer={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 2",
+                    "wins": 0,
+                  }
+                }
                 players={
                   Array [
                     Object {
@@ -441,6 +613,14 @@ ShallowWrapper {
                 updateDropdown={[Function]}
               />,
               <PlayerSelect
+                otherPlayer={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  }
+                }
                 players={
                   Array [
                     Object {
@@ -463,6 +643,12 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "otherPlayer": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                },
                 "players": Array [
                   Object {
                     "id": 0,
@@ -482,6 +668,12 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "otherPlayer": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
                 "players": Array [
                   Object {
                     "id": 0,
@@ -512,7 +704,47 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
-        false,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <NewPlayer
+              isFormShowing={false}
+              toggleNewPlayerForm={[Function]}
+            />,
+            "fixedHeight": -1,
+            "forceInitialAnimation": false,
+            "hasNestedCollapse": false,
+            "isOpened": false,
+            "onMeasure": [Function],
+            "onRender": [Function],
+            "onRest": [Function],
+            "springConfig": Object {
+              "damping": 26,
+              "stiffness": 260,
+            },
+            "style": Object {},
+            "theme": Object {
+              "collapse": "ReactCollapse--collapse",
+              "content": "ReactCollapse--content",
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "isFormShowing": false,
+              "toggleNewPlayerForm": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
       ],
       "type": "div",
     },
@@ -562,6 +794,7 @@ ShallowWrapper {
           className="flex justify-around w-100 items-center"
         >
           <CurrentPlayer
+            className="border"
             color="black"
             isCompTurn="n"
             isFirst={true}
@@ -575,6 +808,7 @@ ShallowWrapper {
             }
           />
           <CurrentPlayer
+            className={false}
             color="red"
             isCompTurn="n"
             isFirst={false}
@@ -592,6 +826,14 @@ ShallowWrapper {
           className="w-100 flex justify-around"
         >
           <PlayerSelect
+            otherPlayer={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              }
+            }
             players={
               Array [
                 Object {
@@ -605,6 +847,14 @@ ShallowWrapper {
             updateDropdown={[Function]}
           />
           <PlayerSelect
+            otherPlayer={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              }
+            }
             players={
               Array [
                 Object {
@@ -623,7 +873,33 @@ ShallowWrapper {
           label="Create New Player"
           onClick={[Function]}
         />,
-        false,
+        <Collapse
+          fixedHeight={-1}
+          forceInitialAnimation={false}
+          hasNestedCollapse={false}
+          isOpened={false}
+          onMeasure={[Function]}
+          onRender={[Function]}
+          onRest={[Function]}
+          springConfig={
+            Object {
+              "damping": 26,
+              "stiffness": 260,
+            }
+          }
+          style={Object {}}
+          theme={
+            Object {
+              "collapse": "ReactCollapse--collapse",
+              "content": "ReactCollapse--content",
+            }
+          }
+        >
+          <NewPlayer
+            isFormShowing={false}
+            toggleNewPlayerForm={[Function]}
+          />
+        </Collapse>,
       ],
       "className": "flex flex-column items-center",
     },
@@ -636,6 +912,7 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <CurrentPlayer
+              className="border"
               color="black"
               isCompTurn="n"
               isFirst={true}
@@ -649,6 +926,7 @@ ShallowWrapper {
               }
             />,
             <CurrentPlayer
+              className={false}
               color="red"
               isCompTurn="n"
               isFirst={false}
@@ -671,6 +949,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "className": "border",
               "color": "black",
               "isCompTurn": "n",
               "isFirst": true,
@@ -690,6 +969,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "className": false,
               "color": "red",
               "isCompTurn": "n",
               "isFirst": false,
@@ -714,6 +994,14 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -727,6 +1015,14 @@ ShallowWrapper {
               updateDropdown={[Function]}
             />,
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -749,6 +1045,12 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "otherPlayer": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              },
               "players": Array [
                 Object {
                   "id": 0,
@@ -768,6 +1070,12 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "otherPlayer": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              },
               "players": Array [
                 Object {
                   "id": 0,
@@ -798,7 +1106,47 @@ ShallowWrapper {
         "rendered": null,
         "type": [Function],
       },
-      false,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <NewPlayer
+            isFormShowing={false}
+            toggleNewPlayerForm={[Function]}
+          />,
+          "fixedHeight": -1,
+          "forceInitialAnimation": false,
+          "hasNestedCollapse": false,
+          "isOpened": false,
+          "onMeasure": [Function],
+          "onRender": [Function],
+          "onRest": [Function],
+          "springConfig": Object {
+            "damping": 26,
+            "stiffness": 260,
+          },
+          "style": Object {},
+          "theme": Object {
+            "collapse": "ReactCollapse--collapse",
+            "content": "ReactCollapse--content",
+          },
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "isFormShowing": false,
+            "toggleNewPlayerForm": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
     ],
     "type": "div",
   },
@@ -813,6 +1161,7 @@ ShallowWrapper {
             className="flex justify-around w-100 items-center"
           >
             <CurrentPlayer
+              className="border"
               color="black"
               isCompTurn="n"
               isFirst={true}
@@ -826,6 +1175,7 @@ ShallowWrapper {
               }
             />
             <CurrentPlayer
+              className={false}
               color="red"
               isCompTurn="n"
               isFirst={false}
@@ -843,6 +1193,14 @@ ShallowWrapper {
             className="w-100 flex justify-around"
           >
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -856,6 +1214,14 @@ ShallowWrapper {
               updateDropdown={[Function]}
             />
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -874,7 +1240,33 @@ ShallowWrapper {
             label="Create New Player"
             onClick={[Function]}
           />,
-          false,
+          <Collapse
+            fixedHeight={-1}
+            forceInitialAnimation={false}
+            hasNestedCollapse={false}
+            isOpened={false}
+            onMeasure={[Function]}
+            onRender={[Function]}
+            onRest={[Function]}
+            springConfig={
+              Object {
+                "damping": 26,
+                "stiffness": 260,
+              }
+            }
+            style={Object {}}
+            theme={
+              Object {
+                "collapse": "ReactCollapse--collapse",
+                "content": "ReactCollapse--content",
+              }
+            }
+          >
+            <NewPlayer
+              isFormShowing={false}
+              toggleNewPlayerForm={[Function]}
+            />
+          </Collapse>,
         ],
         "className": "flex flex-column items-center",
       },
@@ -887,6 +1279,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <CurrentPlayer
+                className="border"
                 color="black"
                 isCompTurn="n"
                 isFirst={true}
@@ -900,6 +1293,7 @@ ShallowWrapper {
                 }
               />,
               <CurrentPlayer
+                className={false}
                 color="red"
                 isCompTurn="n"
                 isFirst={false}
@@ -922,6 +1316,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "className": "border",
                 "color": "black",
                 "isCompTurn": "n",
                 "isFirst": true,
@@ -941,6 +1336,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "className": false,
                 "color": "red",
                 "isCompTurn": "n",
                 "isFirst": false,
@@ -965,6 +1361,14 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <PlayerSelect
+                otherPlayer={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 2",
+                    "wins": 0,
+                  }
+                }
                 players={
                   Array [
                     Object {
@@ -978,6 +1382,14 @@ ShallowWrapper {
                 updateDropdown={[Function]}
               />,
               <PlayerSelect
+                otherPlayer={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  }
+                }
                 players={
                   Array [
                     Object {
@@ -1000,6 +1412,12 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "otherPlayer": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                },
                 "players": Array [
                   Object {
                     "id": 0,
@@ -1019,6 +1437,12 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "otherPlayer": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
                 "players": Array [
                   Object {
                     "id": 0,
@@ -1049,7 +1473,47 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
-        false,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <NewPlayer
+              isFormShowing={false}
+              toggleNewPlayerForm={[Function]}
+            />,
+            "fixedHeight": -1,
+            "forceInitialAnimation": false,
+            "hasNestedCollapse": false,
+            "isOpened": false,
+            "onMeasure": [Function],
+            "onRender": [Function],
+            "onRest": [Function],
+            "springConfig": Object {
+              "damping": 26,
+              "stiffness": 260,
+            },
+            "style": Object {},
+            "theme": Object {
+              "collapse": "ReactCollapse--collapse",
+              "content": "ReactCollapse--content",
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "isFormShowing": false,
+              "toggleNewPlayerForm": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
       ],
       "type": "div",
     },
@@ -1099,6 +1563,7 @@ ShallowWrapper {
           className="flex justify-around w-100 items-center"
         >
           <CurrentPlayer
+            className="border"
             color="black"
             isCompTurn="off"
             isFirst={true}
@@ -1112,6 +1577,7 @@ ShallowWrapper {
             }
           />
           <CurrentPlayer
+            className={false}
             color="red"
             isCompTurn="off"
             isFirst={false}
@@ -1129,6 +1595,14 @@ ShallowWrapper {
           className="w-100 flex justify-around"
         >
           <PlayerSelect
+            otherPlayer={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              }
+            }
             players={
               Array [
                 Object {
@@ -1142,6 +1616,14 @@ ShallowWrapper {
             updateDropdown={[Function]}
           />
           <PlayerSelect
+            otherPlayer={
+              Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              }
+            }
             players={
               Array [
                 Object {
@@ -1160,7 +1642,33 @@ ShallowWrapper {
           label="Create New Player"
           onClick={[Function]}
         />,
-        false,
+        <Collapse
+          fixedHeight={-1}
+          forceInitialAnimation={false}
+          hasNestedCollapse={false}
+          isOpened={false}
+          onMeasure={[Function]}
+          onRender={[Function]}
+          onRest={[Function]}
+          springConfig={
+            Object {
+              "damping": 26,
+              "stiffness": 260,
+            }
+          }
+          style={Object {}}
+          theme={
+            Object {
+              "collapse": "ReactCollapse--collapse",
+              "content": "ReactCollapse--content",
+            }
+          }
+        >
+          <NewPlayer
+            isFormShowing={false}
+            toggleNewPlayerForm={[Function]}
+          />
+        </Collapse>,
       ],
       "className": "flex flex-column items-center",
     },
@@ -1173,6 +1681,7 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <CurrentPlayer
+              className="border"
               color="black"
               isCompTurn="off"
               isFirst={true}
@@ -1186,6 +1695,7 @@ ShallowWrapper {
               }
             />,
             <CurrentPlayer
+              className={false}
               color="red"
               isCompTurn="off"
               isFirst={false}
@@ -1208,6 +1718,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "className": "border",
               "color": "black",
               "isCompTurn": "off",
               "isFirst": true,
@@ -1227,6 +1738,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "className": false,
               "color": "red",
               "isCompTurn": "off",
               "isFirst": false,
@@ -1251,6 +1763,14 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -1264,6 +1784,14 @@ ShallowWrapper {
               updateDropdown={[Function]}
             />,
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -1286,6 +1814,12 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "otherPlayer": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 2",
+                "wins": 0,
+              },
               "players": Array [
                 Object {
                   "id": 0,
@@ -1305,6 +1839,12 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
+              "otherPlayer": Object {
+                "id": 0,
+                "losses": 0,
+                "name": "Player 1",
+                "wins": 0,
+              },
               "players": Array [
                 Object {
                   "id": 0,
@@ -1335,7 +1875,47 @@ ShallowWrapper {
         "rendered": null,
         "type": [Function],
       },
-      false,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <NewPlayer
+            isFormShowing={false}
+            toggleNewPlayerForm={[Function]}
+          />,
+          "fixedHeight": -1,
+          "forceInitialAnimation": false,
+          "hasNestedCollapse": false,
+          "isOpened": false,
+          "onMeasure": [Function],
+          "onRender": [Function],
+          "onRest": [Function],
+          "springConfig": Object {
+            "damping": 26,
+            "stiffness": 260,
+          },
+          "style": Object {},
+          "theme": Object {
+            "collapse": "ReactCollapse--collapse",
+            "content": "ReactCollapse--content",
+          },
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "isFormShowing": false,
+            "toggleNewPlayerForm": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
     ],
     "type": "div",
   },
@@ -1350,6 +1930,7 @@ ShallowWrapper {
             className="flex justify-around w-100 items-center"
           >
             <CurrentPlayer
+              className="border"
               color="black"
               isCompTurn="off"
               isFirst={true}
@@ -1363,6 +1944,7 @@ ShallowWrapper {
               }
             />
             <CurrentPlayer
+              className={false}
               color="red"
               isCompTurn="off"
               isFirst={false}
@@ -1380,6 +1962,14 @@ ShallowWrapper {
             className="w-100 flex justify-around"
           >
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -1393,6 +1983,14 @@ ShallowWrapper {
               updateDropdown={[Function]}
             />
             <PlayerSelect
+              otherPlayer={
+                Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                }
+              }
               players={
                 Array [
                   Object {
@@ -1411,7 +2009,33 @@ ShallowWrapper {
             label="Create New Player"
             onClick={[Function]}
           />,
-          false,
+          <Collapse
+            fixedHeight={-1}
+            forceInitialAnimation={false}
+            hasNestedCollapse={false}
+            isOpened={false}
+            onMeasure={[Function]}
+            onRender={[Function]}
+            onRest={[Function]}
+            springConfig={
+              Object {
+                "damping": 26,
+                "stiffness": 260,
+              }
+            }
+            style={Object {}}
+            theme={
+              Object {
+                "collapse": "ReactCollapse--collapse",
+                "content": "ReactCollapse--content",
+              }
+            }
+          >
+            <NewPlayer
+              isFormShowing={false}
+              toggleNewPlayerForm={[Function]}
+            />
+          </Collapse>,
         ],
         "className": "flex flex-column items-center",
       },
@@ -1424,6 +2048,7 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <CurrentPlayer
+                className="border"
                 color="black"
                 isCompTurn="off"
                 isFirst={true}
@@ -1437,6 +2062,7 @@ ShallowWrapper {
                 }
               />,
               <CurrentPlayer
+                className={false}
                 color="red"
                 isCompTurn="off"
                 isFirst={false}
@@ -1459,6 +2085,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "className": "border",
                 "color": "black",
                 "isCompTurn": "off",
                 "isFirst": true,
@@ -1478,6 +2105,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "className": false,
                 "color": "red",
                 "isCompTurn": "off",
                 "isFirst": false,
@@ -1502,6 +2130,14 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <PlayerSelect
+                otherPlayer={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 2",
+                    "wins": 0,
+                  }
+                }
                 players={
                   Array [
                     Object {
@@ -1515,6 +2151,14 @@ ShallowWrapper {
                 updateDropdown={[Function]}
               />,
               <PlayerSelect
+                otherPlayer={
+                  Object {
+                    "id": 0,
+                    "losses": 0,
+                    "name": "Player 1",
+                    "wins": 0,
+                  }
+                }
                 players={
                   Array [
                     Object {
@@ -1537,6 +2181,12 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "otherPlayer": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 2",
+                  "wins": 0,
+                },
                 "players": Array [
                   Object {
                     "id": 0,
@@ -1556,6 +2206,12 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
+                "otherPlayer": Object {
+                  "id": 0,
+                  "losses": 0,
+                  "name": "Player 1",
+                  "wins": 0,
+                },
                 "players": Array [
                   Object {
                     "id": 0,
@@ -1586,7 +2242,47 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
-        false,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <NewPlayer
+              isFormShowing={false}
+              toggleNewPlayerForm={[Function]}
+            />,
+            "fixedHeight": -1,
+            "forceInitialAnimation": false,
+            "hasNestedCollapse": false,
+            "isOpened": false,
+            "onMeasure": [Function],
+            "onRender": [Function],
+            "onRest": [Function],
+            "springConfig": Object {
+              "damping": 26,
+              "stiffness": 260,
+            },
+            "style": Object {},
+            "theme": Object {
+              "collapse": "ReactCollapse--collapse",
+              "content": "ReactCollapse--content",
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "isFormShowing": false,
+              "toggleNewPlayerForm": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
       ],
       "type": "div",
     },

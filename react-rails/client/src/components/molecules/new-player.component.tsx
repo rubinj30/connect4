@@ -22,7 +22,6 @@ export class NewPlayer extends Component<Props, State> {
     };
 
     handleChange = event => {
-        console.log(event.currentTarget.value);
         this.setState({ name: event.currentTarget.value });
     };
 

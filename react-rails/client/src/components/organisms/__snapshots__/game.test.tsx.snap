@@ -30,6 +30,7 @@ ShallowWrapper {
               Turn:
             </span>
             <Space
+              className="currentTurnPiece"
               piece="B"
             />
           </span>
@@ -139,6 +140,7 @@ ShallowWrapper {
                 Turn:
               </span>
               <Space
+                className="currentTurnPiece"
                 piece="B"
               />
             </span>,
@@ -163,6 +165,7 @@ ShallowWrapper {
                   Turn:
                 </span>,
                 <Space
+                  className="currentTurnPiece"
                   piece="B"
                 />,
               ],
@@ -187,6 +190,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
+                  "className": "currentTurnPiece",
                   "piece": "B",
                 },
                 "ref": null,
@@ -335,6 +339,7 @@ ShallowWrapper {
                 Turn:
               </span>
               <Space
+                className="currentTurnPiece"
                 piece="B"
               />
             </span>
@@ -444,6 +449,7 @@ ShallowWrapper {
                   Turn:
                 </span>
                 <Space
+                  className="currentTurnPiece"
                   piece="B"
                 />
               </span>,
@@ -468,6 +474,7 @@ ShallowWrapper {
                     Turn:
                   </span>,
                   <Space
+                    className="currentTurnPiece"
                     piece="B"
                   />,
                 ],
@@ -492,6 +499,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
+                    "className": "currentTurnPiece",
                     "piece": "B",
                   },
                   "ref": null,
@@ -672,6 +680,7 @@ ShallowWrapper {
               Turn:
             </span>
             <Space
+              className="currentTurnPiece"
               piece="B"
             />
           </span>
@@ -781,6 +790,7 @@ ShallowWrapper {
                 Turn:
               </span>
               <Space
+                className="currentTurnPiece"
                 piece="B"
               />
             </span>,
@@ -805,6 +815,7 @@ ShallowWrapper {
                   Turn:
                 </span>,
                 <Space
+                  className="currentTurnPiece"
                   piece="B"
                 />,
               ],
@@ -829,6 +840,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
+                  "className": "currentTurnPiece",
                   "piece": "B",
                 },
                 "ref": null,
@@ -977,6 +989,7 @@ ShallowWrapper {
                 Turn:
               </span>
               <Space
+                className="currentTurnPiece"
                 piece="B"
               />
             </span>
@@ -1086,6 +1099,7 @@ ShallowWrapper {
                   Turn:
                 </span>
                 <Space
+                  className="currentTurnPiece"
                   piece="B"
                 />
               </span>,
@@ -1110,6 +1124,7 @@ ShallowWrapper {
                     Turn:
                   </span>,
                   <Space
+                    className="currentTurnPiece"
                     piece="B"
                   />,
                 ],
@@ -1134,6 +1149,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
+                    "className": "currentTurnPiece",
                     "piece": "B",
                   },
                   "ref": null,
