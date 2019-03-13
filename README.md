@@ -1,6 +1,6 @@
 # Connect 4
 
-https://connect-4-ts.herokuapp.com/
+https://play-connect-four.herokuapp.com/
 
 Goals:
 
